@@ -1,158 +1,187 @@
-import { iconSizes, iconStroke } from '@njord/tokens'
+import Link from 'next/link'
 
-type Icon = { name: string; d: React.ReactNode }
+import { iconSizes, iconStroke, iconSet, iconGroups } from '@njord/tokens'
 
-const I = {
-  chevronRight: <path d="m9 18 6-6-6-6" />,
-  chevronDown: <polyline points="6 9 12 15 18 9" />,
-  chevronLeft: <path d="m15 18-6-6 6-6" />,
-  close: <path d="M18 6 6 18M6 6l12 12" />,
-  menu: <path d="M4 6h16M4 12h16M4 18h16" />,
-  more: <><circle cx="12" cy="5" r="1" /><circle cx="12" cy="12" r="1" /><circle cx="12" cy="19" r="1" /></>,
-  search: <><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></>,
-  filter: <path d="M3 5h18l-7 8v6l-4 2v-8Z" />,
-  bell: <><path d="M6 8a6 6 0 1 1 12 0c0 5 2 6 2 6H4s2-1 2-6" /><path d="M10 20a2 2 0 0 0 4 0" /></>,
-  check: <polyline points="20 6 9 17 4 12" />,
-  alert: <><path d="M12 9v4M12 17h.01" /><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z" /></>,
-  info: <><circle cx="12" cy="12" r="9" /><path d="M12 16v-4M12 8h.01" /></>,
-  clock: <><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></>,
-  trend: <path d="m4 16 5-6 4 4 7-8" />,
-  gauge: <><path d="M12 14 16 9" /><path d="M4 18a9 9 0 1 1 16 0" /></>,
-  tank: <><path d="M5 4h14v16H5Z" /><path d="M5 10h14" /></>,
-  pump: <><circle cx="9" cy="12" r="5" /><path d="M9 7 16 12l-7 5Z" /></>,
-  valve: <><path d="M4 8 12 12 4 16Z" /><path d="M20 8 12 12l8 4Z" /></>,
-  note: <><path d="M6 3h9l5 5v13H6Z" /><path d="M9 13h6M9 17h4" /></>,
-  report: <><path d="M6 3h9l5 5v13H6Z" /><path d="M9 17v-4M12 17v-6M15 17v-2" /></>,
-  edit: <><path d="M12 20h9" /><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" /></>,
-  download: <><path d="M12 3v12" /><path d="m7 11 5 5 5-5" /><path d="M4 21h16" /></>,
-  refresh: <><path d="M20 11a8 8 0 1 0-2 6" /><path d="M20 5v6h-6" /></>,
-  user: <><circle cx="12" cy="8" r="4" /><path d="M4 21a8 8 0 0 1 16 0" /></>,
-} satisfies Record<string, React.ReactNode>
+import CodeBlock from '../../../components/CodeBlock'
+import { iconGeometry, type IconNode } from '../../../components/lucide-geometry'
 
-const categories: { name: string; note: string; icons: Icon[] }[] = [
-  {
-    name: 'Navigation',
-    note: 'Chevrons point the direction of travel. A right chevron on a row means it drills in.',
-    icons: [
-      { name: 'chevron-right', d: I.chevronRight },
-      { name: 'chevron-down', d: I.chevronDown },
-      { name: 'chevron-left', d: I.chevronLeft },
-      { name: 'menu', d: I.menu },
-      { name: 'close', d: I.close },
-      { name: 'more', d: I.more },
-    ],
-  },
-  {
-    name: 'Actions',
-    note: 'Always paired with a label except in a toolbar, where the aria-label carries it.',
-    icons: [
-      { name: 'search', d: I.search },
-      { name: 'filter', d: I.filter },
-      { name: 'edit', d: I.edit },
-      { name: 'download', d: I.download },
-      { name: 'refresh', d: I.refresh },
-      { name: 'user', d: I.user },
-    ],
-  },
-  {
-    name: 'Status',
-    note: 'Never the sole carrier of state — they sit beside a word and a colour.',
-    icons: [
-      { name: 'check', d: I.check },
-      { name: 'alert', d: I.alert },
-      { name: 'info', d: I.info },
-      { name: 'clock', d: I.clock },
-      { name: 'bell', d: I.bell },
-    ],
-  },
-  {
-    name: 'Process',
-    note: 'Used in navigation and list rows. Mimic symbols are a separate vocabulary.',
-    icons: [
-      { name: 'tank', d: I.tank },
-      { name: 'pump', d: I.pump },
-      { name: 'valve', d: I.valve },
-      { name: 'gauge', d: I.gauge },
-      { name: 'trend', d: I.trend },
-      { name: 'note', d: I.note },
-      { name: 'report', d: I.report },
-    ],
-  },
-]
+/**
+ * One glyph, drawn from the vendored lucide geometry.
+ *
+ * Every icon on this page renders from the same data the application does, so a
+ * glyph shown here cannot disagree with the glyph that ships.
+ */
+function Glyph({
+  name,
+  size = 24,
+  strokeWidth = 2,
+}: {
+  name: string
+  size?: number
+  strokeWidth?: number | string
+}) {
+  const nodes: readonly IconNode[] | undefined = iconGeometry[name]
+  if (!nodes) return null
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      {nodes.map(([Tag, attrs], i) => {
+        const El = Tag as keyof React.JSX.IntrinsicElements
+        return <El key={i} {...attrs} />
+      })}
+    </svg>
+  )
+}
 
-const sizes = Object.entries(iconSizes).map(([token, i]) => ({
-  token,
-  px: Number.parseInt(i.value, 10),
-  use: i.use,
-}))
+const usage = `// The app resolves an icon by its Lucide name at render time.
+<Icon name="alert-triangle" size={16} />
+
+// Perspective: an SVG icon library path, library/icon
+{
+  "type": "ia.display.icon",
+  "props": {
+    "path": "lucide/alert-triangle",
+    "color": "currentColor",
+    "style": { "width": "16px", "height": "16px" }
+  }
+}`
 
 export default function IconsPage() {
+  const total = iconGroups.reduce((n, g) => n + g.icons.length, 0)
+
   return (
     <div className="max-w-[900px]">
       <p className="mb-1 text-xs font-bold uppercase tracking-widest text-slate-400">Styles</p>
       <h1 className="text-2xl font-bold tracking-tight text-ink">Icons</h1>
-      <p className="mt-2 text-sm leading-relaxed text-slate-500">
-        A 24×24 outline set drawn at 2px stroke with round caps and joins, inheriting{' '}
-        <code className="font-mono text-xs">currentColor</code>. Icons clarify a label; they almost
-        never replace one.
+      <p className="mt-2 max-w-[68ch] text-sm leading-relaxed text-slate-500">
+        The set is <strong className="font-semibold text-ink">Lucide</strong>, pinned at v
+        {iconSet.version} — a 24×24 outline family at stroke 2, round caps and joins, inheriting{' '}
+        <code className="font-mono text-xs">currentColor</code>. All {total} glyphs the application
+        uses are listed below, under Lucide&rsquo;s own names.
       </p>
 
-      <div className="mt-8 space-y-8">
-        {categories.map(({ name, note, icons }) => (
-          <div key={name}>
-            <h2 className="text-[11px] font-bold uppercase tracking-[0.8px] text-slate-400">{name}</h2>
-            <p className="mt-1 text-[13px] leading-relaxed text-slate-500">{note}</p>
-            <div className="mt-3 grid grid-cols-3 gap-2 sm:grid-cols-6">
-              {icons.map(({ name: n, d }) => (
+      <div className="mt-5 rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-[13px] leading-relaxed text-slate-600">
+        <strong className="font-semibold text-ink">The name is the contract.</strong> Each name
+        below is the literal string passed to the icon component, and it is Lucide&rsquo;s name,
+        not a label invented for this page. There is no <code className="font-mono text-[11px]">close</code>,{' '}
+        <code className="font-mono text-[11px]">edit</code>,{' '}
+        <code className="font-mono text-[11px]">trend</code> or{' '}
+        <code className="font-mono text-[11px]">alert</code> — they are{' '}
+        <code className="font-mono text-[11px]">x</code>,{' '}
+        <code className="font-mono text-[11px]">pencil</code>,{' '}
+        <code className="font-mono text-[11px]">line-chart</code> and{' '}
+        <code className="font-mono text-[11px]">alert-triangle</code>. A name that is not in Lucide
+        resolves to null and the icon{' '}
+        <strong className="font-semibold text-ink">silently renders as nothing</strong> — no error,
+        no fallback glyph. Copy the names exactly.
+      </div>
+
+      {/* ── The set ── */}
+      <h2 className="mt-10 text-base font-bold text-ink">The set</h2>
+      <p className="mt-1.5 max-w-[68ch] text-[13px] leading-relaxed text-slate-500">
+        Grouped by what the glyph is for. The number is how many call sites use it in the source
+        application — high counts are the established choice for that job; a count of 1 is a
+        one-off and a candidate for consolidation, not a precedent to copy.
+      </p>
+
+      <div className="mt-5 space-y-7">
+        {iconGroups.map((group) => (
+          <section key={group.title}>
+            <div className="flex flex-wrap items-baseline gap-x-3">
+              <h3 className="text-[11px] font-bold uppercase tracking-[0.8px] text-slate-400">
+                {group.title}
+              </h3>
+              <span className="font-mono text-[11px] text-slate-400 tabular-nums">
+                {group.icons.length}
+              </span>
+            </div>
+            {group.note ? (
+              <p className="mt-1 text-[13px] leading-relaxed text-slate-500">{group.note}</p>
+            ) : null}
+            <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
+              {group.icons.map(({ name, count }) => (
                 <div
-                  key={n}
-                  className="flex flex-col items-center gap-2 rounded-lg border border-slate-200 bg-white px-2 py-3.5"
+                  key={name}
+                  className="flex items-center gap-2.5 rounded-lg border border-slate-200 bg-white px-3 py-2.5"
                 >
-                  <span className="text-slate-600">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                      {d}
-                    </svg>
+                  <span className="flex shrink-0 text-slate-600">
+                    <Glyph name={name} size={20} />
                   </span>
-                  <span className="text-center font-mono text-[10px] leading-tight text-slate-400">{n}</span>
+                  <span className="min-w-0 flex-1 truncate font-mono text-[11px] text-ink" title={name}>
+                    {name}
+                  </span>
+                  <span
+                    className="shrink-0 font-mono text-[10px] text-slate-400 tabular-nums"
+                    title={`${count} call site${count === 1 ? '' : 's'}`}
+                  >
+                    {count}
+                  </span>
                 </div>
               ))}
             </div>
-          </div>
+          </section>
         ))}
+      </div>
+
+      <div className="mt-6 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-[12px] leading-relaxed text-slate-600">
+        <strong className="text-ink">Equipment symbols are not icons.</strong> Pump, tank, valve,
+        blower and the rest are drawn SVG on a stricter vocabulary, and none of them exists in
+        Lucide. They live on{' '}
+        <Link href="/components/scada-symbols" className="font-semibold text-ink hover:underline">
+          SCADA symbols
+        </Link>
+        . Do not substitute a Lucide glyph for one, and do not mix the two sets in the same view.
       </div>
 
       {/* ── Sizes ── */}
       <h2 className="mt-10 text-base font-bold text-ink">Sizes</h2>
-      <p className="mt-1.5 text-[13px] leading-relaxed text-slate-500">
+      <p className="mt-1.5 max-w-[68ch] text-[13px] leading-relaxed text-slate-500">
         Always drawn on a 24×24 viewBox and rendered at one of these six sizes. Stroke stays 2 at
         every size — it is <em>not</em> scaled with the glyph, or a small icon turns spindly and a
-        large one turns fat. Colour always inherits <code className="font-mono text-xs">currentColor</code>.
+        large one turns fat.
       </p>
       <div className="mt-4 rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-[13px] leading-relaxed text-slate-600">
         <strong className="font-semibold text-ink">The rule that picks one:</strong> an icon&rsquo;s
         size follows the <em>text</em> it sits with, not the container it sits in. A 16px glyph
         beside 14/20 body reads as part of the sentence; the same glyph in a 40px button still
         follows the label, not the button. Sizing by container is what produced thirteen different
-        icon sizes across the app.
+        icon sizes across the app — 10, 11, 13, 15, 17, 19, 22, 23 and 26, none of them named.
       </div>
       <div className="mt-5 overflow-hidden rounded-xl border border-slate-200 bg-white">
-        {sizes.map(({ token, px, use }) => (
-          <div key={token} className="flex items-center gap-4 border-b border-slate-100 px-5 py-3 last:border-b-0">
-            <span className="flex w-8 shrink-0 justify-center text-slate-600">
-              <svg width={px} height={px} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                {I.bell}
-              </svg>
-            </span>
-            <span className="w-12 shrink-0 font-mono text-xs text-slate-400 tabular-nums">{px}px</span>
-            <span className="w-20 shrink-0 font-mono text-[11px] text-primary-text">{token}</span>
-            <span className="text-[13px] text-slate-600">{use}</span>
-          </div>
-        ))}
+        {Object.entries(iconSizes).map(([token, s], i) => {
+          const px = Number.parseInt(s.value, 10)
+          return (
+            <div
+              key={token}
+              className={`flex items-center gap-4 px-5 py-3 ${i > 0 ? 'border-t border-slate-100' : ''}`}
+            >
+              <span className="flex w-8 shrink-0 justify-center text-slate-600">
+                <Glyph name="bell" size={px} />
+              </span>
+              <span className="w-12 shrink-0 font-mono text-xs text-slate-400 tabular-nums">
+                {s.value}
+              </span>
+              <span className="w-24 shrink-0 font-mono text-[11px] text-primary-text">
+                --{token}
+              </span>
+              <span className="text-[13px] text-slate-600">{s.use}</span>
+            </div>
+          )
+        })}
       </div>
 
       {/* ── Stroke ── */}
       <h2 className="mt-10 text-base font-bold text-ink">Stroke</h2>
-      <p className="mt-1.5 text-[13px] leading-relaxed text-slate-500">
+      <p className="mt-1.5 max-w-[68ch] text-[13px] leading-relaxed text-slate-500">
         Constant across every size. The one exception is the active tab on the mobile tab bar,
         which thickens slightly so the current tab reads without relying on colour alone.
       </p>
@@ -163,21 +192,11 @@ export default function IconsPage() {
             className={`flex items-center gap-4 px-5 py-3 ${i > 0 ? 'border-t border-slate-100' : ''}`}
           >
             <span className="flex w-8 shrink-0 justify-center text-slate-600">
-              <svg
-                width={24}
-                height={24}
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={st.value}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden
-              >
-                {I.bell}
-              </svg>
+              <Glyph name="bell" size={24} strokeWidth={st.value} />
             </span>
-            <span className="w-12 shrink-0 font-mono text-xs text-slate-400 tabular-nums">{st.value}</span>
+            <span className="w-12 shrink-0 font-mono text-xs text-slate-400 tabular-nums">
+              {st.value}
+            </span>
             <span className="w-40 shrink-0 font-mono text-[11px] text-primary-text">--{token}</span>
             <span className="text-[13px] text-slate-600">{st.use}</span>
           </div>
@@ -188,22 +207,61 @@ export default function IconsPage() {
       <h2 className="mt-10 text-base font-bold text-ink">In context</h2>
       <div className="mt-5 flex flex-wrap items-center gap-4 rounded-xl border border-slate-200 bg-white p-5">
         <button className="inline-flex items-center gap-[7px] rounded-md border border-slate-300 bg-white px-3.5 py-2 text-[13px] font-semibold text-ink shadow-sm">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>{I.download}</svg>
+          <Glyph name="download" size={14} />
           Export
         </button>
-        <button aria-label="More actions" className="inline-flex h-[30px] w-[30px] items-center justify-center rounded-sm text-slate-400 hover:bg-slate-100 hover:text-ink">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>{I.more}</svg>
+        <button
+          aria-label="More actions"
+          className="inline-flex h-[30px] w-[30px] items-center justify-center rounded-sm text-slate-400 hover:bg-slate-100 hover:text-ink"
+        >
+          <Glyph name="more-vertical" size={16} />
         </button>
         <span className="inline-flex items-center gap-1.5 text-[13px] text-slate-600">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>{I.clock}</svg>
+          <Glyph name="clock" size={14} />
           Active for 04:12:38
+        </span>
+        <span className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-critical-text">
+          <Glyph name="alert-triangle" size={16} />
+          DO high
         </span>
       </div>
 
+      {/* ── Getting the set into Perspective ── */}
+      <h2 className="mt-10 text-base font-bold text-ink">Getting the set into Perspective</h2>
+      <p className="mt-1.5 max-w-[68ch] text-[13px] leading-relaxed text-slate-500">
+        Perspective ships Material icons, not Lucide, so the set has to be added as an SVG icon
+        library on the gateway. Once installed, an icon is addressed as{' '}
+        <code className="font-mono text-xs">library/name</code> — keep the library named{' '}
+        <code className="font-mono text-xs">lucide</code> and every path below matches the names on
+        this page exactly.
+      </p>
+      <div className="mt-4">
+        <CodeBlock code={usage} label="Icon reference — app and Perspective" />
+      </div>
+      <div className="mt-4 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-[12px] leading-relaxed text-slate-600">
+        Install only the {total} glyphs on this page rather than all {'1,700+'} in Lucide. The set
+        being small and named is the point — an open library is how thirteen sizes and four
+        different &ldquo;edit&rdquo; glyphs got in last time. Source them from{' '}
+        <a
+          href="https://lucide.dev"
+          className="font-semibold text-ink hover:underline"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          lucide.dev
+        </a>{' '}
+        at v{iconSet.version} ({iconSet.license} licence) so the geometry matches this reference.
+      </div>
+
+      {/* ── Rules ── */}
       <div className="mt-8 rounded-xl border border-slate-200 bg-white p-5">
         <p className="text-xs font-bold uppercase tracking-widest text-slate-400">Rules</p>
         <ul className="mt-3 space-y-2">
           {[
+            <>
+              Use a name from this page. A name that is not in the set resolves to null and renders
+              nothing at all — the failure is silent, so a typo ships.
+            </>,
             <>
               Icons inherit <code className="font-mono text-[12px]">currentColor</code>. Never
               hard-code a fill, or the glyph will not follow the dark and legacy skins.
@@ -216,6 +274,10 @@ export default function IconsPage() {
             <>
               An icon-only control still needs a 40px (desktop) or 44px (mobile) target, even when
               the glyph is 16px.
+            </>,
+            <>
+              An icon clarifies a label; it almost never replaces one. The exceptions are the
+              close, overflow and chevron controls, where the glyph is the convention.
             </>,
             <>
               Process icons are for navigation and lists. SCADA mimic symbols are a separate,

@@ -38,7 +38,8 @@ export { spacing, layoutSpacing, clearance } from './spacing.js'
 
 export { durations, easings, keyframes } from './motion.js'
 
-export { iconSizes, iconStroke } from './icons.js'
+export { iconSizes, iconStroke, iconSet, iconGroups, iconNames } from './icons.js'
+export type { IconGroup } from './icons.js'
 export type { KeyframeName } from './motion.js'
 
 export { aliasNames, skins, skinList } from './themes.js'
