@@ -1,0 +1,32 @@
+node_modules/
+
+# Build output — generated, never committed.
+dist/
+.next/
+.turbo/
+*.tsbuildinfo
+
+# Regenerated from packages/tokens on every build by apps/docs prebuild.
+apps/docs/public/downloads/
+
+# Claude Design export: the font families are 20MB of TTF and are not the
+# format the gateway wants anyway (woff2). Source them per the Ignition page.
+ClaudeDesignExport/fonts/
+
+# Editor / OS
+.DS_Store
+.vscode/
+.idea/
+
+# Local env
+.env
+.env.local
+.env.*.local
+
+# ── Internal working material — never published ──────────────────────────────
+# The handover is the deployed docs site. These are the working notes behind it:
+# the design-system/prototype reconciliation, the prompts used to drive the
+# prototype, and the raw Claude Design export. Kept on disk, out of the repo.
+Merge.md
+CLAUDE-DESIGN-PROMPT*.md
+ClaudeDesignExport/

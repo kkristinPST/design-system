@@ -1,0 +1,30 @@
+{
+  "name": "@njord/tokens",
+  "version": "0.1.0",
+  "description": "The NJORD design tokens — the single source every build reads from.",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./css": "./dist/tokens.css",
+    "./njord.css": "./dist/njord.css",
+    "./njord-theme": {
+      "types": "./dist/njord-theme.d.ts",
+      "default": "./dist/njord-theme.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json && node scripts/emit-css.mjs",
+    "dev": "npm run build"
+  },
+  "devDependencies": {
+    "typescript": "^5"
+  }
+}

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!--
+    Docs-site tab icon: the NJORD mark in white on a brand-cyan disc.
+
+    A disc rather than the bare mark: the glyph is 27x43, so at a 16px favicon
+    it would render ~10px wide and read as a stray tick. The filled ground also
+    keeps it legible against both light and dark browser chrome.
+
+    Geometry is the mark from public/njord-mark.svg, scaled 0.5116 (43 -> 22px)
+    and centred in the 32px disc. Colour is palette.primary (#00AEEE) from
+    packages/tokens/src/color.ts — kept literal because an SVG served as a
+    static asset cannot read a CSS custom property.
+  -->
+  <circle cx="16" cy="16" r="16" fill="#00AEEE"/>
+  <g transform="translate(9.09 5) scale(.5116)" fill="#fff">
+    <path d="M16.75 27.56 25.84 16.86c.85-1 .85-2.47 0-3.47L15.28.95C14.77.34 14.02 0 13.24 0c-.79 0-1.54.35-2.05.95L.64 13.39c-.85 1-.85 2.47 0 3.47l9.08 10.7L.64 38.27c-.96 1.13-.82 2.82.31 3.78 1.13.96 2.82.82 3.78-.31l8.51-10.03 8.51 10.03c.53.63 1.29.95 2.05.95.61 0 1.23-.21 1.73-.64 1.13-.96 1.27-2.65.31-3.78l-9.08-10.71ZM13.24 6.83l7.03 8.29-7.03 8.3-7.04-8.3 7.04-8.29Z"/>
+    <circle cx="13.24" cy="13.52" r="2.78"/>
+  </g>
+</svg>

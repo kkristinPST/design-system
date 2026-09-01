@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Design tokens.
+
+   Every --color-*, --text-*, --radius-* and --shadow-* below comes from
+   @njord/tokens, generated from packages/tokens/src. The same source emits the
+   Ignition Perspective theme, so the HMI and the web build cannot drift.
+
+   Do NOT declare a token in this file. Add it to packages/tokens/src and run
+   `npm run build`.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+@import "@njord/tokens/css";
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Semantic text helpers — mirrors of the source .eyebrow / .h1 / … set ── */
+.nj-eyebrow { font-weight: 700; font-size: 12px; line-height: 16px; letter-spacing: 0.8px; text-transform: uppercase; color: var(--fg-muted); }
+.nj-h1 { font-weight: 700; font-size: 24px; line-height: 32px; letter-spacing: -0.2px; color: var(--fg); margin: 0; }
+.nj-h2 { font-weight: 700; font-size: 18px; line-height: 24px; color: var(--fg); margin: 0; }
+.nj-section-label { font-weight: 700; font-size: 12px; line-height: 16px; letter-spacing: 0.5px; text-transform: uppercase; color: var(--fg); }
+.nj-body { font-weight: 400; font-size: 14px; line-height: 20px; color: var(--fg-muted); }
+.nj-body-strong { font-weight: 600; font-size: 14px; line-height: 20px; color: var(--fg); }
+.nj-small { font-weight: 400; font-size: 12px; line-height: 16px; color: var(--fg-muted); }
+.nj-caption { font-weight: 400; font-size: 12px; line-height: 16px; color: var(--fg-subtle); }
+.nj-metric { font-family: var(--font-mono); font-size: 24px; line-height: 32px; color: var(--fg); font-variant-numeric: tabular-nums; letter-spacing: -0.5px; }
+.nj-data { font-family: var(--font-mono); font-size: 12px; line-height: 16px; font-variant-numeric: tabular-nums; }
+.nj-tag { font-family: var(--font-mono); font-size: 12px; line-height: 16px; color: var(--fg-muted); letter-spacing: 0.3px; }
+
+/* ── Accessibility: focus ring + reduced motion (source parity) ── */
+:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; border-radius: 3px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
