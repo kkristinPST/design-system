@@ -62,7 +62,7 @@ const scope = [
   { n: 5, label: 'Styles', href: '/styles/icons', what: 'icons, motion, the three skins, density, this Ignition guide' },
   { n: Object.keys(ignitionSpecs).length, label: 'Components', href: '/components', what: 'each with desktop + mobile variants and its Perspective spec' },
   { n: 7, label: 'Patterns', href: '/patterns/dashboard-overview', what: 'how components compose into real screens' },
-  { n: 4, label: 'Templates', href: '/templates/dashboard', what: 'full-screen frames — dashboard, alarms, SCADA, mobile' },
+  { n: 4, label: 'Templates', href: '/templates/dashboard', what: 'full-screen frames · dashboard, alarms, SCADA, mobile' },
 ]
 
 export default function Handoff() {
@@ -86,7 +86,7 @@ export default function Handoff() {
       <p className="mt-1.5 max-w-[68ch] text-[13px] leading-relaxed text-slate-600">
         This is a retheme and a replacement, not a greenfield build. There is already a working
         Perspective project with live tag bindings, alarm journal queries and named queries behind
-        it. None of that changes — <strong className="font-semibold text-ink">this system
+        it. None of that changes: <strong className="font-semibold text-ink">this system
         specifies presentation only</strong>. Keep every binding you have.
       </p>
       <div className="mt-4 overflow-hidden rounded-xl border border-slate-200 bg-white">
@@ -99,10 +99,10 @@ export default function Handoff() {
           Replace hardcoded colours, fonts and radii in your existing views with{' '}
           <C>var(--njord-…)</C> references first, leaving the layout alone. The screens will look
           substantially closer to the target while every binding stays exactly where it was, and it
-          surfaces token gaps early — while they are still cheap.
+          surfaces token gaps early; while they are still cheap.
         </Step>
         <Step n={3} title="Then replace components, leaf-first">
-          Swap the small pieces before their containers — badge, tag, status dot, state tag, then
+          Swap the small pieces before their containers: badge, tag, status dot, state tag, then
           rows, then cards, then whole views. A container rebuilt around old leaves has to be
           rebuilt again. Each component page carries the style-class JSON to paste.
         </Step>
@@ -116,7 +116,7 @@ export default function Handoff() {
       </div>
       <div className="mt-4 rounded-lg border border-slate-300 bg-slate-50 px-4 py-3 text-[12px] leading-relaxed text-slate-600">
         <strong className="text-ink">Where the old project and this system disagree, this system
-        wins</strong> — that is what it is for. The exceptions are the six{' '}
+        wins</strong>: that is what it is for. The exceptions are the six{' '}
         <a href="#non-negotiables" className="font-semibold text-ink hover:underline">
           non-negotiables
         </a>{' '}
@@ -135,7 +135,7 @@ export default function Handoff() {
           One CSS file carries every token. It installs as a theme folder under{' '}
           <C>data/config/resources/core/…/themes/</C> and must extend the base light theme. Then
           make Inter and JetBrains Mono resolvable. Until this is done nothing else will look right,
-          because every style class below refers to it — and the failure modes here are all silent.
+          because every style class below refers to it; and the failure modes here are all silent.
         </Step>
         <Step n={2} title="Build the style-class library" href="/styles/ignition">
           One class per component variant, values as <C>var(--njord-…)</C> references only. The
@@ -148,13 +148,13 @@ export default function Handoff() {
           to plus its view JSON and gotchas.
         </Step>
         <Step n={4} title="Learn the patterns" href="/patterns/dashboard-overview">
-          How the pieces compose — alarm feed, alarm register, SCADA loop, search and filter,
+          How the pieces compose: alarm feed, alarm register, SCADA loop, search and filter,
           navigation, reflow. These carry the behavioural rules that make the system ISA-18.2
           compliant, not just the visual ones.
         </Step>
         <Step n={5} title="Assemble the screens" href="/templates/dashboard">
-          Four full-screen templates. Each carries a layout spec — regions, sizing, breakpoints and
-          the component inventory — alongside the rendered reference.
+          Four full-screen templates. Each carries a layout spec (regions, sizing, breakpoints and
+          the component inventory) alongside the rendered reference.
         </Step>
       </div>
 
@@ -163,7 +163,7 @@ export default function Handoff() {
         The non-negotiables
       </h2>
       <p className="mt-1.5 max-w-[68ch] text-[13px] leading-relaxed text-slate-600">
-        Most of this system is preference and can be argued with. These six are not — they are what
+        Most of this system is preference and can be argued with. These six are not: they are what
         make it an ISA-101 / ISA-18.2 console rather than a dashboard, and breaking one breaks the
         safety argument, not just the look.
       </p>
@@ -183,7 +183,7 @@ export default function Handoff() {
             </>,
             <>
               <strong className="font-semibold text-ink">Never one channel.</strong> Every state is
-              carried three ways at once — fill, glyph or rail, and words. Colour alone fails
+              carried three ways at once: fill, glyph or rail, and words. Colour alone fails
               colour-blind operators, monochrome print and a sun-washed screen.
             </>,
             <>
@@ -197,7 +197,7 @@ export default function Handoff() {
             </>,
             <>
               <strong className="font-semibold text-ink">MEDIUM is not brand cyan.</strong> Medium
-              priority has its own royal blue. Brand cyan means link, focus and selection — it never
+              priority has its own royal blue. Brand cyan means link, focus and selection; it never
               carries status.
             </>,
           ]}
@@ -208,25 +208,25 @@ export default function Handoff() {
       <h2 className="mt-9 text-base font-bold text-ink">What is and is not specified</h2>
       <p className="mt-1.5 max-w-[68ch] text-[13px] leading-relaxed text-slate-600">
         This system is the front end and nothing else. Everything in the right-hand column already
-        exists in your base project and is not being asked to change — you are reskinning and
+        exists in your base project and is not being asked to change; you are reskinning and
         rebuilding what sits on top of it.
       </p>
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
         <div className="rounded-xl border border-slate-200 bg-white p-5">
-          <p className="text-sm font-semibold text-ink">Specified here — follow it</p>
+          <p className="text-sm font-semibold text-ink">Specified here: follow it</p>
           <Bullets
             items={[
               'Every colour, type role, radius, spacing step and shadow.',
               'Component geometry, states, and which Perspective component each maps to.',
               'Screen layout, regions, breakpoints and reflow behaviour.',
-              'Interaction rules — sort order, acknowledge flows, empty and loading states.',
+              'Interaction rules: sort order, acknowledge flows, empty and loading states.',
               'Label and message wording, including tone and capitalisation.',
             ]}
           />
         </div>
         <div className="rounded-xl border border-slate-200 bg-white p-5">
           <p className="text-sm font-semibold text-ink">
-            Already yours — this system does not touch it
+            Already yours; this system does not touch it
           </p>
           <Bullets
             items={[
@@ -239,7 +239,7 @@ export default function Handoff() {
           />
           <p className="mt-3 border-t border-slate-100 pt-3 text-[12px] leading-relaxed text-slate-500">
             One genuine choice remains yours: whether a given view is an embedded view, a flex
-            repeater or a table. Pick per screen — this system specifies what it must look like and
+            repeater or a table. Pick per screen: this system specifies what it must look like and
             how it must behave, never which Perspective container gets you there.
           </p>
         </div>
@@ -247,7 +247,7 @@ export default function Handoff() {
       <div className="mt-4 rounded-lg border border-slate-300 bg-slate-50 px-4 py-3 text-[12px] leading-relaxed text-slate-600">
         <span className="font-semibold text-ink">When something is not covered:</span> ask rather
         than invent. A missing token or an unspecified state is a gap in this spec, and the fix
-        belongs here so the next person inherits it — not in one view where it will drift.
+        belongs here so the next person inherits it; not in one view where it will drift.
       </div>
 
       {/* ── Scope ── */}
@@ -268,7 +268,7 @@ export default function Handoff() {
         ))}
       </div>
       <p className="mt-3 max-w-[68ch] text-[13px] leading-relaxed text-slate-600">
-        Plus three skins — modern, dark and legacy — that are the same token set re-pointed. Ship
+        Plus three skins (modern, dark and legacy) that are the same token set re-pointed. Ship
         modern first; the other two cost almost nothing once the components read tokens properly,
         and they are the proof that they do.
       </p>

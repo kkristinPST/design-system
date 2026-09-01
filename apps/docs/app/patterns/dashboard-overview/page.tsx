@@ -5,7 +5,7 @@ export default function DashboardOverviewPage() {
       <h1 className="text-2xl font-bold tracking-tight text-ink">Dashboard overview</h1>
       <p className="mt-2 text-sm leading-relaxed text-slate-500">
         The start screen for a site. It answers three questions in order: is anything wrong, what
-        are the vitals, and what happened on the last shift. Alarms come first — always.
+        are the vitals, and what happened on the last shift. Alarms come first: always.
       </p>
 
       {/* ── Desktop composition ── */}
@@ -125,7 +125,7 @@ export default function DashboardOverviewPage() {
           {[
             <>
               Alarms are the first thing on the screen on both builds. Vitals, production and notes
-              come after — an operator opening the dashboard is checking for trouble.
+              come after; an operator opening the dashboard is checking for trouble.
             </>,
             <>
               Every KPI on this screen drills into the filtered list behind it. A number an operator

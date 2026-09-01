@@ -8,7 +8,7 @@ const variants: Variant[] = [
     name: 'Severity ramp',
     platform: 'Desktop',
     description:
-      '9px circle with a 1px ink ring at 16% — the ring is what keeps a bright dot defined against a light tint fill. These are the sev-* marks, never the -text tokens.',
+      '9px circle with a 1px ink ring at 16%; the ring is what keeps a bright dot defined against a light tint fill. These are the sev-* marks, never the -text tokens.',
     preview: (
       <div className="flex flex-wrap items-center gap-6">
         {[
@@ -35,7 +35,7 @@ bg-sev-crit  bg-sev-high  bg-sev-med  bg-sev-low  bg-sev-diag  bg-sev-ok`,
     name: 'Connection pill',
     platform: 'Desktop',
     description:
-      'The top-bar site status. A 7px dot inside a mono pill — the dot carries the state, the label carries the meaning, so it survives a monochrome print.',
+      'The top-bar site status. A 7px dot inside a mono pill; the dot carries the state, the label carries the meaning, so it survives a monochrome print.',
     preview: (
       <div className="flex items-center gap-3">
         <button className="inline-flex items-center gap-1.5 rounded-full bg-success-bg px-[9px] py-1 font-mono text-xs font-bold text-success-text">
@@ -62,7 +62,7 @@ bg-sev-crit  bg-sev-high  bg-sev-med  bg-sev-low  bg-sev-diag  bg-sev-ok`,
     name: 'Row rail',
     platform: 'Desktop',
     description:
-      'Severity as a 3px inset rail on the first cell of a table row, plus a faint priority tint on the whole row. Subtle by design — a full saturated fill is the legacy skin, not this one.',
+      'Severity as a 3px inset rail on the first cell of a table row, plus a faint priority tint on the whole row. Subtle by design: a full saturated fill is the legacy skin, not this one.',
     preview: (
       <div className="w-[480px] overflow-hidden rounded-lg border border-slate-200 bg-white">
         {[
@@ -83,7 +83,7 @@ bg-sev-crit  bg-sev-high  bg-sev-med  bg-sev-low  bg-sev-diag  bg-sev-ok`,
 <tr className="bg-[color-mix(in_srgb,var(--color-critical)_7%,var(--color-surface))]">`,
   },
   {
-    name: 'Mobile — dots and rails',
+    name: 'Mobile · dots and rails',
     platform: 'Mobile',
     description:
       'The alarm row carries a 4px full-height rail on its leading edge, rounded to match the card. Inline dots stay at 9px with the same defining ring.',
@@ -120,7 +120,7 @@ export default function StatusDotPage() {
       title="Status dot"
       intro={
         <>
-          The smallest status marker in the system — a 9px filled circle, always paired with a
+          The smallest status marker in the system: a 9px filled circle, always paired with a
           label. It appears inline in lists, inside connection pills, and as a 3px (desktop) or 4px
           (mobile) rail on the leading edge of a row.
         </>
@@ -132,7 +132,7 @@ export default function StatusDotPage() {
         items: [
           <>
             The dot never travels alone. It is a redundancy cue beside a word, so the state survives
-            colour-blindness and monochrome printing — a bare dot is not a status.
+            colour-blindness and monochrome printing; a bare dot is not a status.
           </>,
           <>
             Dots use the <code className="font-mono text-[12px]">sev-*</code> marks. Text beside them
@@ -140,7 +140,7 @@ export default function StatusDotPage() {
             most common contrast failure in the system.
           </>,
           <>
-            The 1px ink ring at 16% is not decoration — without it a bright dot dissolves into a
+            The 1px ink ring at 16% is not decoration; without it a bright dot dissolves into a
             status-tint fill of the same hue.
           </>,
           <>

@@ -54,7 +54,7 @@ const variants: Variant[] = [
     name: 'Fluid line coding',
     platform: 'Desktop',
     description:
-      'Ten process fluids, each with its own pipe colour. Gases are dashed as well as coloured, so the distinction survives a monochrome print. Deliberately desaturated — status must still read louder.',
+      'Ten process fluids, each with its own pipe colour. Gases are dashed as well as coloured, so the distinction survives a monochrome print. Deliberately desaturated: status must still read louder.',
     preview: (
       <div className="grid w-[560px] grid-cols-2 gap-x-8 gap-y-3">
         {fluids.map(([l, c, dashed]) => (
@@ -162,7 +162,7 @@ export default function ScadaSymbolsPage() {
       intro={
         <>
           The process-mimic vocabulary: equipment shapes, pipes and readout nodes. It follows
-          ISA-101 high-performance HMI — the diagram is quiet by default, and saturated colour means
+          ISA-101 high-performance HMI; the diagram is quiet by default, and saturated colour means
           something is wrong.
         </>
       }
@@ -172,7 +172,7 @@ export default function ScadaSymbolsPage() {
         heading: 'Rules',
         items: [
           <>
-            Normal is <strong>gray</strong>. Running and stopped differ by lightness, not hue —
+            Normal is <strong>gray</strong>. Running and stopped differ by lightness, not hue;
             colour on a mimic is reserved for abnormal states.
           </>,
           <>
@@ -184,7 +184,7 @@ export default function ScadaSymbolsPage() {
             colour-blind reader.
           </>,
           <>
-            The legacy skin is monochrome by definition — every fluid falls back to the pipe colour.
+            The legacy skin is monochrome by definition; every fluid falls back to the pipe colour.
             Never hard-code a fluid hex.
           </>,
           <>

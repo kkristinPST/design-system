@@ -64,7 +64,7 @@ export default function IconsPage() {
       <h1 className="text-2xl font-bold tracking-tight text-ink">Icons</h1>
       <p className="mt-2 max-w-[68ch] text-sm leading-relaxed text-slate-500">
         The set is <strong className="font-semibold text-ink">Lucide</strong>, pinned at v
-        {iconSet.version} — a 24×24 outline family at stroke 2, round caps and joins, inheriting{' '}
+        {iconSet.version}: a 24×24 outline family at stroke 2, round caps and joins, inheriting{' '}
         <code className="font-mono text-xs">currentColor</code>. All {total} glyphs the application
         uses are listed below, under Lucide&rsquo;s own names.
       </p>
@@ -75,13 +75,13 @@ export default function IconsPage() {
         not a label invented for this page. There is no <code className="font-mono text-[11px]">close</code>,{' '}
         <code className="font-mono text-[11px]">edit</code>,{' '}
         <code className="font-mono text-[11px]">trend</code> or{' '}
-        <code className="font-mono text-[11px]">alert</code> — they are{' '}
+        <code className="font-mono text-[11px]">alert</code>; they are{' '}
         <code className="font-mono text-[11px]">x</code>,{' '}
         <code className="font-mono text-[11px]">pencil</code>,{' '}
         <code className="font-mono text-[11px]">line-chart</code> and{' '}
         <code className="font-mono text-[11px]">alert-triangle</code>. A name that is not in Lucide
         resolves to null and the icon{' '}
-        <strong className="font-semibold text-ink">silently renders as nothing</strong> — no error,
+        <strong className="font-semibold text-ink">silently renders as nothing</strong>: no error,
         no fallback glyph. Copy the names exactly.
       </div>
 
@@ -89,7 +89,7 @@ export default function IconsPage() {
       <h2 className="mt-10 text-base font-bold text-ink">The set</h2>
       <p className="mt-1.5 max-w-[68ch] text-[13px] leading-relaxed text-slate-500">
         Grouped by what the glyph is for. The number is how many call sites use it in the source
-        application — high counts are the established choice for that job; a count of 1 is a
+        application; high counts are the established choice for that job; a count of 1 is a
         one-off and a candidate for consolidation, not a precedent to copy.
       </p>
 
@@ -146,7 +146,7 @@ export default function IconsPage() {
       <h2 className="mt-10 text-base font-bold text-ink">Sizes</h2>
       <p className="mt-1.5 max-w-[68ch] text-[13px] leading-relaxed text-slate-500">
         Always drawn on a 24×24 viewBox and rendered at one of these six sizes. Stroke stays 2 at
-        every size — it is <em>not</em> scaled with the glyph, or a small icon turns spindly and a
+        every size; it is <em>not</em> scaled with the glyph, or a small icon turns spindly and a
         large one turns fat.
       </p>
       <div className="mt-4 rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-[13px] leading-relaxed text-slate-600">
@@ -154,7 +154,7 @@ export default function IconsPage() {
         size follows the <em>text</em> it sits with, not the container it sits in. A 16px glyph
         beside 14/20 body reads as part of the sentence; the same glyph in a 40px button still
         follows the label, not the button. Sizing by container is what produced thirteen different
-        icon sizes across the app — 10, 11, 13, 15, 17, 19, 22, 23 and 26, none of them named.
+        icon sizes across the app; 10, 11, 13, 15, 17, 19, 22, 23 and 26, none of them named.
       </div>
       <div className="mt-5 overflow-hidden rounded-xl border border-slate-200 bg-white">
         {Object.entries(iconSizes).map(([token, s], i) => {
@@ -231,16 +231,16 @@ export default function IconsPage() {
       <p className="mt-1.5 max-w-[68ch] text-[13px] leading-relaxed text-slate-500">
         Perspective ships Material icons, not Lucide, so the set has to be added as an SVG icon
         library on the gateway. Once installed, an icon is addressed as{' '}
-        <code className="font-mono text-xs">library/name</code> — keep the library named{' '}
+        <code className="font-mono text-xs">library/name</code>; keep the library named{' '}
         <code className="font-mono text-xs">lucide</code> and every path below matches the names on
         this page exactly.
       </p>
       <div className="mt-4">
-        <CodeBlock code={usage} label="Icon reference — app and Perspective" />
+        <CodeBlock code={usage} label="Icon reference · app and Perspective" />
       </div>
       <div className="mt-4 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-[12px] leading-relaxed text-slate-600">
         Install only the {total} glyphs on this page rather than all {'1,700+'} in Lucide. The set
-        being small and named is the point — an open library is how thirteen sizes and four
+        being small and named is the point; an open library is how thirteen sizes and four
         different &ldquo;edit&rdquo; glyphs got in last time. Source them from{' '}
         <a
           href="https://lucide.dev"
@@ -260,7 +260,7 @@ export default function IconsPage() {
           {[
             <>
               Use a name from this page. A name that is not in the set resolves to null and renders
-              nothing at all — the failure is silent, so a typo ships.
+              nothing at all; the failure is silent, so a typo ships.
             </>,
             <>
               Icons inherit <code className="font-mono text-[12px]">currentColor</code>. Never
@@ -281,7 +281,7 @@ export default function IconsPage() {
             </>,
             <>
               Process icons are for navigation and lists. SCADA mimic symbols are a separate,
-              stricter vocabulary — do not mix them.
+              stricter vocabulary; do not mix them.
             </>,
           ].map((item, i) => (
             <li key={i} className="flex gap-2.5 text-[13px] leading-relaxed text-slate-600">

@@ -68,10 +68,10 @@ const variants: Variant[] = [
 </div>`,
   },
   {
-    name: 'Swiped — action revealed',
+    name: 'Swiped · action revealed',
     platform: 'Mobile',
     description:
-      'Dragging left reveals the acknowledge layer on success-solid (#00734C), not the bright indicator green — white on the bare success token is only 2.3:1.',
+      'Dragging left reveals the acknowledge layer on success-solid (#00734C), not the bright indicator green: white on the bare success token is only 2.3:1.',
     preview: (
       <PhoneFrame className="border-none bg-transparent p-0 shadow-none">
         <div className="flex flex-col gap-2">
@@ -118,7 +118,7 @@ export default function SwipeRowPage() {
       intro={
         <>
           A mobile alarm row that reveals acknowledge when dragged left. It is a shortcut for the
-          most frequent action on the most frequent screen — never the only way to perform it.
+          most frequent action on the most frequent screen; never the only way to perform it.
         </>
       }
       variants={variants}
@@ -128,7 +128,7 @@ export default function SwipeRowPage() {
         items: [
           <>
             Swipe is always a <strong>shortcut</strong>. The same action must exist as a button in
-            the detail screen and in the bulk bar — a hidden gesture cannot be the only path.
+            the detail screen and in the bulk bar: a hidden gesture cannot be the only path.
           </>,
           <>
             The reveal uses <code className="font-mono text-[12px]">success-solid</code> (#00734C).

@@ -105,10 +105,10 @@ const variants: Variant[] = [
 </div>`,
   },
   {
-    name: 'Mobile — value stepper',
+    name: 'Mobile · value stepper',
     platform: 'Mobile',
     description:
-      'A 58px tall control with 58px square buttons on each end — usable with gloves. The current value sits above it and the meta strip below states the range and last change.',
+      'A 58px tall control with 58px square buttons on each end; usable with gloves. The current value sits above it and the meta strip below states the range and last change.',
     preview: (
       <PhoneFrame className="p-4">
         <div className="mb-2.5 flex items-center justify-between gap-3 rounded-xl border border-slate-200 bg-slate-50 px-[13px] py-[11px] text-[11px] font-extrabold uppercase tracking-wider text-slate-600">
@@ -165,10 +165,10 @@ const variants: Variant[] = [
 </div>`,
   },
   {
-    name: 'Mobile — out of range',
+    name: 'Mobile · out of range',
     platform: 'Mobile',
     description:
-      'When the entered value breaks a limit the reason line turns critical-text and the commit button disables. The stepper itself does not turn red — the explanation carries the state.',
+      'When the entered value breaks a limit the reason line turns critical-text and the commit button disables. The stepper itself does not turn red; the explanation carries the state.',
     preview: (
       <PhoneFrame className="p-4">
         <div className="flex h-[58px] items-stretch overflow-hidden rounded-[14px] border border-slate-200 bg-white">
@@ -212,7 +212,7 @@ export default function StepperPage() {
       intro={
         <>
           Numeric entry for setpoints, alarm limits and rationalization values. Every stepper shows
-          the current value, the allowed range and the last change alongside the field — a setpoint
+          the current value, the allowed range and the last change alongside the field; a setpoint
           is never edited without the context that makes it safe.
         </>
       }
@@ -231,7 +231,7 @@ export default function StepperPage() {
           </>,
           <>
             Out of range disables the commit and explains why in words. The field does not turn red
-            on its own — a red box without a sentence tells the operator nothing.
+            on its own: a red box without a sentence tells the operator nothing.
           </>,
           <>
             Mobile buttons are 58px square. This is one of the few controls where the ink itself is

@@ -13,8 +13,8 @@ export default function NavigationAndBreadcrumbsPage() {
       <h2 className="mt-10 text-base font-bold text-ink">Two axes</h2>
       <div className="mt-5 grid gap-4 sm:grid-cols-2">
         {[
-          { t: 'Sidebar — screen kind', d: 'Overview, Alarms, Process, Trends, Reports. Persistent, always visible, carries alarm counts.', e: 'Alarms' },
-          { t: 'Breadcrumb — scope', d: 'Site › building › department. A dropdown, not a trail of links. Switching scope reloads the same screen with new data.', e: 'Bergen · RAS 2' },
+          { t: 'Sidebar · screen kind', d: 'Overview, Alarms, Process, Trends, Reports. Persistent, always visible, carries alarm counts.', e: 'Alarms' },
+          { t: 'Breadcrumb · scope', d: 'Site › building › department. A dropdown, not a trail of links. Switching scope reloads the same screen with new data.', e: 'Bergen · RAS 2' },
         ].map(({ t, d, e }) => (
           <div key={t} className="rounded-xl border border-slate-200 bg-white p-5">
             <p className="text-sm font-semibold text-ink">{t}</p>
@@ -94,7 +94,7 @@ export default function NavigationAndBreadcrumbsPage() {
               the alarm list expects the alarm list, not the dashboard.
             </>,
             <>
-              Screens carry no in-page <code className="font-mono text-[12px]">h1</code> on desktop —
+              Screens carry no in-page <code className="font-mono text-[12px]">h1</code> on desktop;
               the top bar owns the title, so switching tabs never moves the content below it.
             </>,
             <>

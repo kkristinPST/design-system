@@ -44,7 +44,7 @@ export const ignitionSpecs: Record<string, Ignition> = {
 }`,
     },
     view: {
-      path: 'style-classes/njord/btn/m-primary/style.json — mobile',
+      path: 'style-classes/njord/btn/m-primary/style.json: mobile',
       json: `{
   "base": {
     "style": {
@@ -69,7 +69,7 @@ export const ignitionSpecs: Record<string, Ignition> = {
     notes: [
       <>
         Desktop primary is <C>--njord-ink</C>, not brand cyan. Do not swap in{' '}
-        <C>--njord-primary</C> because it looks more like a button — cyan is
+        <C>--njord-primary</C> because it looks more like a button: cyan is
         reserved for links, focus and selection.
       </>,
       <>
@@ -113,7 +113,7 @@ export const ignitionSpecs: Record<string, Ignition> = {
 }`,
     },
     view: {
-      path: 'style-classes/njord/field/m-field/style.json — mobile',
+      path: 'style-classes/njord/field/m-field/style.json: mobile',
       json: `{
   "base": {
     "style": {
@@ -132,7 +132,7 @@ export const ignitionSpecs: Record<string, Ignition> = {
         focus, and a Perspective mobile session inherits that behaviour.
       </>,
       <>
-        Put <C>props.style.classes</C> on the field itself, not a wrapper —
+        Put <C>props.style.classes</C> on the field itself, not a wrapper;
         Perspective applies the focus variant to the input element.
       </>,
     ],
@@ -224,7 +224,7 @@ export const ignitionSpecs: Record<string, Ignition> = {
       <>
         A header checkbox over a partial selection binds to{' '}
         <C>props.indeterminate</C>, not <C>props.selected</C>. Perspective
-        supports the tri-state — use it rather than showing a full check.
+        supports the tri-state: use it rather than showing a full check.
       </>,
       <>
         Mobile scales the box to 22px but the row stays the target. Put the click
@@ -258,7 +258,7 @@ export const ignitionSpecs: Record<string, Ignition> = {
     notes: [
       <>
         A switch writes immediately. If the change needs a Save step it is a
-        checkbox in a form — in Ignition that difference is whether the binding is
+        checkbox in a form; in Ignition that difference is whether the binding is
         bidirectional.
       </>,
       <>
@@ -293,7 +293,7 @@ export const ignitionSpecs: Record<string, Ignition> = {
 }`,
     },
     script: {
-      label: "Change script — gate the commit on the tag's engineering range",
+      label: "Change script: gate the commit on the tag's engineering range",
       code: `lo = system.tag.readBlocking([tagPath + ".EngLow"])[0].value
 hi = system.tag.readBlocking([tagPath + ".EngHigh"])[0].value
 
@@ -306,7 +306,7 @@ self.getSibling("Reason").props.text = (
     notes: [
       <>
         Read the range from the tag&rsquo;s own EngLow / EngHigh rather than
-        hard-coding it in the view — the stepper then stays correct when the tag
+        hard-coding it in the view; the stepper then stays correct when the tag
         is re-ranged.
       </>,
       <>
@@ -355,7 +355,7 @@ self.getSibling("Reason").props.text = (
     },
     notes: [
       <>
-        When the card holds a full-bleed child — a table, filter bar or bulk bar —
+        When the card holds a full-bleed child (a table, filter bar or bulk bar)
         give the card no padding and let the child own the edges. Doing both
         double-pads it.
       </>,
@@ -389,7 +389,7 @@ self.getSibling("Reason").props.text = (
 }`,
     },
     view: {
-      path: 'The row — reflows by column, never by squeeze',
+      path: 'The row · reflows by column, never by squeeze',
       json: `{
   "type": "ia.container.flex",
   "props": { "direction": "row", "wrap": "wrap", "style": { "gap": "var(--njord-sp-16)" } },
@@ -402,7 +402,7 @@ self.getSibling("Reason").props.text = (
     },
     notes: [
       <>
-        Set basis to 208px with grow and shrink on — that is what makes the row
+        Set basis to 208px with grow and shrink on; that is what makes the row
         drop from four columns to two instead of squeezing four cramped cards.
       </>,
       <>
@@ -433,7 +433,7 @@ self.getSibling("Reason").props.text = (
 }`,
     },
     script: {
-      label: 'Expression binding → props.text — say WHICH kind of empty',
+      label: 'Expression binding → props.text · say WHICH kind of empty',
       code: `// "no results" and "nothing is wrong" are opposite meanings
 // and must never share wording.
 if({../rowCount} > 0, "",
@@ -443,7 +443,7 @@ if({../rowCount} > 0, "",
     },
     notes: [
       <>
-        Never render a blank area. An empty table keeps its header — a blank region
+        Never render a blank area. An empty table keeps its header; a blank region
         is indistinguishable from a failed query.
       </>,
       <>
@@ -493,7 +493,7 @@ if({../rowCount} > 0, "",
     notes: [
       <>
         Only critical takes a solid fill, and it uses{' '}
-        <C>--njord-critical-solid</C> — the bare mark is 3.73:1 on white and
+        <C>--njord-critical-solid</C>; the bare mark is 3.73:1 on white and
         cannot hold white text.
       </>,
       <>
@@ -550,7 +550,7 @@ if({../rowCount} > 0, "",
   tag: {
     maps: (
       <>
-        <C>ia.display.label</C> with the <C>njord/tag</C> class — also the column
+        <C>ia.display.label</C> with the <C>njord/tag</C> class; also the column
         style for tag and value columns on <C>ia.display.table</C>.
       </>
     ),
@@ -604,7 +604,7 @@ if({../rowCount} > 0, "",
 }`,
     },
     script: {
-      label: 'Expression — process state crossed with acknowledgement',
+      label: 'Expression: process state crossed with acknowledgement',
       code: `// Perspective alarm objects expose isAcked() and isActive() separately.
 // The four lifecycle states are the PRODUCT of the two, not one field.
 if({../alarm.active} && !{../alarm.acked}, "unack",
@@ -614,7 +614,7 @@ if(!{../alarm.active} && !{../alarm.acked}, "rtn", "normal")))`,
     notes: [
       <>
         Suppression is a second, independent axis. A shelved alarm that is still
-        active is both — render the state tag and the suppression tag side by
+        active is both; render the state tag and the suppression tag side by
         side, never collapsed into one.
       </>,
       <>
@@ -628,7 +628,7 @@ if(!{../alarm.active} && !{../alarm.acked}, "rtn", "normal")))`,
   'alarm-row': {
     maps: (
       <>
-        <C>ia.display.alarm-status-table</C> with row and column style bindings —
+        <C>ia.display.alarm-status-table</C> with row and column style bindings;
         or an embedded view in <C>ia.display.flex-repeater</C> when the row needs
         custom actions.
       </>
@@ -645,7 +645,7 @@ if(!{../alarm.active} && !{../alarm.acked}, "rtn", "normal")))`,
 }`,
     },
     view: {
-      path: 'Alarm table — row style by priority',
+      path: 'Alarm table · row style by priority',
       json: `{
   "type": "ia.display.alarm-status-table",
   "props": {
@@ -669,7 +669,7 @@ if(!{../alarm.active} && !{../alarm.acked}, "rtn", "normal")))`,
     notes: [
       <>
         Sort priority first, then age. Ignition defaults to newest-first, which is
-        wrong here — a three-hour-old critical outranks a one-minute-old low.
+        wrong here: a three-hour-old critical outranks a one-minute-old low.
       </>,
       <>
         The tint is 6–7%, not a fill. Full saturated rows belong to the legacy
@@ -731,7 +731,7 @@ return {
     notes: [
       <>
         The ribbon is never hidden. When nothing is unacknowledged it collapses to
-        a 30px all-clear line — binding <C>props.visible</C> to false makes
+        a 30px all-clear line; binding <C>props.visible</C> to false makes
         &ldquo;no alarms&rdquo; look identical to a broken binding.
       </>,
       <>
@@ -813,7 +813,7 @@ system.perspective.sendMessage("njord.toast",
         visible action buttons first and treat swipe as an enhancement.
       </>,
       <>
-        Because the gesture is unavailable, the row actions are not optional —
+        Because the gesture is unavailable, the row actions are not optional;
         acknowledge must be reachable as a button in the detail view and in the
         bulk bar.
       </>,
@@ -850,7 +850,7 @@ system.perspective.sendMessage("njord.toast",
 }`,
     },
     view: {
-      path: 'Shrink weights — the title survives the squeeze',
+      path: 'Shrink weights · the title survives the squeeze',
       json: `{
   "children": [
     { "meta": { "name": "Scope" },   "position": { "grow": 0, "shrink": 2, "basis": "auto" } },
@@ -865,7 +865,7 @@ system.perspective.sendMessage("njord.toast",
     notes: [
       <>
         Do not set <C>overflow: hidden</C> on the bar. The scope dropdowns are
-        absolutely positioned inside it and clipping renders them invisible —
+        absolutely positioned inside it and clipping renders them invisible;
         control the squeeze with shrink weights instead.
       </>,
       <>
@@ -882,7 +882,7 @@ system.perspective.sendMessage("njord.toast",
   sidebar: {
     maps: (
       <>
-        <C>ia.container.flex</C> (column) of <C>ia.input.button</C> components —
+        <C>ia.container.flex</C> (column) of <C>ia.input.button</C> components;
         not <C>ia.display.menu-tree</C>, which cannot carry the alarm badge.
       </>
     ),
@@ -914,7 +914,7 @@ return len(system.alarm.queryStatus(state=["ActiveUnacked", "ClearUnacked"]))`,
     notes: [
       <>
         The rail is dark chrome in every theme, so its muted tone is{' '}
-        <C>--njord-slate-350</C> — the slate-400 used on white pages only reaches
+        <C>--njord-slate-350</C>: the slate-400 used on white pages only reaches
         3.8:1 here.
       </>,
       <>
@@ -996,7 +996,7 @@ return len(system.alarm.queryStatus(state=["ActiveUnacked", "ClearUnacked"]))`,
 }`,
     },
     view: {
-      path: 'Position — the row breaks, never the sentence',
+      path: 'Position · the row breaks, never the sentence',
       json: `{
   "props": { "direction": "row", "wrap": "wrap", "justify": "space-between" },
   "children": [
@@ -1014,7 +1014,7 @@ return len(system.alarm.queryStatus(state=["ActiveUnacked", "ClearUnacked"]))`,
         collapses to a sliver and breaks one word per line.
       </>,
       <>
-        Screens carry no in-page title — the top bar owns it. Adding one here makes
+        Screens carry no in-page title; the top bar owns it. Adding one here makes
         the tab strip sit at a different height on every screen.
       </>,
     ],
@@ -1046,7 +1046,7 @@ return len(system.alarm.queryStatus(state=["ActiveUnacked", "ClearUnacked"]))`,
     },
     notes: [
       <>
-        Put the click handler on the outer flex, not the label — the whole row is
+        Put the click handler on the outer flex, not the label; the whole row is
         the target and the chevron is only a hint.
       </>,
       <>
@@ -1087,7 +1087,7 @@ if event.key == "k" and (event.metaKey or event.ctrlKey):
     },
     notes: [
       <>
-        Selection is a fill plus a leading dot, never a border — a border shifts
+        Selection is a fill plus a leading dot, never a border: a border shifts
         the row by a pixel as you arrow through.
       </>,
       <>
@@ -1101,7 +1101,7 @@ if event.key == "k" and (event.metaKey or event.ctrlKey):
   'filter-tabs': {
     maps: (
       <>
-        <C>ia.input.multi-state-button</C> — its built-in state model is exactly
+        <C>ia.input.multi-state-button</C>; its built-in state model is exactly
         this component.
       </>
     ),
@@ -1191,7 +1191,7 @@ if event.key == "k" and (event.metaKey or event.ctrlKey):
   'list-row': {
     maps: (
       <>
-        An embedded view inside <C>ia.display.flex-repeater</C> — the mobile
+        An embedded view inside <C>ia.display.flex-repeater</C>: the mobile
         equivalent of a table row.
       </>
     ),
@@ -1243,7 +1243,7 @@ if event.key == "k" and (event.metaKey or event.ctrlKey):
 }`,
     },
     script: {
-      label: 'Governed write — reason required above a threshold',
+      label: 'Governed write · reason required above a threshold',
       code: `def writeSetpoint(tagPath, newValue, reason):
     old = system.tag.readBlocking([tagPath])[0].value
     if newValue > 12.0 and not reason:
@@ -1273,7 +1273,7 @@ if event.key == "k" and (event.metaKey or event.ctrlKey):
   'data-table': {
     maps: (
       <>
-        <C>ia.display.table</C>. Do not rebuild it from flex containers — the
+        <C>ia.display.table</C>. Do not rebuild it from flex containers: the
         built-in table brings sorting, virtualisation and column resizing.
       </>
     ),
@@ -1317,7 +1317,7 @@ if event.key == "k" and (event.metaKey or event.ctrlKey):
         Set <C>emptyMessage</C> explicitly. The default is a bare blank area, which
         is indistinguishable from a failed query.
       </>,
-      <>Compact density changes padding only — never a font size or a hit target.</>,
+      <>Compact density changes padding only; never a font size or a hit target.</>,
       <>
         On a mobile session use the card layout instead. A horizontally scrolling
         table on a 393px screen is unusable in a plant.
@@ -1377,12 +1377,12 @@ if event.key == "k" and (event.metaKey or event.ctrlKey):
   sparkline: {
     maps: (
       <>
-        <C>ia.chart.simple-timeseries</C> with axes, grid and tooltip disabled — or
+        <C>ia.chart.simple-timeseries</C> with axes, grid and tooltip disabled; or
         the sparkline column renderer on <C>ia.display.table</C>.
       </>
     ),
     view: {
-      path: 'Chart props — a shape, not a chart',
+      path: 'Chart props · a shape, not a chart',
       json: `{
   "type": "ia.chart.simple-timeseries",
   "props": {
@@ -1399,7 +1399,7 @@ if event.key == "k" and (event.metaKey or event.ctrlKey):
     notes: [
       <>
         The row must also state the value in text. A sparkline has no scale and is
-        invisible to a screen reader — it can never be the only carrier.
+        invisible to a screen reader; it can never be the only carrier.
       </>,
       <>
         The moment you need an axis, a threshold or a tooltip, the component is a
@@ -1433,7 +1433,7 @@ if event.key == "k" and (event.metaKey or event.ctrlKey):
 }`,
     },
     script: {
-      label: 'props.accessibility.label — describe the trend, not the picture',
+      label: 'props.accessibility.label · describe the trend, not the picture',
       code: `return "%s %s from %.1f to %.1f %s over %d hours%s" % (
     tagName,
     "rising" if last > first else "falling",
@@ -1448,7 +1448,7 @@ if event.key == "k" and (event.metaKey or event.ctrlKey):
         permanently alarming.
       </>,
       <>
-        Charts scale with their pane. Never set a minimum width — it breaks every
+        Charts scale with their pane. Never set a minimum width; it breaks every
         two-pane workspace.
       </>,
     ],
@@ -1459,12 +1459,12 @@ if event.key == "k" and (event.metaKey or event.ctrlKey):
       <>
         Perspective ships P&amp;ID symbols: <C>ia.symbol.pump</C>,{' '}
         <C>ia.symbol.valve</C>, <C>ia.symbol.motor</C>, <C>ia.symbol.vessel</C>.
-        Place them in <C>ia.container.coord</C> — the one place absolute geometry
+        Place them in <C>ia.container.coord</C>: the one place absolute geometry
         is correct.
       </>
     ),
     view: {
-      path: 'Symbol state — neutral is normal, colour is abnormal',
+      path: 'Symbol state · neutral is normal, colour is abnormal',
       json: `{
   "type": "ia.symbol.pump",
   "props": {
@@ -1482,7 +1482,7 @@ if event.key == "k" and (event.metaKey or event.ctrlKey):
 }`,
     },
     script: {
-      label: 'Pipes — fluid line coding, gases dashed',
+      label: 'Pipes · fluid line coding, gases dashed',
       code: `{
   "type": "ia.shapes.path",
   "props": {
@@ -1501,7 +1501,7 @@ if event.key == "k" and (event.metaKey or event.ctrlKey):
     },
     notes: [
       <>
-        Normal is gray. Running and stopped differ by lightness, not hue —{' '}
+        Normal is gray. Running and stopped differ by lightness, not hue:{' '}
         <C>--njord-sc-abnormal</C> is the only saturated symbol colour on a mimic.
       </>,
       <>
@@ -1555,7 +1555,7 @@ if event.key == "k" and (event.metaKey or event.ctrlKey):
     notes: [
       <>
         Anchor to the top rather than centring. A centred popup jumps every time
-        its content resizes — switching a tab inside it, for instance.
+        its content resizes: switching a tab inside it, for instance.
       </>,
       <>
         The body scrolls; the header and footer do not. Actions must stay reachable
@@ -1592,7 +1592,7 @@ if event.key == "k" and (event.metaKey or event.ctrlKey):
 }`,
     },
     script: {
-      label: 'Selecting another row swaps the contents — it does not reopen',
+      label: 'Selecting another row swaps the contents · it does not reopen',
       code: `# Table selection change script. Reuse the SAME popup id so the
 # drawer updates in place instead of stacking popups.
 sel = self.props.selection.selectedRows
@@ -1607,7 +1607,7 @@ if sel:
     },
     notes: [
       <>
-        Keep <C>modal=False</C> so the list behind stays usable — a drawer is
+        Keep <C>modal=False</C> so the list behind stays usable; a drawer is
         context, not an interruption.
       </>,
       <>
@@ -1659,7 +1659,7 @@ system.perspective.openPopup("confirm", "Njord/Mobile/Confirm",
         have been pushed onto the navigation stack.
       </>,
       <>
-        Any input goes at the top of the sheet — the keyboard takes the lower half
+        Any input goes at the top of the sheet; the keyboard takes the lower half
         and a field below it is unreachable.
       </>,
     ],
@@ -1704,7 +1704,7 @@ system.perspective.openPopup("confirm", "Njord/Mobile/Confirm",
     notes: [
       <>Name the object and the count. &ldquo;Saved&rdquo; is useless after a bulk action.</>,
       <>
-        Anything reversible carries Undo in the toast — that is the only place the
+        Anything reversible carries Undo in the toast; that is the only place the
         operator will look for it.
       </>,
       <>

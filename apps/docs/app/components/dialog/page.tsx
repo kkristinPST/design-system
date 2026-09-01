@@ -123,7 +123,7 @@ const variants: Variant[] = [
     name: 'Split footer',
     platform: 'Desktop',
     description:
-      'When the dialog carries metadata — who last changed a value, when it was rationalized — the footer splits: context on the left, actions on the right.',
+      'When the dialog carries metadata (who last changed a value, when it was rationalized) the footer splits: context on the left, actions on the right.',
     preview: (
       <Scrim>
         <div className="w-[460px] overflow-hidden rounded-xl bg-white shadow-[0_12px_32px_rgba(15,24,43,0.12)]">
@@ -160,8 +160,8 @@ export default function DialogPage() {
       intro={
         <>
           A modal that interrupts to collect a decision. Anchored near the top of the scrim rather
-          than vertically centred, so a dialog whose content changes height — switching tabs inside
-          it — grows downward and its header never jumps.
+          than vertically centred, so a dialog whose content changes height (switching tabs inside
+          it) grows downward and its header never jumps.
         </>
       }
       variants={variants}

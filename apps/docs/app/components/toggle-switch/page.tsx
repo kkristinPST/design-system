@@ -17,10 +17,10 @@ const Switch = ({ on }: { on: boolean }) => (
 
 const variants: Variant[] = [
   {
-    name: 'Switch — off / on',
+    name: 'Switch · off / on',
     platform: 'Mobile',
     description:
-      '46×28 track, 22px knob, 18px travel. On is the indicator green — this control states a system condition, so it uses the status ramp rather than brand cyan.',
+      '46×28 track, 22px knob, 18px travel. On is the indicator green: this control states a system condition, so it uses the status ramp rather than brand cyan.',
     preview: (
       <div className="flex items-center gap-10">
         {[false, true].map((on) => (
@@ -41,7 +41,7 @@ const variants: Variant[] = [
     name: 'Settings rows',
     platform: 'Mobile',
     description:
-      'The switch sits at the end of a list row and is never the only target — the whole 52px row toggles. The visual control stays compact; the hit area is inflated invisibly.',
+      'The switch sits at the end of a list row and is never the only target: the whole 52px row toggles. The visual control stays compact; the hit area is inflated invisibly.',
     preview: (
       <PhoneFrame>
         {[
@@ -77,7 +77,7 @@ const variants: Variant[] = [
     name: 'Toggle pill',
     platform: 'Desktop',
     description:
-      'The desktop equivalent inside the account menu. A compact pill that flips to a filled brand-cyan chip with primary-ink text when active — the panel is always dark chrome, so it cannot read from the slate ramp.',
+      'The desktop equivalent inside the account menu. A compact pill that flips to a filled brand-cyan chip with primary-ink text when active; the panel is always dark chrome, so it cannot read from the slate ramp.',
     preview: (
       <div className="w-[260px] rounded-[10px] border border-white/16 bg-ink p-1.5">
         {[
@@ -120,7 +120,7 @@ export default function ToggleSwitchPage() {
       title="Toggle switch"
       intro={
         <>
-          Flips a setting that takes effect immediately — no save step. Mobile uses a sliding
+          Flips a setting that takes effect immediately: no save step. Mobile uses a sliding
           switch; desktop uses a compact on/off pill inside the dark account menu. If a change
           needs confirming, it is a checkbox in a form, not a switch.
         </>
@@ -135,7 +135,7 @@ export default function ToggleSwitchPage() {
             switch.
           </>,
           <>
-            &ldquo;On&rdquo; is <strong>success green</strong>, not brand cyan — a switch reports a
+            &ldquo;On&rdquo; is <strong>success green</strong>, not brand cyan: a switch reports a
             system condition, and cyan belongs to links, focus and selection.
           </>,
           <>
@@ -143,7 +143,7 @@ export default function ToggleSwitchPage() {
             enlarge the control to satisfy WCAG 2.5.5.
           </>,
           <>
-            Anything inside the dark account menu uses fixed light values, never the slate ramp —
+            Anything inside the dark account menu uses fixed light values, never the slate ramp;
             that ramp inverts in dark mode and would turn the labels near-black on near-black.
           </>,
         ],

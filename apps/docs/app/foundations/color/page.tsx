@@ -21,7 +21,7 @@ function Swatch({
   note,
 }: {
   hex: string
-  /** Token name without the prefix — e.g. `slate-800`. */
+  /** Token name without the prefix; e.g. `slate-800`. */
   token: string
   label?: string
   note?: string
@@ -48,34 +48,34 @@ const slateSteps: [string, string, string][] = [
   ['slate-700', palette.slate[700], 'Avatar'],
   ['slate-600', palette.slate[600], 'Body text'],
   ['slate-500', palette.slate[500], 'Secondary text'],
-  ['slate-400', palette.slate[400], 'Muted text — AA on tints'],
+  ['slate-400', palette.slate[400], 'Muted text · AA on tints'],
   ['slate-350', palette.slate[350], 'Dots & hairlines only'],
   ['slate-300', palette.slate[300], 'Strong borders'],
   ['slate-200', palette.slate[200], 'Default borders'],
   ['slate-100', palette.slate[100], 'Hover fills'],
   ['slate-50', palette.slate[50], 'Page background'],
   ['white', palette.white, 'Card and panel surface'],
-  ['black', palette.black, 'Reserved — almost never used'],
+  ['black', palette.black, 'Reserved · almost never used'],
 ]
 
 const brand: [string, string, string][] = [
   ['primary', palette.primary, 'Links, focus, selection'],
-  ['success', palette.success, 'Indicator only — never text'],
+  ['success', palette.success, 'Indicator only · never text'],
   ['warning', palette.warning, 'High priority'],
   ['critical', palette.critical, 'Critical priority'],
-  ['medium', palette.medium, 'Medium priority — its own hue'],
+  ['medium', palette.medium, 'Medium priority · its own hue'],
 ]
 
-/** Every status, every member — derived, so a new member cannot go unshown. */
+/** Every status, every member: derived, so a new member cannot go unshown. */
 const tintRows = Object.entries(status).map(([name, members]) => ({
   name,
   members: Object.entries(members) as [string, string][],
 }))
 
 const scadaRows: [string, string, string][] = [
-  ['sc-run', scada.run, 'Running / open — energised'],
-  ['sc-stop', scada.stop, 'Stopped / closed — de-energised'],
-  ['sc-abnormal', scada.abnormal, 'In alarm — the only saturated one'],
+  ['sc-run', scada.run, 'Running / open · energised'],
+  ['sc-stop', scada.stop, 'Stopped / closed · de-energised'],
+  ['sc-abnormal', scada.abnormal, 'In alarm · the only saturated one'],
   ['sc-pipe', scada.pipe, 'Connector pipes'],
   ['sc-line', scada.line, 'Thin rules and leaders'],
   ['sc-edge', scada.edge, 'Symbol outlines'],
@@ -88,7 +88,7 @@ const scadaRows: [string, string, string][] = [
   ['sc-cabinet-edge', scada.cabinetEdge, 'Cabinet outline'],
 ]
 
-/** Alias names carry no `color-` prefix — they live on :root, not in @theme. */
+/** Alias names carry no `color-` prefix: they live on :root, not in @theme. */
 const ALIAS = new Set([
   'background',
   'foreground',
@@ -102,7 +102,7 @@ const ALIAS = new Set([
 const aliasRows: [string, string, string][] = [
   ['background', skins.modern.tokens.background, 'The page itself'],
   ['surface', skins.modern.tokens.surface, 'A raised card or panel'],
-  ['surface-2', skins.modern.tokens['surface-2'], 'A recessed strip — table header, well'],
+  ['surface-2', skins.modern.tokens['surface-2'], 'A recessed strip · table header, well'],
   ['fg', skins.modern.tokens.fg, 'Primary text'],
   ['fg-muted', skins.modern.tokens['fg-muted'], 'Secondary text'],
   ['fg-subtle', skins.modern.tokens['fg-subtle'], 'Tertiary and meta text'],
@@ -147,7 +147,7 @@ export default function ColorPage() {
       <p className="mt-2 max-w-[68ch] text-sm leading-relaxed text-slate-500">
         A slate spine, one brand cyan, and a strictly-governed status ramp. Under ISA-101 colour is
         a scarce resource: it is spent on abnormal conditions, and almost nothing else. Every value
-        on this page is on the page — 89 colour tokens, nothing held back.
+        on this page is on the page; 89 colour tokens, nothing held back.
       </p>
 
       {/* ── Naming ── */}
@@ -171,7 +171,7 @@ export default function ColorPage() {
           </div>
         </div>
         <p className="mt-3 text-[12px] leading-relaxed text-slate-600">
-          The six surface and text aliases are the exception — they carry no{' '}
+          The six surface and text aliases are the exception; they carry no{' '}
           <span className="font-mono text-[11px]">color-</span> segment on the web (
           <span className="font-mono text-[11px]">var(--surface)</span>), because they are the layer
           a skin re-points. Never paste a hex from this page into a component; the hex is here so
@@ -195,7 +195,7 @@ export default function ColorPage() {
       <p className="mt-3 text-[12px] leading-relaxed text-slate-500">
         The same eleven steps are also published as{' '}
         <span className="font-mono text-[11px]">neutral-0</span> …{' '}
-        <span className="font-mono text-[11px]">neutral-1000</span> — a 1:1 alias of this ramp kept
+        <span className="font-mono text-[11px]">neutral-1000</span>: a 1:1 alias of this ramp kept
         so older chrome keeps working. Prefer the slate names in new work; the two are identical
         values and there is no reason to mix them.
       </p>
@@ -203,7 +203,7 @@ export default function ColorPage() {
       {/* ── Brand ── */}
       <h2 className="mt-10 text-base font-bold text-ink">Brand &amp; semantic base</h2>
       <p className="mt-1.5 max-w-[68ch] text-[13px] leading-relaxed text-slate-500">
-        These are <strong>marks</strong> — fills for dots, rails and bars. None of them is a text
+        These are <strong>marks</strong>: fills for dots, rails and bars. None of them is a text
         colour. For text, use the matching <span className="font-mono text-xs">*-text</span> tint
         below.
       </p>
@@ -352,7 +352,7 @@ export default function ColorPage() {
         ))}
       </div>
       <p className="mt-3 max-w-[68ch] text-[12px] leading-relaxed text-slate-500">
-        These are a web-build convenience. The Ignition theme has no alias layer — there, a skin
+        These are a web-build convenience. The Ignition theme has no alias layer: there, a skin
         re-points the ramp steps themselves, which reaches the same result through the style
         classes. Either way you never reference a skin&rsquo;s value directly.
       </p>
@@ -407,7 +407,7 @@ export default function ColorPage() {
       <h2 className="mt-10 text-base font-bold text-ink">Across the three skins</h2>
       <p className="mt-1.5 max-w-[68ch] text-[13px] leading-relaxed text-slate-500">
         Everything above is the <strong>modern</strong> skin, the default. The other two do not
-        introduce new colours — they re-point names that already exist. These are the only colour
+        introduce new colours; they re-point names that already exist. These are the only colour
         tokens whose value changes, so anything not listed here is identical in all three.
       </p>
       {reskins.map(({ name, selector, rows }) => (
@@ -443,7 +443,7 @@ export default function ColorPage() {
       <p className="mt-3 max-w-[68ch] text-[12px] leading-relaxed text-slate-500">
         The dark skin ships inside the Ignition theme as{' '}
         <span className="font-mono text-[11px]">.njord-theme-dark</span>. Legacy is a web-build skin
-        documented for reference — it recreates the classic HMI and also flattens radii and removes
+        documented for reference; it recreates the classic HMI and also flattens radii and removes
         shadows. Full side-by-side previews are on{' '}
         <Link href="/styles/themes" className="font-semibold text-primary-text hover:underline">
           Themes

@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// Design Tokens — Radii & elevation
+// Design Tokens; Radii & elevation
 //
 // THIS FILE IS THE SOURCE. `npm run build` derives --radius-* / --shadow-* in
 // dist/tokens.css and --njord-r-* / --njord-shadow* in dist/njord.css from it.
@@ -24,10 +24,10 @@ export const elevation = {
 } as const
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Shell dimensions — fixed sizes, not spacing steps.
+// Shell dimensions: fixed sizes, not spacing steps.
 //
 // These are what the clearance tokens in spacing.ts are measured against. A
-// gutter that clears the 72px collapsed rail is 72 because the rail is 72 —
+// gutter that clears the 72px collapsed rail is 72 because the rail is 72;
 // it is not a spacing step and must not be rounded onto the ladder.
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -41,12 +41,12 @@ export const shell = {
 // Minimum interactive target.
 //
 // WCAG 2.5.5 is about the TARGET, not the ink. A compact control keeps its
-// visual size and gains an invisible hit area around it — do NOT inflate a
+// visual size and gains an invisible hit area around it; do NOT inflate a
 // control's height to satisfy this, or every dense toolbar in the product
 // grows. The app implements it as a `.njd-hit` pseudo-element overlay.
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const target = {
-  'target-min':         { value: '44px', use: 'Touch — the WCAG 2.5.5 floor' },
-  'target-min-desktop': { value: '40px', use: 'Pointer-driven chrome — top-bar icon buttons' },
+  'target-min':         { value: '44px', use: 'Touch · the WCAG 2.5.5 floor' },
+  'target-min-desktop': { value: '40px', use: 'Pointer-driven chrome · top-bar icon buttons' },
 } as const

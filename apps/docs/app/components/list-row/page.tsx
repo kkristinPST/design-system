@@ -9,7 +9,7 @@ const Chevron = () => (
 
 const variants: Variant[] = [
   {
-    name: 'Mobile — list row',
+    name: 'Mobile · list row',
     platform: 'Mobile',
     description:
       'The workhorse of the phone build. A 38px icon tile, a two-line text block, and a trailing region for a value, badge or chevron. Rows divide on slate-100 inside a 16px-radius card.',
@@ -67,7 +67,7 @@ const variants: Variant[] = [
 </button>`,
   },
   {
-    name: 'Mobile — reading rows',
+    name: 'Mobile · reading rows',
     platform: 'Mobile',
     description:
       'Label on the left, mono value on the right, no icon. Minimum 48px so the row is tappable when it drills into a trend.',
@@ -102,7 +102,7 @@ const variants: Variant[] = [
 </button>`,
   },
   {
-    name: 'Mobile — fact grid',
+    name: 'Mobile · fact grid',
     platform: 'Mobile',
     description:
       'A two-column read-only grid for detail screens. Cells divide with slate-100 hairlines; the right column drops its right border so no rule floats against the card edge.',
@@ -136,7 +136,7 @@ const variants: Variant[] = [
 </div>`,
   },
   {
-    name: 'Desktop — drill-in row',
+    name: 'Desktop · drill-in row',
     platform: 'Desktop',
     description:
       'The desktop counterpart, used for notes and search results. A bordered card row whose border turns cyan on hover, with a two-line clamp on the body text.',
@@ -144,7 +144,7 @@ const variants: Variant[] = [
       <div className="flex w-[520px] flex-col gap-2">
         {[
           { h: 'Lye dosing pump replaced', t: 'Swapped the dosing head on PU-31; old head is in the workshop for inspection. Flow verified at 4.2 L/h afterwards.', tag: 'PU-31', by: 'K. Berg', isNew: true },
-          { h: 'Handover — night shift', t: 'DO in TK-04 has been drifting low all evening. Trend attached; keep an eye on it after the 02:00 feed.', tag: 'TK-04', by: 'M. Solheim', isNew: false },
+          { h: 'Handover · night shift', t: 'DO in TK-04 has been drifting low all evening. Trend attached; keep an eye on it after the 02:00 feed.', tag: 'TK-04', by: 'M. Solheim', isNew: false },
         ].map(({ h, t, tag, by, isNew }) => (
           <button
             key={h}
@@ -208,7 +208,7 @@ export default function ListRowPage() {
             rendering fault.
           </>,
           <>
-            Rows are 48px minimum, and the tappable region is the whole row — never just the
+            Rows are 48px minimum, and the tappable region is the whole row; never just the
             chevron.
           </>,
           <>

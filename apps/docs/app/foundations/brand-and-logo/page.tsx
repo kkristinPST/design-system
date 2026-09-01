@@ -30,7 +30,7 @@ export default function BrandAndLogoPage() {
             </div>
           </div>
           <div className="border-t border-slate-200 bg-white px-4 py-3.5">
-            <p className="text-sm font-semibold text-ink">Expanded rail — wordmark</p>
+            <p className="text-sm font-semibold text-ink">Expanded rail; wordmark</p>
             <p className="mt-1 text-xs leading-relaxed text-slate-500">
               72px logo band, 22px horizontal padding, a hairline of white at 6% underneath.
             </p>
@@ -50,7 +50,7 @@ export default function BrandAndLogoPage() {
             </div>
           </div>
           <div className="border-t border-slate-200 bg-white px-4 py-3.5">
-            <p className="text-sm font-semibold text-ink">Collapsed rail — mark</p>
+            <p className="text-sm font-semibold text-ink">Collapsed rail; mark</p>
             <p className="mt-1 text-xs leading-relaxed text-slate-500">
               At 72px the wordmark is replaced by the mark alone, centred, and the collapse control
               moves into the nav.
@@ -95,7 +95,7 @@ export default function BrandAndLogoPage() {
           <p className="text-[11px] font-bold uppercase tracking-[0.8px] text-critical-text">Don&rsquo;t</p>
           <ul className="mt-2.5 space-y-1.5 text-[13px] leading-relaxed text-slate-700">
             <li>· Put the logo in the top bar, on cards or in dialogs</li>
-            <li>· Use brand navy as a UI colour — the interface uses the slate ramp</li>
+            <li>· Use brand navy as a UI colour; the interface uses the slate ramp</li>
             <li>· Recolour the mark to a status colour</li>
             <li>· Add a logo watermark behind a mimic or a chart</li>
           </ul>
@@ -107,7 +107,7 @@ export default function BrandAndLogoPage() {
         <code className="font-mono text-[11px]">njord-mark.svg</code>,{' '}
         <code className="font-mono text-[11px]">njord-wordmark.png</code> and{' '}
         <code className="font-mono text-[11px]">logo-collapsed.svg</code>. Use the SVG wherever the
-        renderer supports it — the rail recolours it per theme with a CSS filter rather than
+        renderer supports it: the rail recolours it per theme with a CSS filter rather than
         shipping one asset per skin.
       </div>
     </div>

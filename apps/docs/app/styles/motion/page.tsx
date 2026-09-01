@@ -1,6 +1,6 @@
 import { durations, easings, keyframes } from '@njord/tokens'
 
-// Durations, easings and keyframes all come from the token package — every name
+// Durations, easings and keyframes all come from the token package; every name
 // shown here is a name that ships in the theme file.
 const durationRows = Object.entries(durations).map(([token, d]) => ({
   token,
@@ -29,7 +29,7 @@ export default function MotionPage() {
       <h1 className="text-2xl font-bold tracking-tight text-ink">Motion</h1>
       <p className="mt-2 text-sm leading-relaxed text-slate-500">
         Motion here is functional, never decorative. It shows where a panel came from and confirms
-        that a press registered — nothing more. In a control room, an animation that delays
+        that a press registered: nothing more. In a control room, an animation that delays
         information is a defect.
       </p>
 
@@ -90,7 +90,7 @@ export default function MotionPage() {
           <ul className="mt-2.5 space-y-1.5 text-[13px] leading-relaxed text-slate-700">
             <li>· A live process value counting up to its reading</li>
             <li>· Charts drawing themselves on load</li>
-            <li>· Alarms fading or sliding in — they appear immediately</li>
+            <li>· Alarms fading or sliding in, they appear immediately</li>
             <li>· Anything that delays a number an operator is waiting for</li>
           </ul>
         </div>

@@ -1,7 +1,7 @@
 import { skinList, allTokens } from '@njord/tokens'
 
 // The three skins, the selectors they answer to and every token they remap all
-// come from @njord/tokens — the same source that generates the CSS. This page
+// come from @njord/tokens: the same source that generates the CSS. This page
 // cannot fall out of date with the stylesheet it documents.
 const themes = skinList
 
@@ -26,7 +26,7 @@ export default function ThemesPage() {
       <h1 className="text-2xl font-bold tracking-tight text-ink">Themes</h1>
       <p className="mt-2 text-sm leading-relaxed text-slate-500">
         Three skins over one token set. Every component reads from semantic variables, so a theme is
-        a list of remapped tokens rather than a second stylesheet — re-pointing them re-skins every
+        a list of remapped tokens rather than a second stylesheet; re-pointing them re-skins every
         screen at once.
       </p>
 
@@ -93,8 +93,7 @@ export default function ThemesPage() {
       {/* ── Legacy alarm matrix ── */}
       <h2 className="mt-10 text-base font-bold text-ink">The legacy alarm matrix</h2>
       <p className="mt-1.5 text-[13px] leading-relaxed text-slate-500">
-        The legacy skin&rsquo;s signature is the fully-coded alarm row. Hue encodes state —
-        unacknowledged red, acknowledged purple, returned-to-normal blue — and lightness encodes
+        The legacy skin&rsquo;s signature is the fully-coded alarm row. Hue encodes state (unacknowledged red, acknowledged purple, returned-to-normal blue), and lightness encodes
         priority. Normal, shelved and out-of-service rows carry no fill at all.
       </p>
       <div className="mt-5 overflow-hidden rounded-xl border border-slate-200">
@@ -128,7 +127,7 @@ export default function ThemesPage() {
             </>,
             <>
               Every theme sets <code className="font-mono text-[12px]">color-scheme</code>, so
-              native controls — select popups, scrollbars, date pickers — follow the skin instead of
+              native controls (select popups, scrollbars, date pickers) follow the skin instead of
               painting a light backdrop under light text.
             </>,
             <>
@@ -138,7 +137,7 @@ export default function ThemesPage() {
             </>,
             <>
               In the legacy skin, selection and trend-arrival cannot repaint a coded alarm row
-              without destroying its meaning — they mark it with a left rail instead.
+              without destroying its meaning: they mark it with a left rail instead.
             </>,
             <>
               All three skins are AA-clean. A theme is never an excuse to drop contrast.

@@ -8,7 +8,7 @@ const variants: Variant[] = [
     name: 'Page header',
     platform: 'Desktop',
     description:
-      'Subtitle on the left, controls on the right, tab strip below. There is no in-page h1 — the top bar owns the title, which is why the tab strip keeps the same y from page to page.',
+      'Subtitle on the left, controls on the right, tab strip below. There is no in-page h1; the top bar owns the title, which is why the tab strip keeps the same y from page to page.',
     preview: (
       <div className="w-[760px]">
         <div className="mb-[18px]">
@@ -88,7 +88,7 @@ const variants: Variant[] = [
 </div>`,
   },
   {
-    name: 'Mobile — screen header',
+    name: 'Mobile · screen header',
     platform: 'Mobile',
     description:
       'A 24px / 800 title with an optional back arrow and subtitle. Actions become 40px icon buttons; a segmented control sits directly underneath when the screen has views.',
@@ -162,7 +162,7 @@ export default function PageHeaderPage() {
         items: [
           <>
             Desktop screens carry <strong>no in-page h1</strong>. The top bar&rsquo;s title plus
-            crumb is the page title — duplicating it pushes the tab strip to a different y on every
+            crumb is the page title; duplicating it pushes the tab strip to a different y on every
             screen and makes switching tabs jump.
           </>,
           <>

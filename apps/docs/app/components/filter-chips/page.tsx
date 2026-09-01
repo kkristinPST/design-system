@@ -12,7 +12,7 @@ const variants: Variant[] = [
     name: 'Applied filter chips',
     platform: 'Desktop',
     description:
-      'A pill on slate-100 with a slate-200 border and asymmetric padding — 11px on the label side, 6px beside the dismiss control. A severity chip carries its 7px colour dot.',
+      'A pill on slate-100 with a slate-200 border and asymmetric padding; 11px on the label side, 6px beside the dismiss control. A severity chip carries its 7px colour dot.',
     preview: (
       <div className="inline-flex flex-wrap items-center gap-1.5">
         {[
@@ -118,7 +118,7 @@ const variants: Variant[] = [
 .filterbar .field { flex: 1 1 200px; min-width: 150px }  /* search is elastic */`,
   },
   {
-    name: 'Mobile — scrolling chip row',
+    name: 'Mobile · scrolling chip row',
     platform: 'Mobile',
     description:
       'A horizontally scrolling row with a hidden scrollbar. Chips are 38px minimum height with a 44px hit area; active inverts to ink.',
@@ -166,7 +166,7 @@ export default function FilterChipsPage() {
       intro={
         <>
           Shows what is currently filtering a list, and lets each facet be toggled or dismissed. A
-          chip always states its own value — &ldquo;3 filters applied&rdquo; is not a chip, it is a
+          chip always states its own value; &ldquo;3 filters applied&rdquo; is not a chip, it is a
           hidden state.
         </>
       }
@@ -176,7 +176,7 @@ export default function FilterChipsPage() {
         heading: 'Rules',
         items: [
           <>
-            Chips never shrink. Their label is nowrap, so a squeezed chip clips its own text — the{' '}
+            Chips never shrink. Their label is nowrap, so a squeezed chip clips its own text: the{' '}
             <em>strip</em> wraps or scrolls instead.
           </>,
           <>
@@ -184,7 +184,7 @@ export default function FilterChipsPage() {
             they will forget, and an alarm list with an invisible filter is a safety problem.
           </>,
           <>
-            The severity dot inside a chip is 7px and unringed — it sits on a flat slate-100 fill
+            The severity dot inside a chip is 7px and unringed; it sits on a flat slate-100 fill
             where it already has an edge.
           </>,
           <>

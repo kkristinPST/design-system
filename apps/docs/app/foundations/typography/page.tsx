@@ -53,7 +53,7 @@ export default function TypographyPage() {
       <div className="mt-4 rounded-xl border border-slate-300 bg-slate-50 p-5">
         <p className="text-sm font-semibold text-ink">How to reference the scale</p>
         <p className="mt-1.5 text-[13px] leading-relaxed text-slate-600">
-          Every role below is three tokens — size, line height and, where it is not zero, letter
+          Every role below is three tokens: size, line height and, where it is not zero, letter
           spacing. Add the prefix for your build:
         </p>
         <div className="mt-3 grid gap-2 sm:grid-cols-2">
@@ -82,7 +82,7 @@ export default function TypographyPage() {
           </div>
         </div>
         <p className="mt-3 text-[12px] leading-relaxed text-slate-600">
-          Weight is not a token — set it from the number in each row. The HMI scale is in{' '}
+          Weight is not a token; set it from the number in each row. The HMI scale is in{' '}
           <span className="font-mono text-[11px]">px</span>; the web scale is the same values in{' '}
           <span className="font-mono text-[11px]">rem</span>, so browser text-size settings still
           work.
@@ -137,7 +137,7 @@ export default function TypographyPage() {
       {/* ── Mobile ── */}
       <h2 className="mt-10 text-base font-bold text-ink">Mobile overrides</h2>
       <p className="mt-1.5 text-[13px] leading-relaxed text-slate-500">
-        The phone build re-tunes a handful of roles for a 393px viewport — titles get heavier,
+        The phone build re-tunes a handful of roles for a 393px viewport: titles get heavier,
         metrics get much larger, and labels get tighter. Everything not listed is shared with
         desktop.
       </p>
@@ -188,7 +188,7 @@ export default function TypographyPage() {
               align.
             </>,
             <>
-              Screens carry no in-page <code className="font-mono text-[12px]">h1</code> — the top
+              Screens carry no in-page <code className="font-mono text-[12px]">h1</code>; the top
               bar owns the page title, so the content below keeps the same y on every screen.
             </>,
             <>

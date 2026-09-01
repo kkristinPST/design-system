@@ -56,7 +56,7 @@ const variants: Variant[] = [
     name: 'Alarm table row',
     platform: 'Desktop',
     description:
-      'Severity is a 3px inset rail plus a faint priority tint — critical at 7%, high at 6%. The tint makes the highest-priority rows conspicuous in a dense list (EEMUA 191) without shouting.',
+      'Severity is a 3px inset rail plus a faint priority tint: critical at 7%, high at 6%. The tint makes the highest-priority rows conspicuous in a dense list (EEMUA 191) without shouting.',
     preview: (
       <div className="w-[820px] overflow-x-auto rounded-lg border border-slate-200 bg-white">
         <table className="w-full border-collapse">
@@ -162,7 +162,7 @@ const variants: Variant[] = [
 <tr className="bg-primary-bg shadow-[inset_3px_0_0_var(--color-primary)] animate-[njRowHl_1s_ease]">`,
   },
   {
-    name: 'Mobile — alarm row',
+    name: 'Mobile · alarm row',
     platform: 'Mobile',
     description:
       'A 14px-radius card with a 4px severity rail. The area and time share the top line, the alarm name gets the second, and the reading plus any stale flag sit underneath.',
@@ -230,7 +230,7 @@ export default function AlarmRowPage() {
         <>
           One alarm in a list. Desktop uses a table row with a severity rail and a faint priority
           tint; mobile uses a 14px card with a 4px rail. On both, the alarm <em>name</em> is the
-          identity — it is never the thing that gets truncated to make room for controls.
+          identity; it is never the thing that gets truncated to make room for controls.
         </>
       }
       variants={variants}
@@ -248,7 +248,7 @@ export default function AlarmRowPage() {
             instead, because repainting a coded row would destroy its meaning.
           </>,
           <>
-            Row actions are uppercase 11px outline buttons that tint on hover — ack goes green,
+            Row actions are uppercase 11px outline buttons that tint on hover: ack goes green,
             disable goes red, investigate goes cyan. Disabled actions stay visible at 40% rather
             than disappearing.
           </>,
@@ -260,7 +260,7 @@ export default function AlarmRowPage() {
             <strong className="font-semibold text-ink">
               A saturated legacy row re-points its own ink.
             </strong>{' '}
-            Nothing inside a filled row may use the ordinary text tokens —{' '}
+            Nothing inside a filled row may use the ordinary text tokens:{' '}
             <code className="font-mono text-[11px]">--fg</code> is dark ink and would vanish on a
             red fill. Declare three custom properties on the row&rsquo;s cells and let every child
             inherit them:{' '}
@@ -269,7 +269,7 @@ export default function AlarmRowPage() {
             {alarmRowInk.onSaturated.line}) for hairline borders and glyph rings, and{' '}
             <code className="font-mono text-[11px]">--alm-ink-wash</code> (
             {alarmRowInk.onSaturated.wash}) for a chip fill sitting on the row. Set them on the
-            cells, never on <code className="font-mono text-[11px]">:root</code> — a global default
+            cells, never on <code className="font-mono text-[11px]">:root</code>: a global default
             leaks the override onto every unfilled row.
           </>,
           <>

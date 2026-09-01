@@ -85,14 +85,14 @@ export default function SeverityAndStatusPage() {
 
       <div className="mt-5 rounded-lg border border-[color-mix(in_srgb,var(--color-medium)_28%,transparent)] bg-medium-bg px-4 py-3 text-[12px] leading-relaxed text-medium-text">
         <strong>Medium has its own royal blue</strong> (#2563EB), deliberately not the brand cyan.
-        Under ISA-101 alarm colour is reserved for alarm state — and cyan already means link, focus
+        Under ISA-101 alarm colour is reserved for alarm state; and cyan already means link, focus
         and selection everywhere else in the console.
       </div>
 
       {/* ── Filled chips ── */}
       <h2 className="mt-10 text-base font-bold text-ink">Filled severity chips</h2>
       <p className="mt-1.5 text-[13px] leading-relaxed text-slate-500">
-        A solid badge that carries its own label, for the places a tint would disappear — on a
+        A solid badge that carries its own label, for the places a tint would disappear: on a
         tinted alarm ribbon, on a tab-bar badge. Each fill is paired with the one ink that clears
         AA on it at 9px. Use the pair; never mix a fill with a different ink.
       </p>
@@ -130,7 +130,7 @@ export default function SeverityAndStatusPage() {
       {/* ── Three channels ── */}
       <h2 className="mt-10 text-base font-bold text-ink">Three channels, never one</h2>
       <p className="mt-1.5 text-[13px] leading-relaxed text-slate-500">
-        Every alarm row carries its severity three ways at once — badge, rail and tint — so the
+        Every alarm row carries its severity three ways at once (badge, rail and tint), so the
         state survives colour-blindness, a monochrome print and a sun-washed screen.
       </p>
       <div className="mt-5 w-full overflow-hidden rounded-xl border border-slate-200 bg-white">
@@ -172,7 +172,7 @@ export default function SeverityAndStatusPage() {
       <h2 className="mt-10 text-base font-bold text-ink">Suppression</h2>
       <p className="mt-1.5 text-[13px] leading-relaxed text-slate-500">
         A second, independent axis. A shelved alarm that is still active is <em>both</em> shelved
-        and unacknowledged — showing only the suppression hides a live process condition.
+        and unacknowledged; showing only the suppression hides a live process condition.
       </p>
       <div className="mt-5 overflow-hidden rounded-xl border border-slate-200 bg-white">
         {suppression.map(([g, l, d, cls]) => (
@@ -204,7 +204,7 @@ export default function SeverityAndStatusPage() {
             </>,
             <>
               An alarm active for more than 24h gets a separate <strong>stale</strong> pill. It is a
-              flag, not a state — it never replaces the lifecycle tag.
+              flag, not a state: it never replaces the lifecycle tag.
             </>,
             <>
               Priority tint is 6–7%, not a fill. Full saturated rows belong to the legacy skin,

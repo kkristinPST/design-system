@@ -28,7 +28,7 @@ const variants: Variant[] = [
     name: 'Rows-per-page select',
     platform: 'Desktop',
     description:
-      'A native <select> restyled to match. It keeps native semantics — and the theme sets color-scheme so the OS paints the popup to match the skin instead of a light backdrop under light text.',
+      'A native <select> restyled to match. It keeps native semantics: and the theme sets color-scheme so the OS paints the popup to match the skin instead of a light backdrop under light text.',
     preview: (
       <div className="inline-flex items-center gap-2 text-[13px] text-slate-600">
         Rows per page
@@ -63,7 +63,7 @@ const variants: Variant[] = [
         {[
           { label: 'Instrument fault', sel: false },
           { label: 'Planned maintenance', sel: true },
-          { label: 'Nuisance — awaiting rationalization', sel: false },
+          { label: 'Nuisance · awaiting rationalization', sel: false },
         ].map(({ label, sel }) => (
           <button
             key={label}
@@ -97,7 +97,7 @@ const variants: Variant[] = [
 </button>`,
   },
   {
-    name: 'Mobile — select',
+    name: 'Mobile · select',
     platform: 'Mobile',
     description:
       'A full-width native select with an inlined SVG chevron. 12px radius and 34px right padding so the caret never collides with a long value.',
@@ -128,7 +128,7 @@ const variants: Variant[] = [
 </select>`,
   },
   {
-    name: 'Mobile — option sheet',
+    name: 'Mobile · option sheet',
     platform: 'Mobile',
     description:
       'The preferred mobile picker. Options are 48px rows in a scrollable bordered list; the active row is bold on a slate-50 fill with a cyan check.',
@@ -185,14 +185,14 @@ export default function SelectPage() {
           <>
             Any theme that restyles a native <code className="font-mono text-[12px]">select</code>{' '}
             must also set <code className="font-mono text-[12px]">color-scheme</code>. Without it the
-            OS paints a light popup behind light text — the rows-per-page picker was unreadable in
+            OS paints a light popup behind light text; the rows-per-page picker was unreadable in
             dark mode for exactly this reason.
           </>,
           <>
             Past roughly five options, or any option longer than a few words, switch to the stacked
             list. The dropdown stops being a shortcut once you have to open it to read it.
           </>,
-          <>Selection is border + fill + a check glyph — never fill alone.</>,
+          <>Selection is border + fill + a check glyph; never fill alone.</>,
         ],
       }}
     />

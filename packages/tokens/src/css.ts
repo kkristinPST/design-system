@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// The emit map — the one place that says what a token is CALLED in CSS.
+// The emit map: the one place that says what a token is CALLED in CSS.
 //
 // Every entry names the token twice: once for the web build (`web`) and once
 // for the Ignition Perspective theme (`ignition`). Values are read from the
@@ -27,7 +27,7 @@ export type CssToken = {
   comment?: string
   /**
    * `theme` (default) emits into Tailwind's @theme, which turns the token into
-   * a utility class. `root` emits onto :root instead — for tokens that should
+   * a utility class. `root` emits onto :root instead: for tokens that should
    * NOT mint a class, because Tailwind already owns that namespace (spacing) or
    * the concept has no utility (durations, easings).
    */
@@ -122,7 +122,7 @@ const ELEVATION_CSS: Record<keyof typeof elevation, string> = {
 
 export function tokenGroups(): CssGroup[] {
   const slate: CssToken[] = [
-    { web: '--color-ink', ignition: '--njord-ink', value: palette.slate.ink, comment: 'darkest chrome — sidebar, primary buttons, bulk bar' },
+    { web: '--color-ink', ignition: '--njord-ink', value: palette.slate.ink, comment: 'darkest chrome · sidebar, primary buttons, bulk bar' },
     ...([800, 700, 600, 500, 400, 350, 300, 200, 100, 50] as const).map((step) => ({
       web: `--color-slate-${step}`,
       ignition: `--njord-slate-${step}`,
@@ -149,11 +149,11 @@ export function tokenGroups(): CssGroup[] {
   ]
 
   const brand: CssToken[] = [
-    { web: '--color-primary', ignition: '--njord-primary', value: palette.primary, comment: 'brand cyan — links, focus, selection' },
-    { web: '--color-success', ignition: '--njord-success', value: palette.success, comment: 'indicator green — never carries text' },
+    { web: '--color-primary', ignition: '--njord-primary', value: palette.primary, comment: 'brand cyan · links, focus, selection' },
+    { web: '--color-success', ignition: '--njord-success', value: palette.success, comment: 'indicator green · never carries text' },
     { web: '--color-warning', ignition: '--njord-warning', value: palette.warning },
     { web: '--color-critical', ignition: '--njord-critical', value: palette.critical },
-    { web: '--color-medium', ignition: '--njord-medium', value: palette.medium, comment: 'MEDIUM priority — its own royal blue, never brand cyan' },
+    { web: '--color-medium', ignition: '--njord-medium', value: palette.medium, comment: 'MEDIUM priority · its own royal blue, never brand cyan' },
   ]
 
   const tints: CssToken[] = Object.entries(status).flatMap(([name, members]) =>
@@ -223,7 +223,7 @@ export function tokenGroups(): CssGroup[] {
   ]
 
   // The web build takes rem so the scale respects a user's browser text size.
-  // Perspective style classes are authored in px, so the HMI gets px — and it
+  // Perspective style classes are authored in px, so the HMI gets px; and it
   // gets them at all, so a style class never has to hardcode a size.
   const type: CssToken[] = Object.values(typeScale).flatMap((t) => {
     const out: CssToken[] = [
@@ -252,7 +252,7 @@ export function tokenGroups(): CssGroup[] {
   })
 
   // Mobile roles. The phone build re-tunes nine of them for a 393px viewport,
-  // and they are NOT derivable from the desktop scale — a 30px vital value with
+  // and they are NOT derivable from the desktop scale: a 30px vital value with
   // 30px leading is a deliberate 1.0 ratio no desktop role uses. Emitted under
   // an `-m-` infix so a consumer can see at a glance which surface a role is
   // for. Off @theme like spacing: these are for direct var() reference, not for
@@ -313,7 +313,7 @@ export function tokenGroups(): CssGroup[] {
     scope: 'root' as const,
   }))
 
-  // Clearance floors — component dimensions, not gaps. Off @theme for the same
+  // Clearance floors: component dimensions, not gaps. Off @theme for the same
   // reason spacing is: they must not mint padding utilities.
   const clear: CssToken[] = Object.entries(clearance).map(([name, c]) => ({
     web: `--${name}`,
@@ -340,7 +340,7 @@ export function tokenGroups(): CssGroup[] {
     })),
   ]
 
-  // Shell dimensions and the interactive-target floor. Sizes, not spacing —
+  // Shell dimensions and the interactive-target floor. Sizes, not spacing;
   // off @theme so they cannot mint padding utilities.
   const dims: CssToken[] = [...Object.entries(shell), ...Object.entries(target)].map(
     ([name, d]) => ({
@@ -382,29 +382,29 @@ export function tokenGroups(): CssGroup[] {
   }))
 
   return [
-    { title: 'Slate ramp — the neutral spine of the system', tokens: slate },
+    { title: 'Slate ramp · the neutral spine of the system', tokens: slate },
     {
-      title: 'Neutral aliases — map 1:1 onto the slate ramp',
+      title: 'Neutral aliases · map 1:1 onto the slate ramp',
       tokens: neutralSteps.map(([step, value]) => ({ web: `--color-neutral-${step}`, value })),
     },
     { title: 'Brand / semantic base', tokens: brand },
-    { title: 'Status tints — bg / mid / text / solid', tokens: tints },
-    { title: 'Severity — mark, ink on that mark, and text on a normal surface', tokens: sev },
-    { title: 'Severity — filled chip pairs (fill + the ink it carries)', tokens: sevChip },
+    { title: 'Status tints · bg / mid / text / solid', tokens: tints },
+    { title: 'Severity: mark, ink on that mark, and text on a normal surface', tokens: sev },
+    { title: 'Severity: filled chip pairs (fill + the ink it carries)', tokens: sevChip },
     { title: 'Process-fluid line coding (SCADA mimic pipes)', tokens: fl },
     { title: 'SCADA equipment palette (ISA-101 HP-HMI)', tokens: sc },
     { title: 'Font families', tokens: fonts },
-    { title: 'Type scale — semantic text roles', tokens: type },
-    { title: 'Type scale — mobile re-tuned roles (393px)', tokens: mobileType },
+    { title: 'Type scale · semantic text roles', tokens: type },
+    { title: 'Type scale · mobile re-tuned roles (393px)', tokens: mobileType },
     { title: 'Radii', tokens: radius },
     { title: 'Elevation', tokens: shadow },
-    { title: 'Spacing — the fixed 2px scale', tokens: space },
-    { title: 'Layout — fluid gutters, gaps and rails', tokens: layout },
-    { title: 'Clearance — space measured off a neighbouring element', tokens: clear },
-    { title: 'Icons — sizes and stroke', tokens: icons },
+    { title: 'Spacing · the fixed 2px scale', tokens: space },
+    { title: 'Layout · fluid gutters, gaps and rails', tokens: layout },
+    { title: 'Clearance: space measured off a neighbouring element', tokens: clear },
+    { title: 'Icons · sizes and stroke', tokens: icons },
     { title: 'Shell dimensions and interactive-target floor', tokens: dims },
-    { title: 'Motion — durations and easings', tokens: motion },
-    { title: 'Text size — the user preference multiplier', tokens: textSize },
+    { title: 'Motion · durations and easings', tokens: motion },
+    { title: 'Text size · the user preference multiplier', tokens: textSize },
   ]
 }
 

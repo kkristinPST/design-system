@@ -24,7 +24,7 @@ export default function DensityPage() {
       <h2 className="mt-10 text-base font-bold text-ink">Compact density</h2>
       <p className="mt-1.5 text-[13px] leading-relaxed text-slate-500">
         A spacing setting, not a type setting. It tightens padding and grid gaps everywhere data is
-        listed — tables, cards, KPIs and the dashboard feeds — so more rows fit without anything
+        listed (tables, cards, KPIs and the dashboard feeds), so more rows fit without anything
         getting smaller to touch.
       </p>
 
@@ -84,7 +84,7 @@ export default function DensityPage() {
       </div>
 
       <div className="mt-5 rounded-lg border border-[color-mix(in_srgb,var(--color-warning)_28%,transparent)] bg-warning-bg px-4 py-3 text-[12px] leading-relaxed text-warning-text">
-        Compact mode zeroes card padding only for cards whose child is <em>structural</em> — a
+        Compact mode zeroes card padding only for cards whose child is <em>structural</em>: a
         header, filter bar, bulk bar, table or divided row list. A bare card keeps its padding.
         Applying it to both double-pads the child and detaches its hairline from the card edge.
       </div>
@@ -94,7 +94,7 @@ export default function DensityPage() {
       <p className="mt-1.5 text-[13px] leading-relaxed text-slate-500">
         Implemented as <code className="font-mono text-xs">zoom</code> on the working area, not a
         font-size sweep. The layout reflows at the new size, so a longer label cannot overlap its
-        neighbour — which is exactly what a font-size sweep would cause.
+        neighbour; which is exactly what a font-size sweep would cause.
       </p>
       <div className="mt-5 overflow-hidden rounded-xl border border-slate-200 bg-white">
         {[
@@ -142,7 +142,7 @@ body.nj-text-lg .ad-drawer { height: calc(100vh / var(--nj-ts));
             numbers as the web build rather than inventing its own.
           </p>
           <p className="mt-2.5">
-            <strong className="font-semibold text-ink">How you apply them is your call</strong> — it
+            <strong className="font-semibold text-ink">How you apply them is your call</strong>: it
             depends on your Perspective version and how the session is laid out. Store the
             preference on a session custom property, then either bind{' '}
             <code className="font-mono text-xs">zoom</code> on the root container of the working
@@ -153,7 +153,7 @@ body.nj-text-lg .ad-drawer { height: calc(100vh / var(--nj-ts));
             {[
               <>
                 Scale the <strong>working area</strong>, not the whole session. The top bar, sidebar
-                and alarm ribbon must stay put — an operator enlarging the text should not lose the
+                and alarm ribbon must stay put; an operator enlarging the text should not lose the
                 annunciator off the bottom of the screen.
               </>,
               <>

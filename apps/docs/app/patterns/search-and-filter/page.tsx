@@ -5,7 +5,7 @@ export default function SearchAndFilterPage() {
       <h1 className="text-2xl font-bold tracking-tight text-ink">Search &amp; filter</h1>
       <p className="mt-2 text-sm leading-relaxed text-slate-500">
         Narrowing a list down to what matters. The filter bar groups a label with its control, keeps
-        applied filters visible as chips, and wraps rather than clipping — because the bar grows
+        applied filters visible as chips, and wraps rather than clipping; because the bar grows
         every time a new facet is added.
       </p>
 
@@ -111,7 +111,7 @@ export default function SearchAndFilterPage() {
               That is what makes a long bar readable.
             </>,
             <>
-              A from &rarr; to pair is <em>one</em> control and never splits across rows — a split
+              A from &rarr; to pair is <em>one</em> control and never splits across rows; a split
               range reads as two unrelated times.
             </>,
             <>
@@ -123,7 +123,7 @@ export default function SearchAndFilterPage() {
               label.
             </>,
             <>
-              Group dividers disappear once the bar wraps — an orphaned rule at the start of a line
+              Group dividers disappear once the bar wraps: an orphaned rule at the start of a line
               reads as a rendering fault.
             </>,
             <>

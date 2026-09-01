@@ -9,7 +9,7 @@ const Check = ({ size = 11 }: { size?: number }) => (
 
 const variants: Variant[] = [
   {
-    name: 'Checkbox — off, on, indeterminate',
+    name: 'Checkbox · off, on, indeterminate',
     platform: 'Desktop',
     description:
       '16px box, 1.5px slate-300 border, 4px radius. Checked and indeterminate both fill with brand cyan; the header checkbox of a partly-selected table is indeterminate, never checked.',
@@ -77,10 +77,10 @@ const variants: Variant[] = [
 </span>`,
   },
   {
-    name: 'Radio — option row',
+    name: 'Radio · option row',
     platform: 'Desktop',
     description:
-      'A 14px ring inside a full-width option row. Selecting fills the ring and lifts the whole row to a cyan border on primary-bg — the row is the target, not just the dot.',
+      'A 14px ring inside a full-width option row. Selecting fills the ring and lifts the whole row to a cyan border on primary-bg; the row is the target, not just the dot.',
     preview: (
       <div className="flex w-[420px] flex-col gap-[7px]">
         {[
@@ -116,7 +116,7 @@ const variants: Variant[] = [
 </button>`,
   },
   {
-    name: 'Mobile — checkbox',
+    name: 'Mobile · checkbox',
     platform: 'Mobile',
     description:
       'Scaled up to 22px with a 7px radius so it is comfortably tappable, and always paired with a row-height target rather than being hit directly.',
@@ -173,7 +173,7 @@ export default function CheckboxPage() {
         items: [
           <>
             Square means &ldquo;any number&rdquo;, round means &ldquo;exactly one&rdquo;. Never mix
-            the shapes within one group — the shape is the affordance.
+            the shapes within one group; the shape is the affordance.
           </>,
           <>
             A table header checkbox over a partial selection is <strong>indeterminate</strong>, not

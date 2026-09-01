@@ -105,10 +105,10 @@ export default function Sidebar() {
 
   return (
     <aside className="w-[260px] shrink-0 sticky top-0 h-screen overflow-y-auto border-r border-slate-200 bg-white flex flex-col">
-      {/* Logo — the way back to the overview from anywhere */}
+      {/* Logo: the way back to the overview from anywhere */}
       <Link
         href="/"
-        aria-label="NJORD Design System — overview"
+        aria-label="NJORD Design System · overview"
         className="block px-5 py-6 border-b border-slate-200 transition-colors hover:bg-slate-50"
       >
         <img

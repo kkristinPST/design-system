@@ -6,7 +6,7 @@ import CodeBlock from './CodeBlock'
 export type Platform = 'Desktop' | 'Mobile' | 'Desktop + Mobile'
 
 export type Variant = {
-  /** Variant name, e.g. "Primary" or "Mobile — full-width actions". */
+  /** Variant name, e.g. "Primary" or "Mobile · full-width actions". */
   name: string
   /** Which build this variant belongs to. */
   platform: Platform
@@ -55,7 +55,7 @@ export default function ComponentDoc({
   intro: ReactNode
   variants: Variant[]
   ignition?: Ignition
-  /** Optional closing rules — anatomy, accessibility, do-not list. */
+  /** Optional closing rules: anatomy, accessibility, do-not list. */
   notes?: { heading: string; items: ReactNode[] }
 }) {
   return (
@@ -122,7 +122,7 @@ export default function ComponentDoc({
             )}
             {ignition.view && (
               <CodeBlock
-                label={ignition.view.path ?? 'view.json — component'}
+                label={ignition.view.path ?? 'view.json · component'}
                 code={ignition.view.json}
               />
             )}

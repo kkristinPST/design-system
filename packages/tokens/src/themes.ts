@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// Design Tokens — Skins
+// Design Tokens; Skins
 //
 // THIS FILE IS THE SOURCE for the runtime alias layer and the three skins.
 //
@@ -14,12 +14,12 @@
 
 import { palette } from './color.js'
 
-/** The runtime alias names, in emit order. These are NOT in @theme — they live on :root. */
+/** The runtime alias names, in emit order. These are NOT in @theme; they live on :root. */
 export const aliasNames = [
   'background', // the page itself
   'foreground', // default text on the page
   'surface',    // a raised card or panel
-  'surface-2',  // a recessed strip — table header, well
+  'surface-2',  // a recessed strip: table header, well
   'fg',         // primary text
   'fg-muted',   // secondary text
   'fg-subtle',  // tertiary / meta text
@@ -42,7 +42,7 @@ export type Skin = {
     fg: string
     border: string
     primary: string
-    /** Sidebar rail — chrome, not a token; documented for the shell only. */
+    /** Sidebar rail: chrome, not a token; documented for the shell only. */
     rail: string
     railText: string
   }
@@ -99,7 +99,7 @@ const dark: Skin = {
     'fg-muted':  '#B7C2D4',
     'fg-subtle': '#8B99B2',
 
-    // The ramp inverts — low steps become surfaces, high steps become text.
+    // The ramp inverts: low steps become surfaces, high steps become text.
     'color-slate-600': '#B7C2D4',
     'color-slate-500': '#97A5BC',
     'color-slate-400': '#8B99B2',
@@ -164,5 +164,5 @@ export const skins = { modern, dark, legacy } as const
 
 export type SkinName = keyof typeof skins
 
-/** Ordered for docs and for CSS emission — `modern` first, it owns :root. */
+/** Ordered for docs and for CSS emission: `modern` first, it owns :root. */
 export const skinList: Skin[] = [modern, dark, legacy]

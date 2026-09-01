@@ -114,7 +114,7 @@ const variants: Variant[] = [
 </div>`,
   },
   {
-    name: 'Narrow — shedding chrome',
+    name: 'Narrow · shedding chrome',
     platform: 'Desktop',
     description:
       'The bar sheds its least important pieces before anything can clip: search label and shortcut at 1240px, then the crumb trail and clock at 1080px. Title and scope survive to the end.',
@@ -152,7 +152,7 @@ const variants: Variant[] = [
 @media (max-width:  820px) { .topbar { height: auto; flex-wrap: wrap } }`,
   },
   {
-    name: 'Mobile — screen header',
+    name: 'Mobile · screen header',
     platform: 'Mobile',
     description:
       'The phone replaces the bar with a large screen header: 24px / 800 title, an optional subtitle, and 40px icon buttons that carry a 44px hit area.',
@@ -208,7 +208,7 @@ export default function TopBarPage() {
       intro={
         <>
           The persistent chrome above every screen: where you are, what is live, and how to reach
-          search. Screens carry no in-page <code className="font-mono text-[13px]">h1</code> — this
+          search. Screens carry no in-page <code className="font-mono text-[13px]">h1</code>; this
           bar owns the page title, which is why the tab strip below never shifts between pages.
         </>
       }
@@ -219,12 +219,12 @@ export default function TopBarPage() {
         items: [
           <>
             Squeeze order is fixed: the <strong>scope</strong> gives way first, then the trailing
-            crumb, and the <strong>page title shrinks last</strong> — it is the identity of the
+            crumb, and the <strong>page title shrinks last</strong>: it is the identity of the
             screen.
           </>,
           <>
             The bar must not clip its own dropdowns. Overflow is handled with flex-shrink weights,
-            never <code className="font-mono text-[12px]">overflow: hidden</code> — that clipped the
+            never <code className="font-mono text-[12px]">overflow: hidden</code>; that clipped the
             scope menus to a 24px sliver.
           </>,
           <>

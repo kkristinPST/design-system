@@ -74,7 +74,7 @@ const variants: Variant[] = [
     name: 'Clickable KPI',
     platform: 'Desktop',
     description:
-      'A KPI that drills into a filtered view. Its eyebrow turns primary-text to advertise the link, and hover deepens the border and shadow — the card itself is the target.',
+      'A KPI that drills into a filtered view. Its eyebrow turns primary-text to advertise the link, and hover deepens the border and shadow; the card itself is the target.',
     preview: (
       <button className="w-[268px] rounded-xl border border-slate-200 bg-white px-[18px] py-4 text-left shadow-[0_1px_3px_rgba(0,0,0,0.1),0_1px_2px_rgba(0,0,0,0.06)] transition-[border-color,box-shadow] duration-150 hover:border-slate-300 hover:shadow-[0_2px_8px_rgba(0,0,0,0.08)]">
         <p className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.8px] text-primary-text">
@@ -99,7 +99,7 @@ const variants: Variant[] = [
 </button>`,
   },
   {
-    name: 'Mobile — vitals grid',
+    name: 'Mobile · vitals grid',
     platform: 'Mobile',
     description:
       'Two columns of 16px-radius tiles. The metric is 30px mono; an out-of-band tile takes the status mid-tone as its border, a 4px left rail, and a status-coloured sub-line.',
@@ -163,7 +163,7 @@ const variants: Variant[] = [
 </div>`,
   },
   {
-    name: 'Mobile — health strip',
+    name: 'Mobile · health strip',
     platform: 'Mobile',
     description:
       'A single 16px-radius row split into equal counted cells with slate-100 dividers. Used at the top of the alarm list to show the severity split at a glance.',
@@ -225,7 +225,7 @@ export default function KpiCardPage() {
             exception. Proportional digits make a polling value jitter.
           </>,
           <>
-            The unit is a separate, smaller, quieter span — it is not part of the number and should
+            The unit is a separate, smaller, quieter span; it is not part of the number and should
             never compete with it.
           </>,
           <>
@@ -234,7 +234,7 @@ export default function KpiCardPage() {
           </>,
           <>
             Status on mobile is carried by three things at once: border tone, left rail and the
-            sub-line&rsquo;s text colour. Never by the metric&rsquo;s own colour — a red number
+            sub-line&rsquo;s text colour. Never by the metric&rsquo;s own colour; a red number
             reads as a red <em>value</em>.
           </>,
         ],

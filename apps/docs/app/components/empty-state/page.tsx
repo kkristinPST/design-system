@@ -6,7 +6,7 @@ const variants: Variant[] = [
     name: 'Empty table',
     platform: 'Desktop',
     description:
-      'The header stays; the body carries a single 13px slate-400 line at 34px vertical padding. It names the reason — filters, not data — so the operator knows which lever to pull.',
+      'The header stays; the body carries a single 13px slate-400 line at 34px vertical padding. It names the reason (filters, not data), so the operator knows which lever to pull.',
     preview: (
       <div className="w-[560px] overflow-hidden rounded-xl border border-slate-200 bg-white">
         <table className="w-full border-collapse">
@@ -87,7 +87,7 @@ const variants: Variant[] = [
     name: 'All clear',
     platform: 'Mobile',
     description:
-      'A genuinely good empty state — nothing is wrong. It uses the success well rather than a neutral one, so it reads as reassurance rather than absence.',
+      'A genuinely good empty state; nothing is wrong. It uses the success well rather than a neutral one, so it reads as reassurance rather than absence.',
     preview: (
       <PhoneFrame className="border-none bg-transparent shadow-none">
         <div className="px-[30px] py-[50px] text-center text-slate-400">
@@ -109,7 +109,7 @@ const variants: Variant[] = [
 </div>`,
   },
   {
-    name: 'Mobile — nothing yet',
+    name: 'Mobile · nothing yet',
     platform: 'Mobile',
     description:
       'A neutral slate well for lists that are empty because nothing has been created yet, paired with the action that would fill them.',

@@ -49,7 +49,7 @@ const variants: Variant[] = [
     name: 'Inline sparkline',
     platform: 'Desktop',
     description:
-      'A shape, not a chart — no axes, no gridlines, no tooltip. It answers one question: is this value rising or falling? The final point is marked so “now” is unambiguous.',
+      'A shape, not a chart: no axes, no gridlines, no tooltip. It answers one question: is this value rising or falling? The final point is marked so “now” is unambiguous.',
     preview: (
       <div className="w-[480px] overflow-hidden rounded-lg border border-slate-200 bg-white">
         {[
@@ -83,7 +83,7 @@ const variants: Variant[] = [
     name: 'Filled and toned',
     platform: 'Desktop',
     description:
-      'A filled variant for KPI cards. The tone follows the value’s status — but the status is always also stated in words, because a red line alone is not an alarm.',
+      'A filled variant for KPI cards. The tone follows the value’s status; but the status is always also stated in words, because a red line alone is not an alarm.',
     preview: (
       <div className="grid w-[520px] grid-cols-2 gap-4">
         {[
@@ -116,10 +116,10 @@ const variants: Variant[] = [
 <p className="mt-2 text-xs font-semibold text-critical-text">Below band</p>`,
   },
   {
-    name: 'Mobile — in a vitals tile',
+    name: 'Mobile · in a vitals tile',
     platform: 'Mobile',
     description:
-      'Sized to the tile width and stripped back further. On a phone it is decoration on top of the number — the number is what gets read.',
+      'Sized to the tile width and stripped back further. On a phone it is decoration on top of the number; the number is what gets read.',
     preview: (
       <PhoneFrame className="border-none bg-transparent shadow-none">
         <div className="grid grid-cols-2 gap-2.5">
@@ -166,7 +166,7 @@ export default function SparklinePage() {
       intro={
         <>
           A word-sized trace of recent history, shown beside a value rather than instead of it. It
-          carries shape and direction only — for magnitude, thresholds or timestamps, use the{' '}
+          carries shape and direction only: for magnitude, thresholds or timestamps, use the{' '}
           <strong>Trend chart</strong>.
         </>
       }
@@ -176,7 +176,7 @@ export default function SparklinePage() {
         heading: 'Rules',
         items: [
           <>
-            The number is always present in text. A sparkline is never the sole carrier of a value —
+            The number is always present in text. A sparkline is never the sole carrier of a value;
             it has no scale, and it is invisible to a screen reader.
           </>,
           <>
@@ -191,7 +191,7 @@ export default function SparklinePage() {
             a trend chart.
           </>,
           <>
-            Mark it <code className="font-mono text-[12px]">aria-hidden</code> — the row it sits in
+            Mark it <code className="font-mono text-[12px]">aria-hidden</code>; the row it sits in
             already carries the accessible value.
           </>,
         ],

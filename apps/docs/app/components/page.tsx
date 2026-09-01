@@ -39,7 +39,7 @@ const groups: { group: string; items: Entry[] }[] = [
   {
     group: 'Alarms',
     items: [
-      { name: 'Alarm row', href: '/components/alarm-row', description: 'One alarm in a list — table row or card.', platform: 'Both' },
+      { name: 'Alarm row', href: '/components/alarm-row', description: 'One alarm in a list · table row or card.', platform: 'Both' },
       { name: 'Alarm ribbon', href: '/components/alarm-ribbon', description: 'The persistent ISA-18.2 annunciator.', platform: 'Both' },
       { name: 'Bulk bar', href: '/components/bulk-bar', description: 'Actions across a selection.', platform: 'Both' },
       { name: 'Swipe row', href: '/components/swipe-row', description: 'Swipe-to-acknowledge shortcut.', platform: 'Mobile' },

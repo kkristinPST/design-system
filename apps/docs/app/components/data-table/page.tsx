@@ -73,7 +73,7 @@ const variants: Variant[] = [
     name: 'Compact density',
     platform: 'Desktop',
     description:
-      'The user-level density setting tightens padding from 11/14 to 6/12 and drops the body to 12.5px. It is a spacing setting — it never shrinks a hit target.',
+      'The user-level density setting tightens padding from 11/14 to 6/12 and drops the body to 12.5px. It is a spacing setting; it never shrinks a hit target.',
     preview: (
       <div className="w-[620px] overflow-hidden rounded-xl border border-slate-200 bg-white">
         <table className="w-full border-collapse">
@@ -172,7 +172,7 @@ body.nj-compact .tbl td { padding: 6px 12px; font-size: 12.5px }
 </p>`,
   },
   {
-    name: 'Mobile — table becomes cards',
+    name: 'Mobile · table becomes cards',
     platform: 'Mobile',
     description:
       'The phone build never renders a horizontal table. Each row becomes a card: identity on the first line, the reading large and mono, and the remaining columns as a label/value pair list.',
@@ -221,7 +221,7 @@ export default function DataTablePage() {
         <>
           Dense tabular data on desktop. Numbers are mono and right-aligned so magnitudes line up;
           identifiers are mono and left-aligned; prose is sans. On mobile the table is not scaled
-          down — it is rebuilt as cards.
+          down; it is rebuilt as cards.
         </>
       }
       variants={variants}
@@ -235,7 +235,7 @@ export default function DataTablePage() {
           </>,
           <>
             Never use <code className="font-mono text-[12px]">display:block</code> on the table to
-            solve overflow — it makes the inner table box shrink-to-fit, so a fixed-width table
+            solve overflow; it makes the inner table box shrink-to-fit, so a fixed-width table
             stops short of the card edge.
           </>,
           <>
@@ -244,7 +244,7 @@ export default function DataTablePage() {
           </>,
           <>
             Compact density is a <em>spacing</em> decision. It tightens padding and grid gaps across
-            cards, KPIs and feeds — and never shrinks a font or a target.
+            cards, KPIs and feeds; and never shrinks a font or a target.
           </>,
         ],
       }}

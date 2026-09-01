@@ -23,7 +23,7 @@ export default function MobileAppTemplatePage() {
       <p className="mb-1 text-xs font-bold uppercase tracking-widest text-slate-400">Templates</p>
       <h1 className="text-2xl font-bold tracking-tight text-ink">Mobile app</h1>
       <p className="mt-2 text-sm leading-relaxed text-slate-500">
-        The field build — an iPhone 16 Pro shell: a 393&times;852 screen inside a 413&times;872
+        The field build: an iPhone 16 Pro shell: a 393&times;852 screen inside a 413&times;872
         device. The frames below are drawn at those exact dimensions and scaled as a whole, so
         every proportion matches the running prototype.
       </p>
@@ -211,12 +211,12 @@ export default function MobileAppTemplatePage() {
         <p className="text-xs font-bold uppercase tracking-widest text-slate-400">Anatomy</p>
         <ul className="mt-3 space-y-2">
           {[
-            <><strong>Device</strong> — 413&times;872 with a 56px radius; the screen is 393&times;852 at 47px inside 10px of bezel. Dynamic island 126&times;36 at the top, home indicator 140&times;5 at the bottom.</>,
-            <><strong>Status bar · 54px</strong> — 15px semibold time on the left, indicators on the right, 32px / 34px side padding so nothing sits under the island.</>,
-            <><strong>Alarm ribbon</strong> — pinned under the status bar on every screen with a 4px severity rail and an overflow count. Collapses to an all-clear line; never disappears.</>,
-            <><strong>Screen header</strong> — 24px / 800 title at -0.5px tracking, optional back arrow and subtitle, 40px icon buttons carrying 44px targets.</>,
-            <><strong>Scroll region</strong> — the only scrolling area, 16px gutters, contained overscroll and a hidden scrollbar.</>,
-            <><strong>Tab bar</strong> — five destinations, 21px glyphs over 10px labels, unacknowledged count on Alarms, 26px bottom padding plus the safe-area inset.</>,
+            <><strong>Device</strong>: 413&times;872 with a 56px radius; the screen is 393&times;852 at 47px inside 10px of bezel. Dynamic island 126&times;36 at the top, home indicator 140&times;5 at the bottom.</>,
+            <><strong>Status bar · 54px</strong>: 15px semibold time on the left, indicators on the right, 32px / 34px side padding so nothing sits under the island.</>,
+            <><strong>Alarm ribbon</strong>: pinned under the status bar on every screen with a 4px severity rail and an overflow count. Collapses to an all-clear line; never disappears.</>,
+            <><strong>Screen header</strong>: 24px / 800 title at -0.5px tracking, optional back arrow and subtitle, 40px icon buttons carrying 44px targets.</>,
+            <><strong>Scroll region</strong>: the only scrolling area, 16px gutters, contained overscroll and a hidden scrollbar.</>,
+            <><strong>Tab bar</strong>: five destinations, 21px glyphs over 10px labels, unacknowledged count on Alarms, 26px bottom padding plus the safe-area inset.</>,
           ].map((item, i) => (
             <li key={i} className="flex gap-2.5 text-[13px] leading-relaxed text-slate-600">
               <span aria-hidden className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-slate-300" />
@@ -240,7 +240,7 @@ export default function MobileAppTemplatePage() {
 The phone build shares every token but rebuilds the layouts: tables become
 cards, dialogs become bottom sheets, the mimic becomes a list of readings.`}
         reflow={[
-          ['393', 'The design width — an iPhone 16 Pro screen'],
+          ['393', 'The design width · an iPhone 16 Pro screen'],
           ['≥ 430', 'Gutters grow; content max-width holds so lines stay readable'],
           ['≤ 375', 'Two-up stat rows stack; nothing else changes'],
         ]}

@@ -9,7 +9,7 @@ const variants: Variant[] = [
     name: 'Severity badges',
     platform: 'Desktop',
     description:
-      'The alarm priority ramp. Critical is the only one that inverts to a solid fill — it uses critical-solid (#D8302B) so white text stays AA. The rest are tint-on-tint.',
+      'The alarm priority ramp. Critical is the only one that inverts to a solid fill; it uses critical-solid (#D8302B) so white text stays AA. The rest are tint-on-tint.',
     preview: (
       <div className="flex flex-wrap items-center gap-2">
         <span className={`${badge} bg-critical-solid text-white`}>Critical</span>
@@ -30,7 +30,7 @@ bg-slate-100   text-slate-600      {/* Low / Diagnostic */}`,
     name: 'Status badges',
     platform: 'Desktop',
     description:
-      'Non-alarm conditions — equipment health, connection, review state. Same geometry, drawn from the status tint triplets.',
+      'Non-alarm conditions: equipment health, connection, review state. Same geometry, drawn from the status tint triplets.',
     preview: (
       <div className="flex flex-wrap items-center gap-2">
         <span className={`${badge} bg-success-bg text-success-text`}>Normal</span>
@@ -78,7 +78,7 @@ bg-slate-100   text-slate-600`,
   bg-critical-solid font-mono text-[9px] font-bold text-white shadow-[0_0_0_2px_#fff]">3</span>`,
   },
   {
-    name: 'Mobile — badges',
+    name: 'Mobile · badges',
     platform: 'Mobile',
     description:
       'Tightened to 9px / 800 weight with 5px radius so they fit inside a 13px alarm row without crowding the alarm name.',
@@ -105,7 +105,7 @@ bg-slate-100   text-slate-600`,
 </span>`,
   },
   {
-    name: 'Mobile — tab bar count',
+    name: 'Mobile · tab bar count',
     platform: 'Mobile',
     description:
       'Pinned to a tab icon. It carries a 1.5px border in the surface colour so it stays legible when it overlaps the icon beneath it.',
@@ -167,7 +167,7 @@ export default function BadgePage() {
           <>
             Only <strong>Critical</strong> gets a solid fill, and it uses{' '}
             <code className="font-mono text-[12px]">critical-solid</code> (#D8302B) rather than the
-            bare critical mark — the mark itself is 3.73:1 on white and cannot carry white text.
+            bare critical mark; the mark itself is 3.73:1 on white and cannot carry white text.
           </>,
           <>
             Medium alarm priority uses its own royal blue, never brand cyan. Under ISA-101 alarm

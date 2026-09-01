@@ -71,7 +71,7 @@ const variants: Variant[] = [
     name: 'Stale flag',
     platform: 'Desktop',
     description:
-      'An alarm active for more than 24h. It is a separate pill, not a state — a stale alarm still has a process state, and hiding one behind the other loses information.',
+      'An alarm active for more than 24h. It is a separate pill, not a state; a stale alarm still has a process state, and hiding one behind the other loses information.',
     preview: (
       <div className="flex items-center">
         <span className={`${tag} bg-critical-bg text-critical-text border-[color-mix(in_srgb,var(--color-critical)_22%,transparent)]`}>
@@ -93,7 +93,7 @@ const variants: Variant[] = [
 </span>`,
   },
   {
-    name: 'Mobile — state chips',
+    name: 'Mobile · state chips',
     platform: 'Mobile',
     description:
       'On the phone the glyph is dropped and the label carries the state alone, at 9px / 800. There is no dense table for it to disambiguate, and the row already shows a severity rail.',
@@ -139,19 +139,19 @@ export default function StateTagPage() {
         heading: 'Rules',
         items: [
           <>
-            The letter glyph exists so state is readable without colour. Do not drop it on desktop —
+            The letter glyph exists so state is readable without colour. Do not drop it on desktop:
             in a dense table, colour alone fails for roughly one in twelve male operators.
           </>,
           <>
             Suppression never replaces process state. A shelved alarm that is still active is{' '}
-            <em>both</em> — showing only &ldquo;shelved&rdquo; hides a live process condition.
+            <em>both</em>; showing only &ldquo;shelved&rdquo; hides a live process condition.
           </>,
           <>
             Stale is a flag, not a state. It sits beside the state tag with its own age.
           </>,
           <>
             The glyph is a 1px inset ring in{' '}
-            <code className="font-mono text-[12px]">currentColor</code>, never a filled square — on
+            <code className="font-mono text-[12px]">currentColor</code>, never a filled square; on
             a legacy alarm row a fill would only lighten the row colour and cost contrast.
           </>,
         ],

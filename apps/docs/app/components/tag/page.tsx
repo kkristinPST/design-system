@@ -6,7 +6,7 @@ const variants: Variant[] = [
     name: 'Equipment tag',
     platform: 'Desktop + Mobile',
     description:
-      'The plant identifier for a piece of equipment or an instrument. Always mono, 12px, 0.3px tracking, slate-600 — it is a machine-readable code, and mono is what signals that.',
+      'The plant identifier for a piece of equipment or an instrument. Always mono, 12px, 0.3px tracking, slate-600; it is a machine-readable code, and mono is what signals that.',
     preview: (
       <div className="flex flex-wrap items-center gap-5">
         {['TK-04', 'PT-1201', 'PU-11A', 'FIC-0342', 'DO-0403'].map((t) => (
@@ -116,7 +116,7 @@ const variants: Variant[] = [
   : "border-slate-200 bg-white text-slate-600 hover:border-primary"}>Handover</button>`,
   },
   {
-    name: 'Mobile — tag in an alarm row',
+    name: 'Mobile · tag in an alarm row',
     platform: 'Mobile',
     description:
       'The tag shrinks with the row but keeps mono. On the phone it sits in the meta line under the alarm name, never competing with it for the first read.',
@@ -156,7 +156,7 @@ export default function TagPage() {
       title="Tag"
       intro={
         <>
-          The mono label that carries a machine identity — an equipment tag, an instrument ID, a
+          The mono label that carries a machine identity: an equipment tag, an instrument ID, a
           reading, a duration. If a human wrote it, it is sans; if the plant assigned it, it is
           mono. That split is the whole rule.
         </>
@@ -175,7 +175,7 @@ export default function TagPage() {
             of tags or durations must align on the digit.
           </>,
           <>
-            The tag is subordinate to the name beside it — slate-400 or slate-500 against the
+            The tag is subordinate to the name beside it, slate-400 or slate-500 against the
             name&rsquo;s ink. An operator scans names first and confirms by tag.
           </>,
           <>

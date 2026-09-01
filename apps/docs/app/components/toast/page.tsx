@@ -12,7 +12,7 @@ const variants: Variant[] = [
     name: 'Toast',
     platform: 'Desktop',
     description:
-      'A dark ink pill confirming a completed action, with the undo affordance built in. It states what happened and to what — never a bare “Saved”.',
+      'A dark ink pill confirming a completed action, with the undo affordance built in. It states what happened and to what; never a bare “Saved”.',
     preview: (
       <div className="flex flex-col gap-3">
         <div className="flex w-[420px] items-center gap-2.5 rounded-[13px] bg-ink px-4 py-3 text-[13px] font-semibold text-white shadow-[0_12px_32px_rgba(15,24,43,0.12)]">
@@ -46,7 +46,7 @@ const variants: Variant[] = [
 </div>`,
   },
   {
-    name: 'Mobile — toast',
+    name: 'Mobile · toast',
     platform: 'Mobile',
     description:
       'Pinned 96px from the bottom so it clears the tab bar, inset 16px from each edge. It rises 14px with a fade on entry. The action button carries an invisible 44px hit area.',
@@ -102,14 +102,14 @@ const variants: Variant[] = [
     name: 'Offline banner',
     platform: 'Mobile',
     description:
-      'Not a toast — a persistent slate-800 bar that stays until connectivity returns. It shows the queued write count in mono on a warning pill, so nothing looks lost.',
+      'Not a toast; a persistent slate-800 bar that stays until connectivity returns. It shows the queued write count in mono on a warning pill, so nothing looks lost.',
     preview: (
       <PhoneFrame className="p-0">
         <div className="flex items-center gap-2 bg-slate-800 px-4 py-[7px] text-[12px] font-semibold text-white">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0">
             <path d="M2 2 22 22" /><path d="M5 12a10 10 0 0 1 5-2.6" /><path d="M14 9.4A10 10 0 0 1 19 12" /><path d="M12 19h.01" />
           </svg>
-          Offline — changes will sync
+          Offline; changes will sync
           <span className="ml-auto rounded-full bg-warning px-[7px] py-px font-mono text-[10px] font-extrabold text-ink">
             3
           </span>
@@ -145,7 +145,7 @@ export default function ToastPage() {
         items: [
           <>
             Name the object and the count. &ldquo;4 alarms acknowledged&rdquo; is useful;
-            &ldquo;Saved&rdquo; is not — especially after a bulk action.
+            &ldquo;Saved&rdquo; is not: especially after a bulk action.
           </>,
           <>
             Anything reversible carries <strong>Undo</strong> in the toast. That is the only place

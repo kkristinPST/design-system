@@ -58,7 +58,7 @@ const families = [
   {
     prefix: '--njord-fl-*',
     name: 'Process-fluid line coding',
-    what: 'Ten pipe colours for SCADA mimics. Deliberately desaturated — a pipe must never read louder than an alarm.',
+    what: 'Ten pipe colours for SCADA mimics. Deliberately desaturated: a pipe must never read louder than an alarm.',
   },
   {
     prefix: '--njord-sc-*',
@@ -68,7 +68,7 @@ const families = [
   {
     prefix: '--njord-r-* · --njord-shadow*',
     name: 'Radii and elevation',
-    what: 'Five radii, four shadows. Elevation is shallow on purpose — a control room screen is read at a glance, and heavy depth reads as noise.',
+    what: 'Five radii, four shadows. Elevation is shallow on purpose; a control room screen is read at a glance, and heavy depth reads as noise.',
   },
   {
     prefix: '--njord-font-{sans,mono}',
@@ -86,7 +86,7 @@ export default function DesignTokens() {
       <h1 className="text-2xl font-bold tracking-tight text-ink">Design tokens</h1>
       <p className="mt-2 max-w-[68ch] text-sm leading-relaxed text-slate-500">
         Every colour, type role, radius and shadow in this system has a name. One rule sits under
-        all of it: a value is never typed as a literal into a screen — it is referenced by name, so
+        all of it: a value is never typed as a literal into a screen; it is referenced by name, so
         it can be re-tuned once and change everywhere. This page is what the names mean and how to
         pair them.
       </p>
@@ -95,8 +95,7 @@ export default function DesignTokens() {
         The tokens ship as a single CSS file for the gateway. Get it from{' '}
         <Link href="/styles/ignition" className="font-semibold text-primary-text hover:underline">
           Ignition Perspective
-        </Link>{' '}
-        — copy it off the page or download it — then reference the names below from your style
+        </Link>{' '} (copy it off the page or download it) then reference the names below from your style
         classes.
       </div>
 
@@ -139,13 +138,13 @@ export default function DesignTokens() {
               fill that carries white text at AA.
             </>,
             <>
-              Never set a bare <C>--njord-sev-*</C> as text. Those are mark colours — dots, rails,
+              Never set a bare <C>--njord-sev-*</C> as text. Those are mark colours: dots, rails,
               chart fills. <C>--njord-sev-crit</C> is only 3.73:1 on white and{' '}
               <C>--njord-sev-high</C> is 2.06:1. Words use <C>--njord-sev-*-text</C>.
             </>,
             <>
               When a number sits directly on a severity fill, its ink is{' '}
-              <C>--njord-sev-*-ink</C> — white on some rungs, near-black on others. It is not always
+              <C>--njord-sev-*-ink</C>: white on some rungs, near-black on others. It is not always
               white.
             </>,
             <>
@@ -153,7 +152,7 @@ export default function DesignTokens() {
               never carries text. For a positive action surface use <C>--njord-success-solid</C>.
             </>,
             <>
-              <C>--njord-slate-350</C> is decorative only — hairlines and dots. It does not clear AA
+              <C>--njord-slate-350</C> is decorative only; hairlines and dots. It does not clear AA
               as text. <C>--njord-slate-400</C> is the lightest step that does.
             </>,
           ]}
@@ -182,7 +181,7 @@ export default function DesignTokens() {
 
       <Card title="Skins are the same tokens, re-pointed">
         Three skins ship: modern (default), dark and legacy. A skin is a list of overrides under a
-        selector — no second stylesheet, no forked components. The dark skin is already in the theme
+        selector: no second stylesheet, no forked components. The dark skin is already in the theme
         file as <C>.njord-theme-dark</C>. Components that reference tokens correctly inherit it for
         free; components with an inline hex do not, which makes the skins a useful test of whether
         the implementation is honest. See{' '}
@@ -196,7 +195,7 @@ export default function DesignTokens() {
       <h2 className="mt-9 text-base font-bold text-ink">If you are building for the web too</h2>
       <p className="mt-1.5 max-w-[68ch] text-[13px] leading-relaxed text-slate-600">
         The same token set exists with a <C>--color-</C> prefix for browser builds, wired as Tailwind
-        v4 theme variables so each one is also a utility class — <C>bg-critical-solid</C>,{' '}
+        v4 theme variables so each one is also a utility class: <C>bg-critical-solid</C>,{' '}
         <C>text-warning-text</C>, <C>rounded-lg</C>, <C>text-body</C>. The names after the prefix are
         identical to the Ignition ones, so a token is greppable across both codebases.
       </p>

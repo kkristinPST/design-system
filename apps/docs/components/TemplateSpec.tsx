@@ -13,7 +13,7 @@ import CodeBlock from './CodeBlock'
  * spec has to be complete on the page.
  */
 export type TemplateSpecProps = {
-  /** Component slugs this screen is assembled from — links to each spec page. */
+  /** Component slugs this screen is assembled from; links to each spec page. */
   uses: string[]
   /** Suggested Perspective view path. */
   viewPath: string
@@ -59,7 +59,7 @@ export default function TemplateSpec({
           Components it is built from
         </p>
         <p className="mt-1.5 text-[13px] leading-relaxed text-slate-600">
-          Build these first — each page carries its style-class JSON and view JSON.
+          Build these first; each page carries its style-class JSON and view JSON.
         </p>
         <div className="mt-2.5 flex flex-wrap gap-1.5">
           {uses.map((slug) => (
@@ -106,7 +106,7 @@ export default function TemplateSpec({
           >
             Responsive &amp; reflow
           </Link>
-          . Breakpoints are shared across the console — never invent a per-screen one.
+          . Breakpoints are shared across the console; never invent a per-screen one.
         </p>
 
         {/* ── Watch for ── */}

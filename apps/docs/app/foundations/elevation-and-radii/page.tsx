@@ -1,6 +1,6 @@
 import { radii as radiiTokens, elevation } from '@njord/tokens'
 
-// Both scales come from the token package. Names are shown without a prefix —
+// Both scales come from the token package. Names are shown without a prefix;
 // add --njord- for Ignition, --radius- / --shadow- for the web build.
 const SHADOW_USE: Record<string, string> = {
   sm:   'Secondary buttons, active segment, mobile cards',
@@ -70,7 +70,7 @@ export default function ElevationAndRadiiPage() {
       <div className="mt-5 rounded-lg border border-[color-mix(in_srgb,var(--color-warning)_28%,transparent)] bg-warning-bg px-4 py-3 text-[12px] leading-relaxed text-warning-text">
         The legacy skin sets <code className="font-mono">--shadow-sm</code> and{' '}
         <code className="font-mono">--shadow</code> to <code className="font-mono">none</code> and
-        leans on heavier borders instead. Never hard-code a shadow value — read it from the token,
+        leans on heavier borders instead. Never hard-code a shadow value; read it from the token,
         or cards will float in a skin that is meant to be flat.
       </div>
 
@@ -95,8 +95,8 @@ export default function ElevationAndRadiiPage() {
       {/* ── Mobile ── */}
       <h2 className="mt-10 text-base font-bold text-ink">Mobile radii</h2>
       <p className="mt-1.5 text-[13px] leading-relaxed text-slate-500">
-        The phone build runs softer than desktop across the board — a 16px card against desktop&rsquo;s
-        12px — because the surfaces are larger relative to the viewport.
+        The phone build runs softer than desktop across the board (a 16px card against desktop&rsquo;s
+        12px) because the surfaces are larger relative to the viewport.
       </p>
       <div className="mt-5 grid gap-x-8 gap-y-0 sm:grid-cols-2">
         {mobileRadii.map(([l, v]) => (
@@ -112,9 +112,9 @@ export default function ElevationAndRadiiPage() {
       <div className="mt-5 overflow-hidden rounded-xl border border-slate-200 bg-white">
         {[
           ['Base content', '—', 'Cards, tables, mimics'],
-          ['Drawer scrim', '150', 'rgba(15,24,43,0.32) — lighter, list stays readable'],
+          ['Drawer scrim', '150', 'rgba(15,24,43,0.32) · lighter, list stays readable'],
           ['Drawer', '151', 'Right panel, min(440px, 94vw)'],
-          ['Dialog scrim', '2000', 'rgba(15,24,43,0.46) — heavier, demands a decision'],
+          ['Dialog scrim', '2000', 'rgba(15,24,43,0.46) · heavier, demands a decision'],
           ['Command palette', '200', 'rgba(15,24,43,0.45)'],
           ['Mobile sheet', '90', 'rgba(15,24,43,0.40)'],
           ['Toast', '80', 'Above content, below any scrim'],
@@ -132,7 +132,7 @@ export default function ElevationAndRadiiPage() {
         <ul className="mt-3 space-y-2">
           {[
             <>
-              A drawer&rsquo;s scrim is lighter than a dialog&rsquo;s. The drawer is context — the list
+              A drawer&rsquo;s scrim is lighter than a dialog&rsquo;s. The drawer is context: the list
               behind it must stay legible; the dialog is an interruption.
             </>,
             <>

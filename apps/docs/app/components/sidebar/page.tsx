@@ -20,7 +20,7 @@ const variants: Variant[] = [
     name: 'Navigation rail',
     platform: 'Desktop',
     description:
-      '240px of ink chrome. Items are 38px with an 8px radius; active and hover both take slate-800, and the label turns white. Muted labels use slate-350 — the ramp’s light end, because slate-400 only reaches 3.8:1 on this dark surface.',
+      '240px of ink chrome. Items are 38px with an 8px radius; active and hover both take slate-800, and the label turns white. Muted labels use slate-350: the ramp’s light end, because slate-400 only reaches 3.8:1 on this dark surface.',
     preview: (
       <div className="flex h-[420px] w-[240px] flex-col overflow-hidden rounded-lg bg-ink">
         <div className="flex h-[72px] items-center justify-between border-b border-white/[0.06] px-[22px]">
@@ -80,7 +80,7 @@ const variants: Variant[] = [
     name: 'Collapsed rail',
     platform: 'Desktop',
     description:
-      '72px. Labels drop, items centre, and a count badge becomes an 8px dot pinned to the icon — a number would not fit without shrinking the target.',
+      '72px. Labels drop, items centre, and a count badge becomes an 8px dot pinned to the icon; a number would not fit without shrinking the target.',
     preview: (
       <div className="flex h-[420px] w-[72px] flex-col overflow-hidden rounded-lg bg-ink">
         <div className="flex h-[72px] items-center justify-center border-b border-white/[0.06]">
@@ -117,7 +117,7 @@ const variants: Variant[] = [
     name: 'Account menu',
     platform: 'Desktop',
     description:
-      'Opens upward from the footer. The panel is always dark chrome in every theme, so its contents use fixed light values rather than the slate ramp — that ramp inverts in dark mode.',
+      'Opens upward from the footer. The panel is always dark chrome in every theme, so its contents use fixed light values rather than the slate ramp; that ramp inverts in dark mode.',
     preview: (
       <div className="w-[260px] rounded-[10px] border border-white/[0.16] bg-ink p-1.5 shadow-[0_10px_30px_rgba(0,0,0,0.45)]">
         <div className="mb-1.5 flex items-center gap-2.5 border-b border-white/[0.12] px-2.5 pt-2 pb-2.5">
@@ -182,7 +182,7 @@ export default function SidebarPage() {
             ). The slate-400 used on white pages only reaches 3.8:1 here.
           </>,
           <>
-            Anything inside the account menu uses fixed light hexes, never ramp tokens — in dark
+            Anything inside the account menu uses fixed light hexes, never ramp tokens; in dark
             mode <code className="font-mono text-[12px]">slate-200</code> becomes a near-black
             #28374F on a near-black panel.
           </>,

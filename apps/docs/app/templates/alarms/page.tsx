@@ -112,11 +112,11 @@ export default function AlarmsTemplatePage() {
         <p className="text-xs font-bold uppercase tracking-widest text-slate-400">Anatomy</p>
         <ul className="mt-3 space-y-2">
           {[
-            <><strong>Tab strip</strong> — Active / Shelved / Out of service / History. Filters the same dataset; never navigates.</>,
-            <><strong>Filter bar</strong> — elastic search plus toggle chips with counts. Every applied filter stays visible.</>,
-            <><strong>Table</strong> — priority-then-age sort, severity rail plus faint tint, state tag with letter glyph, row actions on the right.</>,
-            <><strong>Detail drawer</strong> — opens over the list at min(440px, 94vw) with facts, rationale and timeline.</>,
-            <><strong>Bulk bar</strong> — appears above the table once rows are selected.</>,
+            <><strong>Tab strip</strong>: Active / Shelved / Out of service / History. Filters the same dataset; never navigates.</>,
+            <><strong>Filter bar</strong>: elastic search plus toggle chips with counts. Every applied filter stays visible.</>,
+            <><strong>Table</strong>: priority-then-age sort, severity rail plus faint tint, state tag with letter glyph, row actions on the right.</>,
+            <><strong>Detail drawer</strong>: opens over the list at min(440px, 94vw) with facts, rationale and timeline.</>,
+            <><strong>Bulk bar</strong>: appears above the table once rows are selected.</>,
           ].map((item, i) => (
             <li key={i} className="flex gap-2.5 text-[13px] leading-relaxed text-slate-600">
               <span aria-hidden className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-slate-300" />
@@ -148,7 +148,7 @@ it already handles shelving, acknowledgement and paging.`}
         ]}
         watchFor={[
           <>
-            <strong>Sort is priority, then age — never newest-first.</strong> This is the single
+            <strong>Sort is priority, then age · never newest-first.</strong> This is the single
             most common way this screen gets built wrong, and it is a safety property rather than a
             preference.
           </>,
@@ -165,7 +165,7 @@ it already handles shelving, acknowledgement and paging.`}
             is never the only signal.
           </>,
           <>
-            The empty state differs by tab — &ldquo;no active alarms&rdquo; is good news and should
+            The empty state differs by tab: &ldquo;no active alarms&rdquo; is good news and should
             read as calm, not as an error.
           </>,
         ]}

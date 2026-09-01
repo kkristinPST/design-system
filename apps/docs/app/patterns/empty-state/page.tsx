@@ -41,7 +41,7 @@ const reasons: {
     when: 'A filter excludes everything',
     icon: 'filter-x',
     tone: 'neutral',
-    action: 'Clear filters — never a create action',
+    action: 'Clear filters · never a create action',
     glyph: <path d="M3 4h18l-7 8v6l-4 2v-8L3 4ZM17 15l4 4M21 15l-4 4" />,
   },
   {
@@ -57,7 +57,7 @@ const reasons: {
     when: 'Nothing is wrong',
     icon: 'check-circle-2',
     tone: 'good',
-    action: 'None — this is good news',
+    action: 'None · this is good news',
     glyph: (
       <>
         <circle cx="12" cy="12" r="9" />
@@ -70,7 +70,7 @@ const reasons: {
     when: 'Not permitted, or switched off',
     icon: 'lock',
     tone: 'warn',
-    action: 'None — say who can change it',
+    action: 'None · say who can change it',
     glyph: (
       <>
         <rect x="4" y="10" width="16" height="10" rx="2" />
@@ -92,7 +92,7 @@ const sizes = [
   { name: 'region', padding: '72 / 24', tile: '56px', gap: '14', title: 'card-title', use: 'A whole card or panel' },
   { name: 'card', padding: '48 / 24', tile: '48px', gap: '12', title: 'body-strong', use: 'A dialog body or list card' },
   { name: 'compact', padding: '32 / 20', tile: '40px', gap: '10', title: 'body-strong', use: 'A small panel or side rail' },
-  { name: 'row', padding: '32 / 20', tile: '24px, no tile', gap: '10', title: 'body', use: 'Inside a table body — laid out horizontally' },
+  { name: 'row', padding: '32 / 20', tile: '24px, no tile', gap: '10', title: 'body', use: 'Inside a table body · laid out horizontally' },
 ]
 
 const loading = [
@@ -104,7 +104,7 @@ const loading = [
   {
     band: '1–2s',
     show: 'Spinner in the pressed control',
-    why: 'The feedback belongs where the click happened. The button keeps its label, gains aria-busy, and its leading icon is swapped for the spinner — so it never changes width under the cursor.',
+    why: 'The feedback belongs where the click happened. The button keeps its label, gains aria-busy, and its leading icon is swapped for the spinner; so it never changes width under the cursor.',
   },
   {
     band: 'Over ~2s, total unknown',
@@ -149,12 +149,12 @@ export default function StatesPage() {
       <p className="mt-2 max-w-[68ch] text-sm leading-relaxed text-slate-500">
         Every surface that can hold data can also be empty, and there are six different reasons for
         it. Collapsing them into one &ldquo;No data&rdquo; is how an operator loses the ability to
-        tell a quiet plant from a broken query. One anatomy, four sizes, six reasons — and one
+        tell a quiet plant from a broken query. One anatomy, four sizes, six reasons; and one
         component, so no screen invents a fifth shape of nothing-here.
       </p>
 
       <div className="mt-6 rounded-lg border border-slate-300 bg-slate-50 px-4 py-3 text-[12px] leading-relaxed text-slate-600">
-        These are <strong className="font-semibold text-ink">behavioural</strong> rules — which
+        These are <strong className="font-semibold text-ink">behavioural</strong> rules: which
         state to show, when, and what it may offer. Geometry and colour come from the tokens. For
         the markup of a single instance see{' '}
         <Link href="/components/empty-state" className="font-semibold text-primary-text hover:underline">
@@ -186,7 +186,7 @@ export default function StatesPage() {
       <h2 className="mt-10 text-base font-bold text-ink">Four sizes</h2>
       <p className="mt-1.5 max-w-[68ch] text-[13px] leading-relaxed text-slate-500">
         Picked by the container, not by how important the message feels. Note that{' '}
-        <C>row</C> is the odd one — no tile, and laid out <strong>horizontally</strong> so it sits
+        <C>row</C> is the odd one: no tile, and laid out <strong>horizontally</strong> so it sits
         inside a table body without breaking the grid.
       </p>
       <div className="mt-5 overflow-x-auto rounded-xl border border-slate-200 bg-white">
@@ -230,7 +230,7 @@ export default function StatesPage() {
         </table>
       </div>
       <p className="mt-3 text-[12px] leading-relaxed text-slate-500">
-        Every number here is on the spacing scale — <C>sp-72</C>, <C>sp-56</C>, <C>sp-48</C>,{' '}
+        Every number here is on the spacing scale: <C>sp-72</C>, <C>sp-56</C>, <C>sp-48</C>,{' '}
         <C>sp-24</C>, <C>sp-20</C>, <C>sp-14</C>, <C>sp-12</C>, <C>sp-10</C>. See{' '}
         <Link href="/foundations/spacing" className="font-semibold text-primary-text hover:underline">
           Spacing
@@ -241,7 +241,7 @@ export default function StatesPage() {
       {/* ── Inline tier ── */}
       <h3 className="mt-8 text-sm font-bold text-ink">Below the four: the inline tier</h3>
       <p className="mt-1.5 max-w-[68ch] text-[13px] leading-relaxed text-slate-500">
-        A single muted line — no tile, no title, no action — for a dropdown, popover or sub-panel
+        A single muted line (no tile, no title, no action) for a dropdown, popover or sub-panel
         where a full empty state would dominate its container. It is a{' '}
         <strong>separate component</strong>, not a fifth size: nothing about it is configurable
         except alignment.
@@ -249,7 +249,7 @@ export default function StatesPage() {
       <div className="mt-4 grid gap-3 sm:grid-cols-2">
         <div className="rounded-xl border border-slate-200 bg-white p-4">
           <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.8px] text-slate-400">
-            Centred — default
+            Centred: default
           </p>
           <div className="rounded-lg border border-slate-200 px-[14px] py-3 text-center text-xs text-slate-500">
             No matching parameters
@@ -257,7 +257,7 @@ export default function StatesPage() {
         </div>
         <div className="rounded-xl border border-slate-200 bg-white p-4">
           <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.8px] text-slate-400">
-            Left — for left-aligned lists
+            Left; for left-aligned lists
           </p>
           <div className="rounded-lg border border-slate-200 px-[2px] py-2.5 pl-3 text-xs text-slate-500">
             No one assigned
@@ -268,7 +268,7 @@ export default function StatesPage() {
       {/* ── Reasons ── */}
       <h2 className="mt-10 text-base font-bold text-ink">Six reasons</h2>
       <p className="mt-1.5 max-w-[68ch] text-[13px] leading-relaxed text-slate-500">
-        The reason decides the icon, the tone and — the point of it — what action is offered. Tone
+        The reason decides the icon, the tone and: the point of it; what action is offered. Tone
         paints <strong>only the icon tile</strong>; the title and body stay neutral, so an empty
         state can never be mistaken for an alarm.
       </p>
@@ -299,7 +299,7 @@ export default function StatesPage() {
       {/* ── The resolved rule ── */}
       <div className="mt-5 rounded-xl border border-critical-mid bg-critical-bg p-5">
         <p className="text-sm font-semibold text-critical-text">
-          The <code className="font-mono">resolved</code> rule — safety-relevant
+          The <code className="font-mono">resolved</code> rule, safety-relevant
         </p>
         <p className="mt-2 text-[13px] leading-relaxed text-critical-text">
           <strong className="font-semibold">
@@ -343,7 +343,7 @@ export default function StatesPage() {
       <div className="mt-4 overflow-hidden rounded-xl border border-slate-200 bg-white">
         {[
           ['Skeleton', 'slate-100 fill, radius-sm, a 1.4s sweep of surface at 70% alpha. Disabled under prefers-reduced-motion. Variants: text (lines of varied width, 12px tall, 10px apart), block, chart (bar silhouette on a hairline baseline), table (rows on hairlines).'],
-          ['Spinner', '2px ring in currentColor over a 25%-alpha track, 700ms linear — 2.4s under reduced motion.'],
+          ['Spinner', '2px ring in currentColor over a 25%-alpha track, 700ms linear; 2.4s under reduced motion.'],
           ['Progress', 'Label (body-strong) and percentage (mono 12px, tabular) on one row; 6px track in slate-100 with a primary fill; a sub-line (small, slate-500) stating the real counts; Cancel right-aligned. The indeterminate variant is a 32% band sliding on 1.1s.'],
         ].map(([name, spec], i) => (
           <div key={name} className={`px-5 py-4 ${i > 0 ? 'border-t border-slate-100' : ''}`}>
@@ -353,8 +353,8 @@ export default function StatesPage() {
         ))}
       </div>
       <p className="mt-3 text-[12px] leading-relaxed text-slate-500">
-        The loop durations are tokens — <C>d-shimmer</C>, <C>d-spin</C>, <C>d-spin-reduced</C>,{' '}
-        <C>d-indeterminate</C> — see{' '}
+        The loop durations are tokens: <C>d-shimmer</C>, <C>d-spin</C>, <C>d-spin-reduced</C>,{' '}
+        <C>d-indeterminate</C>; see{' '}
         <Link href="/styles/motion" className="font-semibold text-primary-text hover:underline">
           Motion
         </Link>
@@ -366,7 +366,7 @@ export default function StatesPage() {
         <p className="mt-1.5 text-[13px] leading-relaxed text-critical-text">
           A determinate bar must be driven by real work done in real chunks, so the percentage is the
           true ratio of work completed and Cancel genuinely stops it. An animated bar that tracks
-          nothing teaches operators that progress is decorative — and then they cannot tell a slow
+          nothing teaches operators that progress is decorative; and then they cannot tell a slow
           export from a hung one. <strong className="font-semibold">If the total is unknown, use a
           skeleton, not a bar.</strong> Cancelling must leave nothing written, and say so.
         </p>
@@ -378,18 +378,18 @@ export default function StatesPage() {
         <ul className="space-y-2">
           {[
             <>
-              Titles state the condition. Sentence case, no full stop —{' '}
+              Titles state the condition. Sentence case, no full stop:{' '}
               <em>&ldquo;No trend groups yet&rdquo;</em>.
             </>,
             <>
-              Body is one line, imperative where an action follows —{' '}
+              Body is one line, imperative where an action follows:{' '}
               <em>
                 &ldquo;Plot the parameters you analyse together, then save them as a group&rdquo;
               </em>
               .
             </>,
             <>
-              Loading copy names the work and its size —{' '}
+              Loading copy names the work and its size:{' '}
               <em>&ldquo;Sampling 3 signals over the last 7 d&rdquo;</em>. Never a bare
               &ldquo;Loading…&rdquo;.
             </>,
@@ -410,7 +410,7 @@ export default function StatesPage() {
           {[
             <>
               One shared implementation. Nothing else may define its own empty-state or loading
-              shape — a fifth shape is how the pattern dies.
+              shape; a fifth shape is how the pattern dies.
             </>,
             <>
               Never merge <C>empty</C> and <C>filtered</C> into one message. &ldquo;No trend
@@ -422,11 +422,11 @@ export default function StatesPage() {
               duplicate record.
             </>,
             <>
-              An em-dash in an empty table <em>cell</em> is not an empty state — that is a missing
+              An em-dash in an empty table <em>cell</em> is not an empty state; that is a missing
               value, not a missing set. Leave it alone.
             </>,
             <>
-              A table&rsquo;s empty state is the <C>row</C> size, spanning all columns — never a
+              A table&rsquo;s empty state is the <C>row</C> size, spanning all columns; never a
               floating block that detaches from the header.
             </>,
           ].map((item, i) => (

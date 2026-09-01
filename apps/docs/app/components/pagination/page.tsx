@@ -61,7 +61,7 @@ const variants: Variant[] = [
     name: 'Jump to page',
     platform: 'Desktop',
     description:
-      'For long registers. A 48px mono input beside the pager — typing a page number is faster than clicking through twelve pages of alarms.',
+      'For long registers. A 48px mono input beside the pager; typing a page number is faster than clicking through twelve pages of alarms.',
     preview: (
       <div className="flex w-[680px] flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white px-[18px] py-3">
         <span className="text-[13px] text-slate-600">1 – 50 of 584</span>
@@ -106,7 +106,7 @@ const variants: Variant[] = [
 /* do NOT "fix" overflow by capping the visible page-number count */`,
   },
   {
-    name: 'Mobile — load more',
+    name: 'Mobile · load more',
     platform: 'Mobile',
     description:
       'The phone build does not paginate. It shows a range summary and a full-width load-more button, so the operator never loses their scroll position mid-list.',
@@ -154,7 +154,7 @@ export default function PaginationPage() {
         heading: 'Rules',
         items: [
           <>
-            Always state the range and the total — &ldquo;1 – 50 of 584&rdquo;. A page number
+            Always state the range and the total; &ldquo;1 – 50 of 584&rdquo;. A page number
             without a total tells the operator nothing about how much is left.
           </>,
           <>

@@ -39,7 +39,7 @@ export default function DashboardTemplatePage() {
       <p className="mt-2 text-sm leading-relaxed text-slate-500">
         The desktop shell: 240px sidebar, 64px top bar, the annunciator ribbon, then content. Every
         screen in the console is this frame with a different body. The preview below is the real
-        1440&times;900 layout scaled to fit — every measurement in it is a true source value.
+        1440&times;900 layout scaled to fit; every measurement in it is a true source value.
       </p>
 
       <div className="mt-8 overflow-hidden rounded-xl border border-slate-200">
@@ -259,7 +259,7 @@ export default function DashboardTemplatePage() {
                       </div>
                       <div className="px-5 py-[18px]">
                         <p className="text-[13px] leading-relaxed text-slate-600">
-                          DO in DPT1 has been drifting low all evening. Trend attached — keep an eye
+                          DO in DPT1 has been drifting low all evening. Trend attached: keep an eye
                           on it after the 02:00 feed.
                         </p>
                         <p className="mt-2.5 text-[12px] text-slate-400">E. Sørensen · 2h ago</p>
@@ -277,10 +277,10 @@ export default function DashboardTemplatePage() {
         <p className="text-xs font-bold uppercase tracking-widest text-slate-400">Anatomy</p>
         <ul className="mt-3 space-y-2">
           {[
-            <><strong>Sidebar · 240px</strong> — the NJORD wordmark at 26px in a 72px band, then the nine facility-wide routes (Dashboard, Site Plan, Alarms, Maneuver History, Reports, Fish Feeding, Fish Biology, Analytics, Settings). The unacknowledged count rides on Alarms. Account footer pinned to the bottom.</>,
-            <><strong>Top bar · 64px</strong> — left: system-status dot, then <em>Building ▾ › Department ▾</em> as interactive scope dropdowns, then the page title. Right, in order: facility clock, search trigger, critical count pill, high count pill, bell with unacknowledged badge, then Notes, Maneuver history and Help.</>,
-            <><strong>Annunciator</strong> — always present. Severity chip, alarm name over tag / area / age, Acknowledge, and the overflow count.</>,
-            <><strong>Content</strong> — fluid gutters, a 4-up KPI row, then a main pane beside a clamped 352px rail.</>,
+            <><strong>Sidebar · 240px</strong>: the NJORD wordmark at 26px in a 72px band, then the nine facility-wide routes (Dashboard, Site Plan, Alarms, Maneuver History, Reports, Fish Feeding, Fish Biology, Analytics, Settings). The unacknowledged count rides on Alarms. Account footer pinned to the bottom.</>,
+            <><strong>Top bar · 64px</strong>: left: system-status dot, then <em>Building ▾ › Department ▾</em> as interactive scope dropdowns, then the page title. Right, in order: facility clock, search trigger, critical count pill, high count pill, bell with unacknowledged badge, then Notes, Maneuver history and Help.</>,
+            <><strong>Annunciator</strong>: always present. Severity chip, alarm name over tag / area / age, Acknowledge, and the overflow count.</>,
+            <><strong>Content</strong>: fluid gutters, a 4-up KPI row, then a main pane beside a clamped 352px rail.</>,
           ].map((item, i) => (
             <li key={i} className="flex gap-2.5 text-[13px] leading-relaxed text-slate-600">
               <span aria-hidden className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-slate-300" />
@@ -293,7 +293,7 @@ export default function DashboardTemplatePage() {
       <div className="mt-4 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-[12px] leading-relaxed text-slate-600">
         The scope dropdowns are the only navigation that changes <em>what data</em> a screen shows.
         The sidebar changes <em>which screen</em>. Screens carry no in-page{' '}
-        <code className="font-mono text-[11px]">h1</code> — the top bar title is the document
+        <code className="font-mono text-[11px]">h1</code>; the top bar title is the document
         heading.
       </div>
       <TemplateSpec
@@ -323,7 +323,7 @@ rebuilding the chrome on each screen.`}
         ]}
         watchFor={[
           <>
-            The ribbon is <strong>always mounted</strong>, including when nothing is in alarm — it
+            The ribbon is <strong>always mounted</strong>, including when nothing is in alarm; it
             collapses to an all-clear line. A ribbon that disappears trains operators to stop
             looking at that band.
           </>,
@@ -333,7 +333,7 @@ rebuilding the chrome on each screen.`}
           </>,
           <>
             KPI cards use <code className="font-mono text-[12px]">basis: 0; grow: 1</code>, not a
-            fixed width — otherwise the row will not split cleanly at 1180.
+            fixed width; otherwise the row will not split cleanly at 1180.
           </>,
           <>The scroll container is the content column, not the page. The shell never scrolls.</>,
         ]}

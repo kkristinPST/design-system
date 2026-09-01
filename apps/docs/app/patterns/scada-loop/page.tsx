@@ -33,14 +33,14 @@ export default function ScadaLoopPage() {
             <line x1="144" y1="106" x2="212" y2="106" stroke="var(--color-fl-proc)" strokeWidth="5" strokeLinecap="round" />
             <line x1="252" y1="106" x2="336" y2="106" stroke="var(--color-fl-proc)" strokeWidth="5" strokeLinecap="round" />
 
-            {/* pump — selected */}
+            {/* pump; selected */}
             <g>
               <circle cx="232" cy="106" r="19" fill="var(--color-sc-run)" stroke="var(--color-primary)" strokeWidth="2.4" />
               <path d="M232 87 L251 106 L232 125 Z" fill="var(--color-sc-run)" stroke="var(--color-primary)" strokeWidth="2.4" strokeLinejoin="round" />
             </g>
             <text x="232" y="146" textAnchor="middle" className="font-mono text-[10px]" fill="var(--color-ink)" stroke="var(--color-sc-halo)" strokeWidth="3" paintOrder="stroke">PU-11A</text>
 
-            {/* readout — abnormal */}
+            {/* readout; abnormal */}
             <rect x="336" y="86" width="86" height="40" rx="3" fill="var(--color-sc-node)" stroke="var(--color-sc-abnormal)" strokeWidth="1.8" />
             <text x="379" y="102" textAnchor="middle" className="font-mono text-[9px]" fill="var(--color-slate-500)">DO-0403</text>
             <text x="379" y="118" textAnchor="middle" className="font-mono text-[13px] font-bold" fill="var(--color-critical-text)">6.2 mg/L</text>
@@ -90,8 +90,7 @@ export default function ScadaLoopPage() {
 
       <h2 className="mt-10 text-base font-bold text-ink">Mobile</h2>
       <p className="mt-1.5 text-[13px] leading-relaxed text-slate-500">
-        Phones do not get a mimic. The same loop becomes a hero status line plus a list of readings
-        — a pinch-zoomable schematic on a 393px screen is unusable in a plant.
+        Phones do not get a mimic. The same loop becomes a hero status line plus a list of readings: a pinch-zoomable schematic on a 393px screen is unusable in a plant.
       </p>
       <div className="mt-5 w-[340px] overflow-hidden rounded-2xl border border-slate-200 bg-white">
         <div className="flex items-center gap-2.5 border-b border-slate-100 px-4 py-3">
@@ -123,7 +122,7 @@ export default function ScadaLoopPage() {
         <ul className="mt-3 space-y-2">
           {[
             <>
-              The mimic is quiet by default. Normal equipment is neutral gray — saturated colour on
+              The mimic is quiet by default. Normal equipment is neutral gray; saturated colour on
               a diagram means abnormal, and nothing else.
             </>,
             <>

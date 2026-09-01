@@ -68,7 +68,7 @@ const variants: Variant[] = [
     name: 'Wrapping',
     platform: 'Desktop',
     description:
-      'A six-tab strip can be wider than a narrow content pane even on a wide monitor — an expanded sidebar on a tablet is enough. The strip wraps fluidly rather than at a breakpoint.',
+      'A six-tab strip can be wider than a narrow content pane even on a wide monitor: an expanded sidebar on a tablet is enough. The strip wraps fluidly rather than at a breakpoint.',
     preview: (
       <div className="w-[380px]">
         <div className="inline-flex max-w-full flex-wrap gap-0.5 rounded-md border border-slate-200 bg-slate-100 p-[3px]">
@@ -86,7 +86,7 @@ const variants: Variant[] = [
 .pagehead-right > .segmented { max-width: 100% }`,
   },
   {
-    name: 'Mobile — segmented control',
+    name: 'Mobile · segmented control',
     platform: 'Mobile',
     description:
       'A borderless slate-100 track at 12px radius. Segments flex to equal width, the active one lifts to white, and each gets a 44px hit area from an invisible pseudo-element.',
@@ -143,7 +143,7 @@ export default function FilterTabsPage() {
       intro={
         <>
           Switches which slice of the same dataset is shown. Desktop uses a bordered segmented
-          strip; mobile uses a borderless track with equal-width segments. Tabs filter — they never
+          strip; mobile uses a borderless track with equal-width segments. Tabs filter: they never
           navigate to a different screen.
         </>
       }

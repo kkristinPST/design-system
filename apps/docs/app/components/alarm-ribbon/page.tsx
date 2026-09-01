@@ -6,7 +6,7 @@ const variants: Variant[] = [
     name: 'Annunciator ribbon',
     platform: 'Desktop',
     description:
-      'The persistent ISA-18.2 annunciator under the top bar. Two rows: severity + alarm name + actions on line one, tag / area / age on line two — so the alarm identity survives any viewport width.',
+      'The persistent ISA-18.2 annunciator under the top bar. Two rows: severity + alarm name + actions on line one, tag / area / age on line two; so the alarm identity survives any viewport width.',
     preview: (
       <div className="w-[760px] overflow-hidden rounded-lg border border-slate-200">
         <div className="grid min-h-[56px] grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-x-3.5 border-b border-slate-200 border-l-4 border-l-critical bg-critical-bg py-2 pl-6 pr-5">
@@ -53,7 +53,7 @@ const variants: Variant[] = [
     name: 'Severity levels',
     platform: 'Desktop',
     description:
-      'The left border and background follow the severity ramp. Low and diagnostic fall back to the neutral slate-50 surface — they annunciate, but they do not colour the chrome.',
+      'The left border and background follow the severity ramp. Low and diagnostic fall back to the neutral slate-50 surface; they annunciate, but they do not colour the chrome.',
     preview: (
       <div className="w-[560px] overflow-hidden rounded-lg border border-slate-200">
         {[
@@ -85,7 +85,7 @@ border-l-slate-400 bg-slate-50     {/* Low / Diagnostic */}`,
     name: 'All clear',
     platform: 'Desktop',
     description:
-      'The ribbon never disappears — an empty annunciator is indistinguishable from a broken one. It collapses to a 30px quiet line on the plain surface with no left rail.',
+      'The ribbon never disappears; an empty annunciator is indistinguishable from a broken one. It collapses to a 30px quiet line on the plain surface with no left rail.',
     preview: (
       <div className="w-[560px] overflow-hidden rounded-lg border border-slate-200">
         <div className="flex min-h-[30px] items-center gap-2 border-l-4 border-l-transparent bg-white py-0 pl-6 pr-5">
@@ -105,7 +105,7 @@ border-l-slate-400 bg-slate-50     {/* Low / Diagnostic */}`,
 </div>`,
   },
   {
-    name: 'Mobile — ribbon',
+    name: 'Mobile · ribbon',
     platform: 'Mobile',
     description:
       'Pinned under the status bar. Severity chip, two-line text block, and a mono overflow count. Tapping anywhere opens the alarm list.',
@@ -159,8 +159,7 @@ export default function AlarmRibbonPage() {
       intro={
         <>
           The persistent annunciator required by ISA-18.2. It shows the single highest-priority
-          unacknowledged alarm plus a count of the rest, on every screen, and it is always present
-          — even when there is nothing to annunciate.
+          unacknowledged alarm plus a count of the rest, on every screen, and it is always present; even when there is nothing to annunciate.
         </>
       }
       variants={variants}
@@ -179,7 +178,7 @@ export default function AlarmRibbonPage() {
           </>,
           <>
             The meta line uses a fixed 11px at slate-600. It sits on a critical or warning tint,
-            where slate-500 only reaches 4.12:1 — and an em-relative size shrank it to 8.6px.
+            where slate-500 only reaches 4.12:1; and an em-relative size shrank it to 8.6px.
           </>,
           <>
             Acknowledge is the ink button; everything else is a link. There is exactly one

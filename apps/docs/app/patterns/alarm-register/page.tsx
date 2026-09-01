@@ -116,7 +116,7 @@ export default function AlarmRegisterPage() {
               backlog is visible from the strip.
             </>,
             <>
-              The register is editable on mobile — field engineers rationalize at the equipment, and
+              The register is editable on mobile: field engineers rationalize at the equipment, and
               a read-only phone view would push the work back to a desk.
             </>,
           ].map((item, i) => (

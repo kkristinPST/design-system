@@ -118,7 +118,7 @@ export default function IgnitionPage() {
       <p className="mt-2 text-sm leading-relaxed text-slate-500">
         How this design system is implemented in Ignition. One theme file carries every token, a
         style-class library carries every component variant, and views reference classes rather
-        than inline styles — so a colour changes in one place and re-skins the whole HMI.
+        than inline styles; so a colour changes in one place and re-skins the whole HMI.
       </p>
 
       <div className="mt-6 rounded-lg border border-[color-mix(in_srgb,var(--color-warning)_28%,transparent)] bg-warning-bg px-4 py-3 text-[12px] leading-relaxed text-warning-text">
@@ -132,12 +132,12 @@ export default function IgnitionPage() {
       <p className="mt-1.5 text-[13px] leading-relaxed text-slate-500">
         Tokens become CSS custom properties on <code className="font-mono text-xs">:root</code>,
         with an <code className="font-mono text-xs">--njord-</code> prefix so they never collide
-        with Ignition&rsquo;s own variables. This is the complete file — copy or download it, drop it
+        with Ignition&rsquo;s own variables. This is the complete file; copy or download it, drop it
         on the gateway, and every token in this system is available to every view.
       </p>
       <p className="mt-2 text-[13px] leading-relaxed text-slate-500">
         It is the <strong className="font-semibold text-ink">only</strong> place a value is allowed
-        to live. If you find yourself typing a hex into a style class, the token for it is missing —
+        to live. If you find yourself typing a hex into a style class, the token for it is missing,
         raise it rather than inlining it.
       </p>
 
@@ -150,7 +150,7 @@ export default function IgnitionPage() {
               data/config/resources/core/com.inductiveautomation.perspective/themes/
             </code>
             , holding three files: <code className="font-mono text-[12px]">index.css</code> (the
-            entry point — that is the file above),{' '}
+            entry point; that is the file above),{' '}
             <code className="font-mono text-[12px]">config.json</code> and{' '}
             <code className="font-mono text-[12px]">resource.json</code>.
           </p>
@@ -160,7 +160,7 @@ export default function IgnitionPage() {
               <>
                 <strong>Not extending the base theme.</strong> A custom theme must{' '}
                 <code className="font-mono text-[12px]">@import</code> the light theme. Anything
-                light defines that yours does not is simply absent — the giveaway is buttons
+                light defines that yours does not is simply absent; the giveaway is buttons
                 rendering with no border.
               </>,
               <>
@@ -171,7 +171,7 @@ export default function IgnitionPage() {
               </>,
               <>
                 <strong>Forgetting to rescan.</strong> The gateway does not notice new theme files on
-                its own — Platform → Overview → Scan File System, then restart.
+                its own; Platform → Overview → Scan File System, then restart.
               </>,
             ].map((item, i) => (
               <li key={i} className="flex gap-2.5">
@@ -188,7 +188,7 @@ export default function IgnitionPage() {
             <code className="font-mono text-[12px]">
               /data/api/v1/resources/com.inductiveautomation.perspective/themes/copy-base-themes
             </code>
-            , then confirm the relative import path resolves on your install — the docs and the
+            , then confirm the relative import path resolves on your install: the docs and the
             field reports differ on it, so verify rather than trust either.
           </p>
         </div>
@@ -203,7 +203,7 @@ export default function IgnitionPage() {
       />
       <p className="mt-2 text-[12px] leading-relaxed text-slate-500">
         <code className="font-mono text-[11px]">resource.json</code> is deliberately not published
-        here — its schema is internal to the gateway, and the supported route is to copy it from a
+        here; its schema is internal to the gateway, and the supported route is to copy it from a
         theme your install already ships (<code className="font-mono text-[11px]">dark-cool</code> is
         the usual one) rather than hand-write it.
       </p>
@@ -220,11 +220,11 @@ export default function IgnitionPage() {
         Two families carry the whole system: <strong className="font-semibold text-ink">Inter</strong>{' '}
         for language and <strong className="font-semibold text-ink">JetBrains Mono</strong> for every
         number, tag, duration and setpoint. Both are open-licence (SIL OFL), so they can ship with
-        the gateway. The theme already declares the stacks — you only need to make the files
+        the gateway. The theme already declares the stacks; you only need to make the files
         resolvable. Two ways, depending on whether the gateway can reach the internet:
       </p>
       <CodeBlock
-        label="Option A — self-hosted (works air-gapped; preferred for a plant network)"
+        label="Option A; self-hosted (works air-gapped; preferred for a plant network)"
         code={`/* Put the .woff2 files beside njord.css in the themes folder, then add
    this to the TOP of njord.css. Download the families from
    fonts.google.com/specimen/Inter and .../JetBrains+Mono. */
@@ -251,7 +251,7 @@ export default function IgnitionPage() {
 }`}
       />
       <CodeBlock
-        label="Option B — Google Fonts (only if the client browser has internet)"
+        label="Option B; Google Fonts (only if the client browser has internet)"
         code={`/* First line of njord.css. Simpler, but it fails silently on an
    isolated plant network and falls back to the system sans. */
 
@@ -259,7 +259,7 @@ export default function IgnitionPage() {
       />
       <p className="mt-3 text-[13px] leading-relaxed text-slate-500">
         The exact folder a gateway serves static assets from varies with version and reverse-proxy
-        setup — confirm yours before committing to a path. What matters for the design is only that{' '}
+        setup; confirm yours before committing to a path. What matters for the design is only that{' '}
         <code className="font-mono text-xs">Inter</code> and{' '}
         <code className="font-mono text-xs">JetBrains Mono</code> resolve; the fallback chain in the
         theme keeps everything legible if they do not, but the mono fallback will not be tabular and
@@ -277,7 +277,7 @@ export default function IgnitionPage() {
         <code className="font-mono text-xs">hover</code>,{' '}
         <code className="font-mono text-xs">active</code>,{' '}
         <code className="font-mono text-xs">focus</code> and{' '}
-        <code className="font-mono text-xs">disabled</code> variants — which is exactly the set the
+        <code className="font-mono text-xs">disabled</code> variants; which is exactly the set the
         web build uses. Values are <code className="font-mono text-xs">var()</code> references, never
         literals.
       </p>
@@ -285,20 +285,20 @@ export default function IgnitionPage() {
 
       {/* ── 4. Component ── */}
       <h2 className="mt-10 text-base font-bold text-ink">4 · Using it in a view</h2>
-      <CodeBlock label="views/Njord/Components/Button/view.json — component fragment" code={perspectiveComponent} />
+      <CodeBlock label="views/Njord/Components/Button/view.json · component fragment" code={perspectiveComponent} />
 
       {/* ── 5. Severity binding ── */}
       <h2 className="mt-10 text-base font-bold text-ink">5 · Severity in one expression</h2>
       <p className="mt-1.5 text-[13px] leading-relaxed text-slate-500">
         Severity drives badges, dots, rails and row tints. Bind the class name once and every
-        component that shows severity stays consistent — including when the ramp is re-tuned.
+        component that shows severity stays consistent; including when the ramp is re-tuned.
       </p>
       <CodeBlock label="Expression binding → props.style.classes" code={bindingExample} />
 
       {/* ── 6. Alarm data ── */}
       <h2 className="mt-10 text-base font-bold text-ink">6 · The alarm feed</h2>
       <p className="mt-1.5 text-[13px] leading-relaxed text-slate-500">
-        Alarm row, alarm ribbon and the alarm table all read this shape. Note the sort — priority
+        Alarm row, alarm ribbon and the alarm table all read this shape. Note the sort: priority
         first, then age. Newest-first is wrong: a three-hour-old critical outranks a one-minute-old
         low.
       </p>
@@ -308,7 +308,7 @@ export default function IgnitionPage() {
       <h2 className="mt-10 text-base font-bold text-ink">7 · Every style class</h2>
       <p className="mt-1.5 max-w-[68ch] text-[13px] leading-relaxed text-slate-500">
         The complete library, one row per component. Each links to the component page, where the
-        full style-class JSON, the view JSON and the implementation notes for that component live —
+        full style-class JSON, the view JSON and the implementation notes for that component live;
         ready to copy. Build them in this order and nothing later is blocked.
       </p>
       <div className="mt-5 overflow-hidden rounded-xl border border-slate-200 bg-white">
@@ -343,7 +343,7 @@ export default function IgnitionPage() {
             <>
               Prefer Ignition&rsquo;s built-in{' '}
               <code className="font-mono text-[12px]">ia.display.alarm-status-table</code> for the
-              full alarm register — then style it with the{' '}
+              full alarm register; then style it with the{' '}
               <code className="font-mono text-[12px]">njord/table/*</code> classes rather than
               rebuilding the table from flex containers.
             </>,
@@ -359,7 +359,7 @@ export default function IgnitionPage() {
             </>,
             <>
               Perspective mobile sessions get the mobile variants. Do not scale the desktop view
-              down — the layouts are rebuilt, not reflowed.
+              down; the layouts are rebuilt, not reflowed.
             </>,
           ].map((item, i) => (
             <li key={i} className="flex gap-2.5 text-[13px] leading-relaxed text-slate-600">

@@ -1,10 +1,10 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// Design Tokens — Typography
+// Design Tokens; Typography
 //
 // THIS FILE IS THE SOURCE. `npm run build` derives the --text-* scale in
 // dist/tokens.css from `typeScale` below. Never edit a generated file.
 //
-// Originally lifted from NJORD Redesign — lib/tokens.css semantic text helpers.
+// Originally lifted from NJORD Redesign: lib/tokens.css semantic text helpers.
 //
 // Two families, one rule: Inter carries language, JetBrains Mono carries every
 // number, tag, duration and setpoint. Mono is always tabular-nums so digits in
@@ -13,7 +13,7 @@
 
 export const fontFamilies = {
   sans: "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-  // Consolas FIRST — control-room Windows machines then render the original the
+  // Consolas FIRST; control-room Windows machines then render the original the
   // design was drawn against. Consolas is not web-distributable, so JetBrains
   // Mono is the substitute everyone else falls back to.
   mono: "Consolas, 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace",
@@ -38,7 +38,7 @@ export const typeScale = {
     lineHeight: '40px',
     fontWeight: 600,
     letterSpacing: '-1px',
-    usage: 'Hero figure — a score or single dominant number. Tabular-nums.',
+    usage: 'Hero figure: a score or single dominant number. Tabular-nums.',
   },
   metric: {
     token: 'metric',
@@ -56,7 +56,7 @@ export const typeScale = {
     lineHeight: '32px',
     fontWeight: 700,
     letterSpacing: '-0.2px',
-    usage: 'Page title. Screens carry no in-page h1 — the top bar owns it.',
+    usage: 'Page title. Screens carry no in-page h1 · the top bar owns it.',
   },
   title: {
     token: 'title',
@@ -65,7 +65,7 @@ export const typeScale = {
     lineHeight: '28px',
     fontWeight: 700,
     letterSpacing: '-0.2px',
-    usage: 'The top-bar page title. Louder than h2 — the screen owns no in-page h1.',
+    usage: 'The top-bar page title. Louder than h2 · the screen owns no in-page h1.',
   },
   readout: {
     token: 'readout',
@@ -101,7 +101,7 @@ export const typeScale = {
     lineHeight: '20px',
     fontWeight: 600,
     letterSpacing: '0',
-    usage: 'Emphasised body — list row titles, labelled values.',
+    usage: 'Emphasised body · list row titles, labelled values.',
   },
   body: {
     token: 'body',
@@ -175,7 +175,7 @@ export const typeScale = {
     lineHeight: '12px',
     fontWeight: 400,
     letterSpacing: '0',
-    usage: 'Chart tick labels ONLY. Never for interface text — it does not meet minimum legibility.',
+    usage: 'Chart tick labels ONLY. Never for interface text: it does not meet minimum legibility.',
   },
   badge: {
     token: 'badge',
@@ -190,7 +190,7 @@ export const typeScale = {
 } as const satisfies Record<string, TypeToken>
 
 // ---------------------------------------------------------------------------
-// Mobile overrides — the phone build re-tunes a handful of roles for a 393px
+// Mobile overrides: the phone build re-tunes a handful of roles for a 393px
 // viewport. Everything not listed here is shared with desktop.
 // ---------------------------------------------------------------------------
 
@@ -207,7 +207,7 @@ export const mobileTypeScale = {
 } as const
 
 // ---------------------------------------------------------------------------
-// Text size — a user-level preference, not a design choice.
+// Text size: a user-level preference, not a design choice.
 //
 // Implemented as `zoom` on the working area rather than a font-size sweep: the
 // layout REFLOWS at the new scale, so a longer label can never overlap its
@@ -218,9 +218,9 @@ export const mobileTypeScale = {
 // ---------------------------------------------------------------------------
 
 export const textSizes = {
-  'ts-default': { value: '1', use: 'Base — no scaling' },
-  'ts-lg':      { value: '1.09', use: 'Large — body.nj-text-lg' },
-  'ts-xl':      { value: '1.18', use: 'Extra large — body.nj-text-xl' },
+  'ts-default': { value: '1', use: 'Base · no scaling' },
+  'ts-lg':      { value: '1.09', use: 'Large · body.nj-text-lg' },
+  'ts-xl':      { value: '1.18', use: 'Extra large · body.nj-text-xl' },
 } as const
 
 // ---------------------------------------------------------------------------
@@ -237,7 +237,7 @@ export const fontWeights = {
 
 // ---------------------------------------------------------------------------
 // Tailwind v3 fontSize config shape.
-// Tailwind v4 consumers import "@njord/tokens/css" instead — it is generated.
+// Tailwind v4 consumers import "@njord/tokens/css" instead; it is generated.
 // ---------------------------------------------------------------------------
 
 export const tailwindFontSize = Object.fromEntries(

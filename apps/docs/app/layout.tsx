@@ -16,7 +16,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "NJORD Design System",
-  description: "Component and style documentation — desktop and mobile",
+  description: "Component and style documentation · desktop and mobile",
 };
 
 export default function RootLayout({
@@ -33,7 +33,7 @@ export default function RootLayout({
         suppressHydrationWarning: browser extensions inject attributes onto
         <body> before React hydrates (ColorZilla adds cz-shortcut-listen,
         Grammarly and Dark Reader do the same), which React reports as a
-        hydration mismatch. It applies to this element only — one level deep —
+        hydration mismatch. It applies to this element only (one level deep),
         so a real mismatch inside the app is still reported.
       */}
       <body className="flex h-full bg-slate-50 text-ink" suppressHydrationWarning>

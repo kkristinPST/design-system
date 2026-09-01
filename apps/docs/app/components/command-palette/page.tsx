@@ -110,7 +110,7 @@ const variants: Variant[] = [
     name: 'Search trigger',
     platform: 'Desktop',
     description:
-      'The top-bar entry point. It advertises the shortcut rather than hiding it, and sheds the label then the keycap as the bar narrows — the icon alone survives.',
+      'The top-bar entry point. It advertises the shortcut rather than hiding it, and sheds the label then the keycap as the bar narrows: the icon alone survives.',
     preview: (
       <div className="flex items-center gap-6">
         <button className="inline-flex h-[34px] items-center gap-2 rounded-md border border-slate-200 bg-slate-50 px-2.5 text-[13px] text-slate-500 hover:border-slate-300 hover:bg-white">
@@ -139,7 +139,7 @@ const variants: Variant[] = [
     name: 'No results',
     platform: 'Desktop',
     description:
-      'The palette keeps its input and footer and states the miss in the body. It never collapses to nothing — a shrinking panel under a typing cursor is disorienting.',
+      'The palette keeps its input and footer and states the miss in the body. It never collapses to nothing: a shrinking panel under a typing cursor is disorienting.',
     preview: (
       <div className="flex w-full justify-center rounded-lg bg-[rgba(15,24,43,0.45)] p-8">
         <div className="flex w-[560px] flex-col overflow-hidden rounded-[14px] border border-slate-200 bg-white shadow-[0_24px_60px_rgba(0,0,0,0.35)]">
@@ -191,7 +191,7 @@ export default function CommandPalettePage() {
             long tag can never push the label out of view.
           </>,
           <>
-            Selection is a fill plus a leading dot, not a border — a border would shift the row by a
+            Selection is a fill plus a leading dot, not a border; a border would shift the row by a
             pixel as you arrow through the list.
           </>,
           <>

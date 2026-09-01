@@ -6,7 +6,7 @@ const variants: Variant[] = [
     name: 'Primary',
     platform: 'Desktop',
     description:
-      'The committing action. Dark ink, not brand cyan — cyan is reserved for links, focus and selection. One per view.',
+      'The committing action. Dark ink, not brand cyan: cyan is reserved for links, focus and selection. One per view.',
     preview: (
       <button className="inline-flex items-center gap-[7px] rounded-md border border-ink bg-ink px-3.5 py-2 text-[13px] font-semibold text-white transition-colors hover:bg-slate-800">
         Acknowledge
@@ -49,7 +49,7 @@ const variants: Variant[] = [
     name: 'Danger',
     platform: 'Desktop',
     description:
-      'Destructive or irreversible actions — disabling an alarm, taking equipment out of service.',
+      'Destructive or irreversible actions: disabling an alarm, taking equipment out of service.',
     preview: (
       <button className="inline-flex items-center gap-[7px] rounded-md border border-critical bg-critical px-3.5 py-2 text-[13px] font-semibold text-white transition-colors hover:bg-[#D8332E]">
         Take out of service
@@ -90,7 +90,7 @@ const variants: Variant[] = [
   {
     name: 'Disabled',
     platform: 'Desktop',
-    description: 'Opacity 0.45, shadow removed, not-allowed cursor. Never hide an action — disable it.',
+    description: 'Opacity 0.45, shadow removed, not-allowed cursor. Never hide an action: disable it.',
     preview: (
       <button
         disabled
@@ -104,7 +104,7 @@ const variants: Variant[] = [
 </button>`,
   },
   {
-    name: 'Mobile — full-width actions',
+    name: 'Mobile · full-width actions',
     platform: 'Mobile',
     description:
       'A 50px tall, 14px radius bar. Buttons flex to share the row equally and sit in the sticky footer of a detail screen. Ack uses the bright indicator green; primary uses brand cyan.',
@@ -129,7 +129,7 @@ const variants: Variant[] = [
 </div>`,
   },
   {
-    name: 'Mobile — primary / danger / disabled',
+    name: 'Mobile · primary / danger / disabled',
     platform: 'Mobile',
     description:
       'Same 50px bar across all intents. Disabled drops to a slate-100 fill with slate-400 ink rather than fading the whole control.',
@@ -155,7 +155,7 @@ const variants: Variant[] = [
   text-sm font-bold text-slate-400 cursor-not-allowed">Save setpoint</button>`,
   },
   {
-    name: 'Mobile — icon button',
+    name: 'Mobile · icon button',
     platform: 'Mobile',
     description:
       'Drawn at 40×40 but given a 44×44 minimum hit area. Used in the screen header for search, filter and notifications.',
@@ -201,14 +201,14 @@ export default function ButtonPage() {
         items: [
           <>
             The desktop primary is <strong>ink</strong>, not brand cyan. Cyan is reserved for
-            links, focus rings and selection — an action painted cyan competes with them.
+            links, focus rings and selection: an action painted cyan competes with them.
           </>,
           <>
             Mobile primary <em>is</em> cyan, because on the phone there is no dense chrome for it
             to compete with and the bar needs to read as the one committing action.
           </>,
           <>
-            Never put text on bare <code className="font-mono text-[12px]">success</code> — it is a
+            Never put text on bare <code className="font-mono text-[12px]">success</code>; it is a
             2.3:1 indicator green. Use <code className="font-mono text-[12px]">success-solid</code>{' '}
             (#00734C) when a green surface must carry a white label.
           </>,

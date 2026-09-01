@@ -10,8 +10,8 @@ const TABS = [
 ]
 
 /**
- * The NJORD phone frame at its true dimensions — iPhone 16 Pro, 393×852 screen
- * inside a 413×872 device — scaled down as a whole so proportions stay exact.
+ * The NJORD phone frame at its true dimensions (iPhone 16 Pro, 393×852 screen
+ * inside a 413×872 device) scaled down as a whole so proportions stay exact.
  * Source: mobile/mobile.css (.device / .screen / .m-statusbar / .m-tabbar).
  */
 export default function NjPhone({

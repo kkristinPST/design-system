@@ -28,10 +28,10 @@ const variants: Variant[] = [
 </label>`,
   },
   {
-    name: 'Text field — default, focus, error',
+    name: 'Text field · default, focus, error',
     platform: 'Desktop',
     description:
-      'Focus is a cyan border plus a 3px primary-bg ring — never a colour change alone. Error text uses critical-text, not the bare critical mark.',
+      'Focus is a cyan border plus a 3px primary-bg ring; never a colour change alone. Error text uses critical-text, not the bare critical mark.',
     preview: (
       <div className="flex w-[420px] flex-col gap-4">
         <div>
@@ -46,7 +46,7 @@ const variants: Variant[] = [
         </div>
         <div>
           <label className="mb-2 block text-[10px] font-bold uppercase tracking-wider text-slate-400">
-            Reason — focused
+            Reason; focused
           </label>
           <input
             defaultValue="Sensor replacement scheduled"
@@ -55,7 +55,7 @@ const variants: Variant[] = [
         </div>
         <div>
           <label className="mb-2 block text-[10px] font-bold uppercase tracking-wider text-slate-400">
-            Duration — error
+            Duration, error
           </label>
           <input
             defaultValue=""
@@ -77,7 +77,7 @@ const variants: Variant[] = [
     name: 'Textarea',
     platform: 'Desktop',
     description:
-      'Notes and comments. Vertical resize only — horizontal resize would break the dialog grid. 1.5 line-height for multi-line legibility.',
+      'Notes and comments. Vertical resize only: horizontal resize would break the dialog grid. 1.5 line-height for multi-line legibility.',
     preview: (
       <div className="w-[420px]">
         <label className="mb-2 block text-[10px] font-bold uppercase tracking-wider text-slate-400">
@@ -96,10 +96,10 @@ const variants: Variant[] = [
     text-[13px] leading-relaxed text-ink outline-none placeholder:text-slate-400" />`,
   },
   {
-    name: 'Mobile — text field',
+    name: 'Mobile · text field',
     platform: 'Mobile',
     description:
-      'A 48px tall, 12px radius control at 15px type — large enough that iOS will not zoom the viewport on focus. Focus adds a 3px cyan ring.',
+      'A 48px tall, 12px radius control at 15px type; large enough that iOS will not zoom the viewport on focus. Focus adds a 3px cyan ring.',
     preview: (
       <PhoneFrame className="p-4">
         <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-slate-500">
@@ -126,7 +126,7 @@ const variants: Variant[] = [
 {/* focus */} border-primary shadow-[0_0_0_3px_rgba(0,174,238,0.18)]`,
   },
   {
-    name: 'Mobile — search bar & textarea',
+    name: 'Mobile · search bar & textarea',
     platform: 'Mobile',
     description:
       'The search bar is a filled slate-100 well inside a bottom sheet, with no border. The note textarea is 96px minimum so the keyboard does not cover the whole field.',
@@ -169,7 +169,7 @@ export default function InputPage() {
         <>
           Text entry across both builds. Desktop inputs are 13px with a 1px slate-300 border;
           mobile inputs are 48px tall at 15px type so iOS will not zoom on focus. Focus is always
-          a cyan border <em>plus</em> a soft ring — colour alone is never the only signal.
+          a cyan border <em>plus</em> a soft ring; colour alone is never the only signal.
         </>
       }
       variants={variants}
@@ -178,7 +178,7 @@ export default function InputPage() {
         heading: 'Rules',
         items: [
           <>
-            A search field is one line: icon + input. It may shrink, but it must never wrap — a
+            A search field is one line: icon + input. It may shrink, but it must never wrap; a
             wrapped field puts the magnifier on its own row.
           </>,
           <>

@@ -5,7 +5,7 @@ import { useState } from 'react'
 /**
  * A code block that can be copied in one click.
  *
- * Developers reach this system as a published URL and nothing else — no repo,
+ * Developers reach this system as a published URL and nothing else: no repo,
  * no file share. Every snippet they need has to be liftable straight off the
  * page, so this is the only code block the docs use.
  */
@@ -15,12 +15,12 @@ export default function CodeBlock({
   download,
   maxHeight,
 }: {
-  /** Small mono caption above the block — usually the file or resource path. */
+  /** Small mono caption above the block; usually the file or resource path. */
   label?: string
   code: string
   /** Optional href for a "Download" link beside the copy button. */
   download?: { href: string; filename: string }
-  /** Cap the height and scroll — for the long ones like the theme file. */
+  /** Cap the height and scroll; for the long ones like the theme file. */
   maxHeight?: number
 }) {
   const [copied, setCopied] = useState(false)
@@ -31,7 +31,7 @@ export default function CodeBlock({
       setCopied(true)
       setTimeout(() => setCopied(false), 1800)
     } catch {
-      // Clipboard is unavailable over plain http on some hosts — the text is
+      // Clipboard is unavailable over plain http on some hosts; the text is
       // still selectable, so fail quietly rather than throwing an error at the
       // reader.
       setCopied(false)

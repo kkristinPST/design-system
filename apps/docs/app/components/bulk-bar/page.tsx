@@ -66,7 +66,7 @@ const variants: Variant[] = [
    .card > .bulkbar:first-child { border-radius: var(--r-lg) var(--r-lg) 0 0 } */`,
   },
   {
-    name: 'Mobile — floating bulk bar',
+    name: 'Mobile · floating bulk bar',
     platform: 'Mobile',
     description:
       'A rounded ink pill floating 12px inside the screen edges, sitting directly above the tab bar. Chips inside it go transparent with a light border so they read on the dark fill.',
@@ -127,7 +127,7 @@ export default function BulkBarPage() {
       intro={
         <>
           Appears when rows are selected and carries the actions that apply to all of them. Dark
-          ink on both builds — it is a temporary mode, and the dark surface says so. Desktop docks
+          ink on both builds; it is a temporary mode, and the dark surface says so. Desktop docks
           it above the table; mobile floats it above the tab bar.
         </>
       }
@@ -141,7 +141,7 @@ export default function BulkBarPage() {
             number is not enough when the selection can span pages.
           </>,
           <>
-            There is always a visible way out — a ghost &ldquo;Clear selection&rdquo;. Selection
+            There is always a visible way out: a ghost &ldquo;Clear selection&rdquo;. Selection
             mode must never be a trap.
           </>,
           <>

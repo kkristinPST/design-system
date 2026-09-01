@@ -23,7 +23,7 @@ export default function SpacingPage() {
       <h1 className="text-2xl font-bold tracking-tight text-ink">Spacing</h1>
       <p className="mt-2 text-sm leading-relaxed text-slate-500">
         A 2px base unit for component-level spacing, and a fluid clamp scale for layout. The shell
-        has no fixed width — gutters and gaps grow with the viewport so a 1920px monitor feels used
+        has no fixed width; gutters and gaps grow with the viewport so a 1920px monitor feels used
         rather than stretched.
       </p>
 
@@ -33,7 +33,7 @@ export default function SpacingPage() {
         <p className="mt-1.5 max-w-[68ch] text-[13px] leading-relaxed text-slate-600">
           A few values are measured off a{' '}
           <strong className="font-semibold text-ink">neighbouring element</strong>, not off the
-          scale. Each keeps content out of the lane something else occupies — the tab bar, a
+          scale. Each keeps content out of the lane something else occupies; the tab bar, a
           floating close button, the top of the viewport. Their value is dictated by that
           neighbour&rsquo;s size, so rounding them onto the ladder would break the very thing they
           exist to avoid.
@@ -54,7 +54,7 @@ export default function SpacingPage() {
         </div>
         <p className="mt-3 text-[12px] leading-relaxed text-slate-600">
           They belong with the <code className="font-mono text-[11px]">env(safe-area-inset)</code>{' '}
-          exemption, not with spacing steps — and they are named for what they clear, never for
+          exemption, not with spacing steps; and they are named for what they clear, never for
           their number, so the name still reads true when the tab bar changes height. See{' '}
           <Link
             href="/patterns/empty-state"
@@ -68,7 +68,7 @@ export default function SpacingPage() {
 
       <h2 className="mt-10 text-base font-bold text-ink">Fixed scale</h2>
       <p className="mt-1.5 max-w-[68ch] text-[13px] leading-relaxed text-slate-500">
-        Each step is named for its pixel value — <span className="font-mono text-xs">sp-14</span>{' '}
+        Each step is named for its pixel value, <span className="font-mono text-xs">sp-14</span>{' '}
         is 14px. Reference it as <span className="font-mono text-xs">var(--njord-sp-14)</span> in
         Perspective or <span className="font-mono text-xs">var(--sp-14)</span> on the web. The base
         is 2px rather than 4px because control interiors genuinely need 2, 6, 10 and 14: a
@@ -91,7 +91,7 @@ export default function SpacingPage() {
       {/* ── Fluid ── */}
       <h2 className="mt-10 text-base font-bold text-ink">Fluid layout scale</h2>
       <p className="mt-1.5 text-[13px] leading-relaxed text-slate-500">
-        These drive the shell. They are clamps, not breakpoints — the layout scales continuously
+        These drive the shell. They are clamps, not breakpoints: the layout scales continuously
         instead of jumping at fixed widths.
       </p>
       <div className="mt-5 overflow-hidden rounded-xl border border-slate-200 bg-white">
@@ -129,7 +129,7 @@ export default function SpacingPage() {
       {/* ── Mobile ── */}
       <h2 className="mt-10 text-base font-bold text-ink">Mobile spacing</h2>
       <p className="mt-1.5 text-[13px] leading-relaxed text-slate-500">
-        The phone build uses fixed values rather than clamps — the viewport range is narrow enough
+        The phone build uses fixed values rather than clamps; the viewport range is narrow enough
         that fluid scaling buys nothing.
       </p>
       <div className="mt-5 overflow-hidden rounded-xl border border-slate-200 bg-white">
@@ -154,7 +154,7 @@ export default function SpacingPage() {
       <h2 className="mt-10 text-base font-bold text-ink">Shell dimensions</h2>
       <p className="mt-1.5 max-w-[68ch] text-[13px] leading-relaxed text-slate-500">
         Fixed sizes, not spacing steps. These are what the clearance values above are measured
-        against — a gutter that clears the collapsed rail is 72px because the rail is 72px. Never
+        against: a gutter that clears the collapsed rail is 72px because the rail is 72px. Never
         round one of these onto the ladder.
       </p>
       <div className="mt-5 overflow-hidden rounded-xl border border-slate-200 bg-white">
@@ -190,7 +190,7 @@ export default function SpacingPage() {
       </div>
       <div className="mt-5 rounded-lg border border-slate-300 bg-slate-50 px-4 py-3 text-[12px] leading-relaxed text-slate-600">
         <strong className="text-ink">WCAG 2.5.5 is about the target, not the ink.</strong> A
-        compact control keeps its visual size and gains an invisible hit area around it — do not
+        compact control keeps its visual size and gains an invisible hit area around it; do not
         inflate a control&rsquo;s height to satisfy this, or every dense toolbar in the product
         grows. Implement it as a transparent pseudo-element that extends past the control&rsquo;s
         painted bounds.
@@ -215,7 +215,7 @@ export default function SpacingPage() {
               scrolls sideways, and no column is ever hidden.
             </>,
             <>
-              Compact density tightens padding and gaps across cards, KPIs and tables — and never
+              Compact density tightens padding and gaps across cards, KPIs and tables; and never
               shrinks a font or a hit target.
             </>,
           ].map((item, i) => (

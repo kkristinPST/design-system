@@ -84,7 +84,7 @@ const variants: Variant[] = [
     name: 'Multi-pen legend',
     platform: 'Desktop',
     description:
-      'Comparison charts give each pen a swatch, a name and its own value. The pens use distinguishable hues from the palette, never the severity ramp — a pen is not a status.',
+      'Comparison charts give each pen a swatch, a name and its own value. The pens use distinguishable hues from the palette, never the severity ramp; a pen is not a status.',
     preview: (
       <div className="w-[600px] rounded-xl border border-slate-200 bg-white p-5 shadow-[0_1px_3px_rgba(0,0,0,0.1)]">
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
@@ -114,10 +114,10 @@ const variants: Variant[] = [
 </span>`,
   },
   {
-    name: 'Mobile — trend card',
+    name: 'Mobile · trend card',
     platform: 'Mobile',
     description:
-      'A 16px-radius card with the value above the plot and mono time labels below. Below the chart sits a landscape hint — rotating the phone opens a full-width chart.',
+      'A 16px-radius card with the value above the plot and mono time labels below. Below the chart sits a landscape hint: rotating the phone opens a full-width chart.',
     preview: (
       <PhoneFrame className="p-3.5">
         <div className="mb-1.5 flex items-center justify-between">
@@ -181,7 +181,7 @@ export default function TrendChartPage() {
           <>
             Give the <code className="font-mono text-[12px]">svg</code> a{' '}
             <code className="font-mono text-[12px]">role=&quot;img&quot;</code> and an aria-label
-            that <em>describes the trend</em> — direction, range and any threshold crossing.
+            that <em>describes the trend</em>: direction, range and any threshold crossing.
           </>,
           <>
             Charts scale with their pane and never force a minimum width. A mimic or chart that

@@ -18,7 +18,7 @@ const variants: Variant[] = [
     name: 'Quick link rows',
     platform: 'Desktop',
     description:
-      'A 38px slate-100 icon tile, a 14px/600 label and a 12px slate-500 subtitle. Hover lifts the row to slate-50 and deepens the border — the whole row is the target.',
+      'A 38px slate-100 icon tile, a 14px/600 label and a 12px slate-500 subtitle. Hover lifts the row to slate-50 and deepens the border; the whole row is the target.',
     preview: (
       <div className="flex w-[480px] flex-col gap-2">
         {links.map(({ l, s, d }) => (
@@ -84,7 +84,7 @@ const variants: Variant[] = [
 </div>`,
   },
   {
-    name: 'Mobile — list rows',
+    name: 'Mobile · list rows',
     platform: 'Mobile',
     description:
       'The same links collapse into a divided card. The icon tile drops to 38px with an 11px radius and the chevron marks each row as a drill-in.',
@@ -129,7 +129,7 @@ export default function QuickLinksPage() {
       intro={
         <>
           Signposts to a destination, used on the start page and in the help dialog. Each carries an
-          icon tile, a label and a subtitle explaining what is on the other side — a link without
+          icon tile, a label and a subtitle explaining what is on the other side: a link without
           that second line is a guess.
         </>
       }

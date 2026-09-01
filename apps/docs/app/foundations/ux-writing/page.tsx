@@ -7,7 +7,7 @@ const userQuestions = [
 ]
 
 const dosDonts = [
-  { do: 'Dissolved oxygen 6.2 mg/L — below the 7.0 low limit.', dont: 'Process variable out of range.' },
+  { do: 'Dissolved oxygen 6.2 mg/L · below the 7.0 low limit.', dont: 'Process variable out of range.' },
   { do: 'Acknowledge', dont: 'Submit acknowledgement request' },
   { do: 'No alarms match these filters.', dont: 'No data available.' },
   { do: 'Take out of service', dont: 'Permanently suppress this alarm from the alarm system' },
@@ -41,7 +41,7 @@ const writingRules = [
   {
     rule: 'Sentence case',
     guidance:
-      'Sentence case everywhere — labels, headings, buttons. Uppercase is reserved for badges, state tags and eyebrows, where it is a typographic role rather than emphasis.',
+      'Sentence case everywhere: labels, headings, buttons. Uppercase is reserved for badges, state tags and eyebrows, where it is a typographic role rather than emphasis.',
     example: { do: 'Acknowledge all', dont: 'Acknowledge All' },
   },
   {
@@ -143,7 +143,7 @@ export default function UXWritingPage() {
           3. Respectful conversations
         </h2>
         <p className="mt-2 text-sm text-neutral-500">
-          The product speaks to real people in real moments — sometimes stressful
+          The product speaks to real people in real moments; sometimes stressful
           ones. Write accordingly.
         </p>
         <div className="mt-5 space-y-3">

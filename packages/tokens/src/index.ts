@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// @njord/tokens — the single source of truth for the NJORD design system.
+// @njord/tokens: the single source of truth for the NJORD design system.
 //
 //   import { palette, severity } from '@njord/tokens'   // values, typed
 //   @import "@njord/tokens/css";                        // Tailwind v4 @theme

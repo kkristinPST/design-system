@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// Design Tokens — Icon sizes
+// Design Tokens; Icon sizes
 //
 // THIS FILE IS THE SOURCE. Six sizes, all even.
 //
@@ -7,21 +7,21 @@
 // the container it sits in. A 16px glyph beside 14/20 body reads as part of the
 // sentence; the same glyph in a 40px button still follows the label, not the
 // button. Sizing by container is what produced thirteen different icon sizes
-// across the app — 10, 11, 13, 15, 17, 19, 22, 23 and 26 all chosen per call
+// across the app; 10, 11, 13, 15, 17, 19, 22, 23 and 26 all chosen per call
 // site, none of them named.
 //
 // Every glyph is drawn on a 24×24 viewBox and rendered at one of these sizes.
-// Stroke stays 2 at every size — it is NOT scaled with the glyph, or a small
+// Stroke stays 2 at every size; it is NOT scaled with the glyph, or a small
 // icon turns spindly and a large one turns fat. Colour always inherits
 // currentColor so an icon cannot disagree with the text beside it.
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const iconSizes = {
   'icon-12': { value: '12px', use: 'Micro-mark inside a chip, badge or pill' },
-  'icon-14': { value: '14px', use: 'Inline with body 14/20 — table-cell actions, link arrows, meta lines' },
-  'icon-16': { value: '16px', use: 'DEFAULT — buttons, menu items, card heads, inputs, sidebar rail' },
-  'icon-20': { value: '20px', use: 'Prominent — dialog close, top-bar buttons, sidebar nav, mobile tab bar, steppers' },
-  'icon-24': { value: '24px', use: 'Hero glyph — empty-state tiles, confirm-dialog glyph, equipment glyphs' },
+  'icon-14': { value: '14px', use: 'Inline with body 14/20: table-cell actions, link arrows, meta lines' },
+  'icon-16': { value: '16px', use: 'DEFAULT: buttons, menu items, card heads, inputs, sidebar rail' },
+  'icon-20': { value: '20px', use: 'Prominent: dialog close, top-bar buttons, sidebar nav, mobile tab bar, steppers' },
+  'icon-24': { value: '24px', use: 'Hero glyph: empty-state tiles, confirm-dialog glyph, equipment glyphs' },
   'icon-28': { value: '28px', use: 'Mobile screen hero only' },
 } as const
 
@@ -35,13 +35,13 @@ export const iconStroke = {
 // The icon SET.
 //
 // Lucide, pinned at v0.469.0. Names below are Lucide's own kebab-case names and
-// are the literal string the app passes to its Icon component — they are not
+// are the literal string the app passes to its Icon component; they are not
 // labels chosen for this document. A name that is not on this list either does
 // not exist in Lucide or is not used by NJORD; in both cases the icon silently
 // renders as nothing, because the lookup returns null rather than throwing.
 //
 // Every glyph is a 24×24 outline at stroke 2, with round caps and joins, and
-// inherits currentColor. Equipment symbols — pump, tank, valve, blower — are
+// inherits currentColor. Equipment symbols (pump, tank, valve, blower) are
 // NOT icons and are not in Lucide; they are drawn SVG and live with the SCADA
 // symbol set.
 //
@@ -218,7 +218,7 @@ export const iconGroups: readonly IconGroup[] = [
     ],
   },
   {
-    title: 'Domain — RAS process & fish',
+    title: 'Domain · RAS process & fish',
     note: 'NJORD-specific. Equipment symbols are separate.',
     icons: [
       { name: 'zap', count: 8 },

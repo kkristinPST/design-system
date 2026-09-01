@@ -1,12 +1,12 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// Design Tokens — Color
+// Design Tokens; Color
 //
 // THIS FILE IS THE SOURCE. Nothing else declares a colour.
 // `npm run build` derives the Tailwind @theme block (dist/tokens.css) and the
 // Ignition Perspective theme (dist/njord.css) from the values below, so a hex
 // changes in exactly one place. Never edit a generated file.
 //
-// Originally lifted from NJORD Redesign — lib/tokens.css (Claude Design project
+// Originally lifted from NJORD Redesign: lib/tokens.css (Claude Design project
 // "NJORD Redesign", Redesign.html).
 //
 // The neutral spine is a SLATE ramp (blue-tinted), not pure gray.
@@ -14,15 +14,15 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const palette = {
-  // ── Slate — the neutral spine ────────────────────────────────────────────
+  // ── Slate: the neutral spine ────────────────────────────────────────────
   slate: {
-    ink: '#0F182B', // darkest chrome — sidebar, primary buttons, bulk bar
+    ink: '#0F182B', // darkest chrome: sidebar, primary buttons, bulk bar
     800: '#1D293D', // active nav / raised chrome
     700: '#314158', // avatar
     600: '#5C646F', // body text
     500: '#62748E', // secondary text
-    400: '#666F7D', // muted text — darkened so it clears AA on tint fills
-    350: '#90A1B9', // decorative dots / hairlines ONLY — never text
+    400: '#666F7D', // muted text: darkened so it clears AA on tint fills
+    350: '#90A1B9', // decorative dots / hairlines ONLY; never text
     300: '#CAD5E2', // strong borders / input borders
     200: '#E0E5EB', // default borders / dividers
     100: '#EFF2F5', // hover fills / row dividers
@@ -33,8 +33,8 @@ export const palette = {
   black: '#000000',
 
   // ── Brand / semantic base ────────────────────────────────────────────────
-  primary:  '#00AEEE', // brand cyan — links, focus, selection
-  success:  '#00C483', // indicator green — bright, never carries text
+  primary:  '#00AEEE', // brand cyan: links, focus, selection
+  success:  '#00C483', // indicator green: bright, never carries text
   warning:  '#FBA100',
   critical: '#F53E39',
   // MEDIUM alarm priority has its OWN hue (royal blue) so it never shares the
@@ -44,7 +44,7 @@ export const palette = {
 } as const
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Status tints — every status has a bg / mid / text triplet.
+// Status tints; every status has a bg / mid / text triplet.
 // `text` is the only member safe to use as a foreground on an ordinary surface.
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -54,7 +54,7 @@ export const status = {
     mid:   '#70D7A7',
     text:  '#007A52',
     // Solid fill for a positive ACTION surface with white text (swipe-to-ack).
-    // `palette.success` itself is only 2.3:1 against white — never put text on it.
+    // `palette.success` itself is only 2.3:1 against white; never put text on it.
     solid: '#00734C',
   },
   warning: {
@@ -66,7 +66,7 @@ export const status = {
     bg:    '#FEEAE9',
     mid:   '#FF8377',
     text:  '#C42620',
-    solid: '#D8302B', // highest-priority badge — white text, AA clean
+    solid: '#D8302B', // highest-priority badge: white text, AA clean
   },
   medium: {
     bg:   '#E8EEFC',
@@ -84,7 +84,7 @@ export const status = {
 } as const
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Severity ramp — dots, chart fills, row rails.
+// Severity ramp: dots, chart fills, row rails.
 //   mark → the fill itself (dots, bars, rails)
 //   ink  → label color when a number sits directly ON that fill
 //   text → severity as text on an ordinary surface
@@ -101,7 +101,7 @@ export const severity = {
 } as const
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Filled severity CHIP pairs — a small solid badge that carries its own label.
+// Filled severity CHIP pairs; a small solid badge that carries its own label.
 //
 // Used where a tint would disappear: on a tinted alarm ribbon, on a tab-bar
 // badge. Distinct from `severity[].mark`, which is a fill with no text on it,
@@ -122,7 +122,7 @@ export const severityChip = {
 } as const
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Process-fluid line coding — SCADA mimic pipes.
+// Process-fluid line coding; SCADA mimic pipes.
 // Deliberately subtle: alarm status must still read louder than any pipe.
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -141,7 +141,7 @@ export const fluids = {
 
 // ─────────────────────────────────────────────────────────────────────────────
 // SCADA equipment palette (ISA-101 HP-HMI).
-// NORMAL is neutral gray — color is reserved for ABNORMAL.
+// NORMAL is neutral gray; color is reserved for ABNORMAL.
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const scada = {
@@ -155,13 +155,13 @@ export const scada = {
   cabinet:     '#EDE7DF',
   cabinetEdge: '#B9B0A4',
   halo:        '#FFFFFF',
-  run:         '#3C4A5E', // running / open — energized (solid neutral)
-  stop:        '#C9D2DC', // stopped / closed — de-energized (light neutral)
-  abnormal:    '#F53E39', // equipment in alarm — the ONLY saturated symbol color
+  run:         '#3C4A5E', // running / open: energized (solid neutral)
+  stop:        '#C9D2DC', // stopped / closed: de-energized (light neutral)
+  abnormal:    '#F53E39', // equipment in alarm: the ONLY saturated symbol color
 } as const
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Alarm-row ink — CONTEXTUAL, not a :root token.
+// Alarm-row ink; CONTEXTUAL, not a :root token.
 //
 // The legacy skin fills an active alarm row with its saturated severity colour,
 // so nothing inside that row can use the ordinary text tokens: --fg would be
@@ -171,7 +171,7 @@ export const scada = {
 // emitted into dist/tokens.css: a :root default would leak the override onto
 // every unfilled row.
 //
-//   line → hairline borders and glyph rings (55% ink — visible, not loud)
+//   line → hairline borders and glyph rings (55% ink: visible, not loud)
 //   wash → the faint fill behind a chip sitting on the row (20% ink)
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -192,7 +192,7 @@ export const alarmRowInk = {
 } as const
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Surface / text / border aliases — the semantic layer components read from.
+// Surface / text / border aliases; the semantic layer components read from.
 // Re-pointing these is what re-skins the whole app (dark, legacy).
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -221,7 +221,7 @@ export const border = {
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Tailwind v3 theme.extend.colors (for projects not on v4).
-// Tailwind v4 consumers import "@njord/tokens/css" instead — it is generated.
+// Tailwind v4 consumers import "@njord/tokens/css" instead; it is generated.
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const tailwindColors = {

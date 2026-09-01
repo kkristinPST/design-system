@@ -63,7 +63,7 @@ export default function ScadaTemplatePage() {
               <rect x="416" y="80" width="46" height="64" rx="3" fill="var(--color-sc-fill-lite)" stroke="var(--color-sc-edge)" strokeWidth="1.4" />
               <text x="439" y="72" textAnchor="middle" className="font-mono text-[9px]" fill="var(--color-slate-500)">MBBR</text>
 
-              {/* readout — abnormal */}
+              {/* readout; abnormal */}
               <rect x="132" y="176" width="86" height="38" rx="3" fill="var(--color-sc-node)" stroke="var(--color-sc-abnormal)" strokeWidth="1.8" />
               <text x="175" y="191" textAnchor="middle" className="font-mono text-[9px]" fill="var(--color-slate-500)">DO-0403</text>
               <text x="175" y="206" textAnchor="middle" className="font-mono text-[12px] font-bold" fill="var(--color-critical-text)">6.2 mg/L</text>
@@ -110,10 +110,10 @@ export default function ScadaTemplatePage() {
         <p className="text-xs font-bold uppercase tracking-widest text-slate-400">Anatomy</p>
         <ul className="mt-3 space-y-2">
           {[
-            <><strong>Area tabs</strong> — switch which loop the mimic shows. Same screen, different scope.</>,
-            <><strong>Mimic</strong> — ISA-101 high-performance: neutral equipment, saturated colour only for abnormal, values in white node boxes.</>,
-            <><strong>Fluid legend</strong> — always present. Line coding is meaningless without it, and gases are dashed as well as coloured.</>,
-            <><strong>Dock</strong> — loop vitals and equipment counts. Selecting a node fills it without navigating away.</>,
+            <><strong>Area tabs</strong>: switch which loop the mimic shows. Same screen, different scope.</>,
+            <><strong>Mimic</strong>: ISA-101 high-performance: neutral equipment, saturated colour only for abnormal, values in white node boxes.</>,
+            <><strong>Fluid legend</strong>: always present. Line coding is meaningless without it, and gases are dashed as well as coloured.</>,
+            <><strong>Dock</strong>: loop vitals and equipment counts. Selecting a node fills it without navigating away.</>,
           ].map((item, i) => (
             <li key={i} className="flex gap-2.5 text-[13px] leading-relaxed text-slate-600">
               <span aria-hidden className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-slate-300" />
@@ -152,7 +152,7 @@ cannot reflow and will not survive a different screen size.`}
             are distinguished by dashes as well as colour so it survives monochrome.
           </>,
           <>
-            Selecting a node fills the dock — it never navigates away. Operators lose their place in
+            Selecting a node fills the dock; it never navigates away. Operators lose their place in
             the process if the mimic unmounts.
           </>,
           <>

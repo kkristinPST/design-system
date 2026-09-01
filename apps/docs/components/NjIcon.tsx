@@ -14,7 +14,7 @@ const paths: Record<string, ReactNode> = {
   utensils: <><path d="M4 2v7a3 3 0 0 0 6 0V2" /><path d="M7 2v20" /><path d="M17 2c-1.5 2-2 4-2 7 0 2 1 3 2 3v10" /></>,
   fish: <><path d="M2 12c3-5 8-7 12-7 4 0 7 3 8 7-1 4-4 7-8 7-4 0-9-2-12-7Z" /><path d="M18 12h.01" /><path d="M2 12c2 1 3 3 3 5" /></>,
   'line-chart': <><path d="M3 3v18h18" /><path d="m7 14 4-5 3 3 5-6" /></>,
-  // lucide "settings-2" — sliders. Chosen over the gear because the gear path
+  // lucide "settings-2"; sliders. Chosen over the gear because the gear path
   // is dense enough that it turns to mush at the 18px the sidebar draws it at.
   settings: <><path d="M20 7h-9M14 17H5" /><circle cx="17" cy="17" r="3" /><circle cx="7" cy="7" r="3" /></>,
   'chevrons-left': <><path d="m11 17-5-5 5-5" /><path d="m18 17-5-5 5-5" /></>,

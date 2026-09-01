@@ -1,6 +1,6 @@
 const rules = [
   { n: '1', t: 'The shell is fluid', d: 'No fixed app width. Gutters and gaps scale with the viewport via clamp(), so the layout grows continuously rather than jumping at breakpoints.' },
-  { n: '2', t: 'Card fields add and drop columns', d: 'auto-fit + minmax() with a real minimum. A grid re-columns instead of shrinking its contents — this is what makes 1920px feel used, not stretched.' },
+  { n: '2', t: 'Card fields add and drop columns', d: 'auto-fit + minmax() with a real minimum. A grid re-columns instead of shrinking its contents; this is what makes 1920px feel used, not stretched.' },
   { n: '3', t: 'Workspaces keep an asymmetric 2-pane grid', d: 'Mimic + dock, chart + pens: a flexible main pane and a clamped side rail, stacking at one shared breakpoint (1180px) rather than each screen picking its own.' },
   { n: '4', t: 'Divider borders become 1px gaps', d: 'Inside wrapping grids the hairlines are gaps with a ring on each cell, so a wrapped row never shows an orphaned rule and an empty track still reads as card surface.' },
   { n: '5', t: 'Overflow is contained by the card that owns it', d: 'A wide table scrolls inside its own wrapper. The page never scrolls sideways, and no column is ever hidden.' },
@@ -76,7 +76,7 @@ export default function ResponsiveAndReflowPage() {
       {/* Breakpoints */}
       <h2 className="mt-10 text-base font-bold text-ink">Where things actually change</h2>
       <p className="mt-1.5 text-[13px] leading-relaxed text-slate-500">
-        Breakpoints exist, but only for things a clamp cannot express — shedding chrome, stacking a
+        Breakpoints exist, but only for things a clamp cannot express: shedding chrome, stacking a
         workspace, reordering a grid.
       </p>
       <div className="mt-5 overflow-hidden rounded-xl border border-slate-200 bg-white">
@@ -135,7 +135,7 @@ export default function ResponsiveAndReflowPage() {
             </>,
             <>
               Never solve table overflow with{' '}
-              <code className="font-mono text-[12px]">display: block</code> — it makes the inner
+              <code className="font-mono text-[12px]">display: block</code>; it makes the inner
               table box shrink-to-fit, so a fixed-width table stops short of the card edge.
             </>,
             <>
@@ -144,7 +144,7 @@ export default function ResponsiveAndReflowPage() {
               collapses to a sliver and breaks one word per line.
             </>,
             <>
-              A tab strip can overflow a narrow <em>pane</em> on a wide <em>viewport</em> — an
+              A tab strip can overflow a narrow <em>pane</em> on a wide <em>viewport</em>: an
               expanded sidebar on a tablet is enough. Fluid wrapping, not a media query.
             </>,
           ].map((item, i) => (

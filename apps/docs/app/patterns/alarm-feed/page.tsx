@@ -117,7 +117,7 @@ export default function AlarmFeedPage() {
         <ul className="mt-3 space-y-2">
           {[
             <>
-              Default sort is priority, then age — never newest-first. A three-hour-old critical
+              Default sort is priority, then age; never newest-first. A three-hour-old critical
               outranks a one-minute-old low.
             </>,
             <>
@@ -128,7 +128,7 @@ export default function AlarmFeedPage() {
               safety problem.
             </>,
             <>
-              Acknowledging never removes a row from the list. It changes its state tag — the alarm
+              Acknowledging never removes a row from the list. It changes its state tag; the alarm
               is still active, and hiding it would be a lie.
             </>,
           ].map((item, i) => (

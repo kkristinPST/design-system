@@ -69,7 +69,7 @@ const variants: Variant[] = [
     name: 'Read-only rows',
     platform: 'Desktop',
     description:
-      'Metadata about the parameter — who changed it, when, and against which limits. The value is bold ink; the label stays slate-500.',
+      'Metadata about the parameter: who changed it, when, and against which limits. The value is bold ink; the label stays slate-500.',
     preview: (
       <div className="flex w-[520px] flex-col">
         {[
@@ -110,7 +110,7 @@ const variants: Variant[] = [
           <textarea
             rows={2}
             defaultValue=""
-            placeholder="Required — recorded against the alarm"
+            placeholder="Required · recorded against the alarm"
             className="w-full resize-y rounded-md border border-slate-300 bg-white px-3 py-2.5 text-[13px] leading-relaxed outline-none placeholder:text-slate-400"
           />
         </div>
@@ -124,7 +124,7 @@ const variants: Variant[] = [
 </div>`,
   },
   {
-    name: 'Mobile — field rows',
+    name: 'Mobile · field rows',
     platform: 'Mobile',
     description:
       'A 52px row with a fixed 126px label column and a right-aligned mono value. Editable rows are buttons; read-only rows drop the pointer and the press state.',
@@ -167,10 +167,10 @@ const variants: Variant[] = [
 </button>`,
   },
   {
-    name: 'Mobile — long-text field',
+    name: 'Mobile · long-text field',
     platform: 'Mobile',
     description:
-      'Rationalization prose — cause, consequence, operator action. Stacked rather than side-by-side, with a modified-by line underneath, and an optional suggestion block.',
+      'Rationalization prose: cause, consequence, operator action. Stacked rather than side-by-side, with a modified-by line underneath, and an optional suggestion block.',
     preview: (
       <PhoneFrame>
         <div className="border-b border-slate-100 px-3.5 py-3">
@@ -218,7 +218,7 @@ export default function ParamRowPage() {
       title="Param row"
       intro={
         <>
-          A single editable process value — a setpoint, an alarm limit, a rationalization field.
+          A single editable process value: a setpoint, an alarm limit, a rationalization field.
           Every param row shows the value, where it can go, and who last moved it, because changing
           a limit without that context is how alarm floods start.
         </>
@@ -238,7 +238,7 @@ export default function ParamRowPage() {
           </>,
           <>
             Crossing a governance threshold gates the commit and makes the reason field required.
-            The warning explains the rule in a sentence — never just a red border.
+            The warning explains the rule in a sentence; never just a red border.
           </>,
           <>
             Read-only rows on mobile drop both the chevron and the press state. A row that looks

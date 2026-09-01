@@ -34,7 +34,7 @@ const sections = [
   {
     title: 'Templates',
     href: '/templates/dashboard',
-    desc: 'Full-screen frames — the desktop shell and the mobile app build.',
+    desc: 'Full-screen frames: the desktop shell and the mobile app build.',
     items: ['Dashboard', 'Alarms', 'SCADA', 'Mobile app'],
   },
 ]
@@ -42,11 +42,11 @@ const sections = [
 const principles = [
   {
     t: 'Colour is a scarce resource',
-    d: 'Under ISA-101, saturated colour is reserved for abnormal conditions. Normal equipment is neutral gray; the chrome is slate; brand cyan means link, focus and selection — never status.',
+    d: 'Under ISA-101, saturated colour is reserved for abnormal conditions. Normal equipment is neutral gray; the chrome is slate; brand cyan means link, focus and selection (never status.',
   },
   {
     t: 'Never one channel',
-    d: 'Every state is carried three ways at once — badge, glyph or rail, and words. The interface survives colour-blindness, a monochrome print and a sun-washed screen.',
+    d: 'Every state is carried three ways at once) badge, glyph or rail, and words. The interface survives colour-blindness, a monochrome print and a sun-washed screen.',
   },
   {
     t: 'Language is sans, machines are mono',
@@ -68,7 +68,7 @@ export default function Home() {
         An operations console, documented
       </h1>
       <p className="mt-2 max-w-[68ch] text-sm leading-relaxed text-slate-500">
-        The design system behind the NJORD redesign — a fish-farming SCADA and alarm console built
+        The design system behind the NJORD redesign: a fish-farming SCADA and alarm console built
         to ISA-18.2 and ISA-101. Tokens, components, patterns and full-screen templates, with the
         desktop and mobile builds documented side by side.
       </p>
@@ -124,7 +124,7 @@ export default function Home() {
       </div>
 
       <div className="mt-8 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-[12px] leading-relaxed text-slate-600">
-        Building this in Ignition Perspective? Everything you need is on this site — the complete
+        Building this in Ignition Perspective? Everything you need is on this site: the complete
         theme file, a style class for every component variant, and the view JSON to go with it, all
         copyable from the page. Start at{' '}
         <Link href="/get-started/handoff" className="font-semibold text-primary-text hover:underline">

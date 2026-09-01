@@ -6,7 +6,7 @@ const variants: Variant[] = [
     name: 'Alarm detail drawer',
     platform: 'Desktop',
     description:
-      'Slides in from the right at min(440px, 94vw) over a lighter scrim than a dialog uses — the list behind stays readable, because the drawer is context, not an interruption.',
+      'Slides in from the right at min(440px, 94vw) over a lighter scrim than a dialog uses; the list behind stays readable, because the drawer is context, not an interruption.',
     preview: (
       <div className="relative w-[700px] overflow-hidden rounded-lg border border-slate-200 bg-slate-50">
         <div className="p-5">
@@ -60,7 +60,7 @@ const variants: Variant[] = [
             </p>
             <ul className="m-0 list-none p-0 pl-1">
               {[
-                { t: '09:14:02', s: 'Alarm raised — DO fell below 7.0', tone: 'bg-critical' },
+                { t: '09:14:02', s: 'Alarm raised · DO fell below 7.0', tone: 'bg-critical' },
                 { t: '09:16:40', s: 'Oxygen cone output increased to 92%', tone: 'bg-primary' },
                 { t: '09:22:11', s: 'Operator note added by K. Berg', tone: 'bg-slate-300' },
               ].map(({ t, s, tone }, i, a) => (
@@ -145,7 +145,7 @@ export default function DrawerPage() {
       intro={
         <>
           A right-hand panel for the detail of a selected row. Unlike a dialog it does not demand a
-          decision — the list stays visible behind it, and selecting another row swaps the contents
+          decision; the list stays visible behind it, and selecting another row swaps the contents
           without closing.
         </>
       }
@@ -168,7 +168,7 @@ export default function DrawerPage() {
             transparent so the thread does not dangle.
           </>,
           <>
-            Footer actions stretch to share the width equally — in a 440px panel a right-aligned
+            Footer actions stretch to share the width equally; in a 440px panel a right-aligned
             pair leaves an awkward gap.
           </>,
         ],

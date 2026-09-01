@@ -51,7 +51,7 @@ const variants: Variant[] = [
     name: 'Search sheet',
     platform: 'Mobile',
     description:
-      'The sheet form of search. A filled slate-100 well at the top, then a scrolling result list — the keyboard covers the lower half, so the field must be at the top.',
+      'The sheet form of search. A filled slate-100 well at the top, then a scrolling result list: the keyboard covers the lower half, so the field must be at the top.',
     preview: (
       <PhoneFrame className="relative p-0">
         <div className="h-[120px]" />
@@ -100,7 +100,7 @@ const variants: Variant[] = [
     name: 'Centred confirm',
     platform: 'Mobile',
     description:
-      'A destructive confirm does not slide from the bottom — it pops in the centre with a 20px radius, so it is clearly a decision rather than a drawer of options.',
+      'A destructive confirm does not slide from the bottom: it pops in the centre with a 20px radius, so it is clearly a decision rather than a drawer of options.',
     preview: (
       <PhoneFrame className="relative p-0">
         <div className="h-[120px]" />
@@ -164,7 +164,7 @@ export default function BottomSheetPage() {
             a field below it is unreachable.
           </>,
           <>
-            The grip is decorative — the sheet must also be dismissible by tapping the scrim. Never
+            The grip is decorative; the sheet must also be dismissible by tapping the scrim. Never
             make a drag gesture the only way out.
           </>,
         ],
