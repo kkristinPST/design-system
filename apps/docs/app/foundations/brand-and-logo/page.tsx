@@ -1,3 +1,5 @@
+import { asset } from '../../../components/asset'
+
 export default function BrandAndLogoPage() {
   return (
     <div className="max-w-[900px]">
@@ -16,7 +18,7 @@ export default function BrandAndLogoPage() {
           <div className="bg-ink p-0">
             <div className="flex h-[72px] items-center justify-between border-b border-white/[0.06] px-[22px]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/njord-wordmark.png" alt="NJORD" className="h-[26px] w-auto" />
+              <img src={asset('/njord-wordmark.png')} alt="NJORD" className="h-[26px] w-auto" />
               <button aria-label="Collapse" className="inline-flex h-7 w-7 items-center justify-center rounded-md text-slate-350">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="m15 18-6-6 6-6" /></svg>
               </button>
@@ -39,7 +41,7 @@ export default function BrandAndLogoPage() {
           <div className="bg-ink">
             <div className="flex h-[72px] items-center justify-center border-b border-white/[0.06]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/njord-mark.svg" alt="NJORD" className="h-[30px] w-auto" />
+              <img src={asset('/njord-mark.svg')} alt="NJORD" className="h-[30px] w-auto" />
             </div>
             <div className="space-y-1 p-3">
               {[0, 1, 2].map((i) => (
@@ -61,9 +63,9 @@ export default function BrandAndLogoPage() {
       <h2 className="mt-10 text-base font-bold text-ink">Surfaces</h2>
       <div className="mt-5 grid gap-4 sm:grid-cols-3">
         {[
-          { label: 'Ink (default)', bg: '#0F182B', src: '/njord-wordmark.png', filter: undefined, note: 'The rail in the modern and dark skins. Uses the white wordmark as shipped.' },
-          { label: 'Light', bg: '#FFFFFF', src: '/njord-logo-blue.svg', filter: undefined, note: 'Print, exported reports and the login screen.' },
-          { label: 'Legacy rail', bg: '#E7EAED', src: '/njord-wordmark.png', filter: 'brightness(0) saturate(100%) invert(28%) sepia(34%) saturate(900%) hue-rotate(178deg)', note: 'The classic skin flips the rail to a light nav and recolours the same asset with a CSS filter.' },
+          { label: 'Ink (default)', bg: '#0F182B', src: asset('/njord-wordmark.png'), filter: undefined, note: 'The rail in the modern and dark skins. Uses the white wordmark as shipped.' },
+          { label: 'Light', bg: '#FFFFFF', src: asset('/njord-logo-blue.svg'), filter: undefined, note: 'Print, exported reports and the login screen.' },
+          { label: 'Legacy rail', bg: '#E7EAED', src: asset('/njord-wordmark.png'), filter: 'brightness(0) saturate(100%) invert(28%) sepia(34%) saturate(900%) hue-rotate(178deg)', note: 'The classic skin flips the rail to a light nav and recolours the same asset with a CSS filter.' },
         ].map(({ label, bg, src, filter, note }) => (
           <div key={label} className="overflow-hidden rounded-xl border border-slate-200">
             <div className="flex h-[92px] items-center justify-center" style={{ background: bg }}>

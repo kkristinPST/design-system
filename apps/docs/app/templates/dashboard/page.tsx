@@ -2,6 +2,7 @@ import TemplateSpec from '../../../components/TemplateSpec'
 
 import ShellPreview from '../../../components/ShellPreview'
 import NjIcon from '../../../components/NjIcon'
+import { asset } from '../../../components/asset'
 
 /* The nine facility-wide routes, exactly as NAV is declared in lib/chrome.jsx. */
 const NAV = [
@@ -48,7 +49,7 @@ export default function DashboardTemplatePage() {
             <aside className="flex w-[240px] shrink-0 flex-col bg-ink">
               <div className="flex h-[72px] items-center justify-between border-b border-white/[0.06] px-[22px]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/njord-wordmark.png" alt="NJORD" className="h-[26px] w-auto" />
+                <img src={asset('/njord-wordmark.png')} alt="NJORD" className="h-[26px] w-auto" />
                 <button className="flex h-7 w-7 items-center justify-center rounded-md" aria-label="Collapse sidebar">
                   <NjIcon name="chevrons-left" size={18} color="var(--color-slate-400)" />
                 </button>

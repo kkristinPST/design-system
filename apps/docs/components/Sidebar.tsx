@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { asset } from './asset'
 
 const nav = [
   {
@@ -111,7 +112,7 @@ export default function Sidebar() {
         className="block px-5 py-6 border-b border-slate-200 transition-colors hover:bg-slate-50"
       >
         <img
-          src="/njord-logo-blue.svg"
+          src={asset('/njord-logo-blue.svg')}
           alt="Company logo"
           className="h-10 w-auto"
         />

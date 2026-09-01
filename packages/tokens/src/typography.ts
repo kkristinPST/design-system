@@ -58,18 +58,6 @@ export const typeScale = {
     letterSpacing: '-0.2px',
     usage: 'Page title. Screens carry no in-page h1 — the top bar owns it.',
   },
-  heroValue: {
-    token: 'hero-value',
-    fontFamily: 'sans',
-    fontSize: '22px',
-    lineHeight: '28px',
-    fontWeight: 700,
-    letterSpacing: '-0.5px',
-    usage:
-      'The one prominent figure in a card head, donut centre or stat tile — ' +
-      'bigger than a title, smaller than a metric. Single-line by nature: ' +
-      'collapse the leading where it sits tight against a label.',
-  },
   title: {
     token: 'title',
     fontFamily: 'sans',

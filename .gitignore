@@ -30,3 +30,6 @@ ClaudeDesignExport/fonts/
 Merge.md
 CLAUDE-DESIGN-PROMPT*.md
 ClaudeDesignExport/
+
+# Static export output for GitHub Pages — built in CI, never committed.
+out/

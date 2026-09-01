@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import type { ReactNode } from 'react'
 
 import CodeBlock from './CodeBlock'
@@ -102,12 +103,12 @@ export default function ComponentDoc({
               IA
             </span>
             <p className="text-sm font-bold text-ink">Ignition Perspective</p>
-            <a
+            <Link
               href="/styles/ignition"
               className="ml-auto text-xs font-semibold text-primary-text hover:underline"
             >
               Theme &amp; setup
-            </a>
+            </Link>
           </div>
 
           <div className="px-5 py-4">

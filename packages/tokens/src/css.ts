@@ -10,7 +10,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { palette, status, severity, severityChip, fluids, scada } from './color.js'
-import { fontFamilies, typeScale, textSizes } from './typography.js'
+import { fontFamilies, typeScale, mobileTypeScale, textSizes } from './typography.js'
 import { radii, elevation, shell, target } from './layout.js'
 import { spacing, layoutSpacing, clearance } from './spacing.js'
 import { durations, easings } from './motion.js'
@@ -251,6 +251,42 @@ export function tokenGroups(): CssGroup[] {
     return out
   })
 
+  // Mobile roles. The phone build re-tunes nine of them for a 393px viewport,
+  // and they are NOT derivable from the desktop scale — a 30px vital value with
+  // 30px leading is a deliberate 1.0 ratio no desktop role uses. Emitted under
+  // an `-m-` infix so a consumer can see at a glance which surface a role is
+  // for. Off @theme like spacing: these are for direct var() reference, not for
+  // Tailwind to mint `text-m-*` utilities from.
+  const kebab = (s: string) => s.replace(/(?<=[a-z])(?=[A-Z])/g, '-').toLowerCase()
+
+  const mobileType: CssToken[] = Object.entries(mobileTypeScale).flatMap(([name, t]) => {
+    const key = kebab(name)
+    const out: CssToken[] = [
+      {
+        web: `--text-m-${key}`,
+        ignition: `--njord-text-m-${key}`,
+        value: t.fontSize,
+        comment: `${t.fontSize}/${t.lineHeight} — mobile only`,
+        scope: 'root' as const,
+      },
+      {
+        web: `--lh-m-${key}`,
+        ignition: `--njord-lh-m-${key}`,
+        value: t.lineHeight,
+        scope: 'root' as const,
+      },
+    ]
+    if (t.letterSpacing !== '0') {
+      out.push({
+        web: `--ls-m-${key}`,
+        ignition: `--njord-ls-m-${key}`,
+        value: t.letterSpacing,
+        scope: 'root' as const,
+      })
+    }
+    return out
+  })
+
   // Spacing stays off @theme: Tailwind owns `--spacing-*` and would mint
   // p-sp-4 / gap-sp-4 utilities from it. Referenced as var(--sp-4) instead.
   const space: CssToken[] = Object.entries(spacing).map(([name, s]) => ({
@@ -359,6 +395,7 @@ export function tokenGroups(): CssGroup[] {
     { title: 'SCADA equipment palette (ISA-101 HP-HMI)', tokens: sc },
     { title: 'Font families', tokens: fonts },
     { title: 'Type scale — semantic text roles', tokens: type },
+    { title: 'Type scale — mobile re-tuned roles (393px)', tokens: mobileType },
     { title: 'Radii', tokens: radius },
     { title: 'Elevation', tokens: shadow },
     { title: 'Spacing — the fixed 2px scale', tokens: space },

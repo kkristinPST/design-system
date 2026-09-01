@@ -2,6 +2,7 @@ import Link from 'next/link'
 import type { ReactNode } from 'react'
 
 import CodeBlock from '../../../components/CodeBlock'
+import { asset } from '../../../components/asset'
 
 function C({ children }: { children: ReactNode }) {
   return (
@@ -206,10 +207,10 @@ export default function DesignTokens() {
 @import "./tokens.css";
 
 /* tokens.json — a flat name → value map, if you need neither */`}
-        download={{ href: '/downloads/tokens.css', filename: 'tokens.css' }}
+        download={{ href: asset('/downloads/tokens.css'), filename: 'tokens.css' }}
       />
       <p className="mt-2 text-[12px] leading-relaxed text-slate-500">
-        <a href="/downloads/tokens.json" download className="font-semibold text-primary-text hover:underline">
+        <a href={asset('/downloads/tokens.json')} download className="font-semibold text-primary-text hover:underline">
           tokens.json
         </a>{' '}
         · a flat map for a consumer that speaks neither Tailwind nor Perspective.

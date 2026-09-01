@@ -1,6 +1,7 @@
 import Link from 'next/link'
 
 import { palette, status, severity, fluids, scada, skins, skinList, allTokens } from '@njord/tokens'
+import { asset } from '../../../components/asset'
 
 /** The token name, rendered the way a developer types it. */
 function Name({ children }: { children: string }) {
@@ -457,7 +458,7 @@ export default function ColorPage() {
         </Link>
         , or as a flat map in{' '}
         <a
-          href="/downloads/tokens.json"
+          href={asset('/downloads/tokens.json')}
           download
           className="font-semibold text-primary-text hover:underline"
         >

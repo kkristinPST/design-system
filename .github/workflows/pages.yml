@@ -1,0 +1,60 @@
+# Build the docs site and publish it to GitHub Pages.
+#
+# The build MUST run from the repo root, not from apps/docs: packages/tokens/dist
+# is generated and gitignored, so on a fresh checkout it does not exist. Turbo's
+# build task declares dependsOn ["^build"], so filtering to `docs` builds the
+# token package first — which is what creates dist and lets the docs prebuild
+# resolve @njord/tokens. Running `next build` inside apps/docs fails here.
+name: Deploy docs to Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# One concurrent deploy; a newer push supersedes an in-flight run rather than
+# queueing behind it.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - run: npx turbo run build --filter=docs
+
+      # Pages runs Jekyll by default, and Jekyll skips directories starting with
+      # an underscore — which silently drops the whole _next folder and serves a
+      # page with no CSS or JS. This file turns Jekyll off.
+      - run: touch apps/docs/out/.nojekyll
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: apps/docs/out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

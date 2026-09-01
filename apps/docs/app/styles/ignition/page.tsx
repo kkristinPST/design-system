@@ -4,6 +4,7 @@ import Link from 'next/link'
 
 import CodeBlock from '../../../components/CodeBlock'
 import { ignitionSpecs } from '../../../components/ignition-specs'
+import { asset } from '../../../components/asset'
 
 const styleClass = `{
   "base": {
@@ -210,7 +211,7 @@ export default function IgnitionPage() {
         label="themes/njord/index.css"
         code={njordThemeCss}
         maxHeight={420}
-        download={{ href: '/downloads/njord.css', filename: 'index.css' }}
+        download={{ href: asset('/downloads/njord.css'), filename: 'index.css' }}
       />
 
       {/* ── 1b. Fonts ── */}
