@@ -178,6 +178,16 @@ export default function InputPage() {
         heading: 'Rules',
         items: [
           <>
+            <strong className="font-semibold text-ink">Cap a search field inside a toolbar.</strong>{' '}
+            Left to flex it takes every spare pixel and pushes the row&rsquo;s last action onto a
+            second line. Cap the width, let the bar shrink, and keep one row.
+          </>,
+          <>
+            If the cap clips the placeholder, <strong>shorten the copy, do not widen the
+            field</strong>. The column headers already say what is searchable, so
+            &ldquo;Filter alarms…&rdquo; carries as much as a sentence naming every column.
+          </>,
+          <>
             A search field is one line: icon + input. It may shrink, but it must never wrap; a
             wrapped field puts the magnifier on its own row.
           </>,

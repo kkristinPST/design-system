@@ -176,6 +176,17 @@ export default function FilterChipsPage() {
         heading: 'Rules',
         items: [
           <>
+            <strong className="font-semibold text-ink">A chip is a legend or a control, never
+            half of each.</strong> If one state carries a count, all of them do; if a chip looks
+            clickable it must filter. A status row where Nominal had no count while Critical did,
+            and none of them filtered, invited a click that did nothing.
+          </>,
+          <>
+            When filtering collapses a grouped view, <strong>force open any fold holding a
+            match</strong>. A match hidden inside a closed group is the same failure as no match
+            at all.
+          </>,
+          <>
             Chips never shrink. Their label is nowrap, so a squeezed chip clips its own text: the{' '}
             <em>strip</em> wraps or scrolls instead.
           </>,

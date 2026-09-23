@@ -105,6 +105,27 @@ export default function SearchAndFilterPage() {
       <div className="mt-10 rounded-xl border border-slate-200 bg-white p-5">
         <p className="text-xs font-bold uppercase tracking-widest text-slate-400">Rules</p>
         <ul className="mt-3 space-y-2">
+            <>
+              <strong className="font-semibold text-ink">Separate what QUERIES from what
+              SLICES.</strong> A control that changes the data fetched (a date range hitting the
+              historian) needs an explicit Search. A control that narrows the set already returned
+              applies live. Put them in two rows and there is no second Search button to explain,
+              because only one row can trigger a fetch.
+            </>,
+            <>
+              <strong className="font-semibold text-ink">A count on a chip must never contradict
+              the click.</strong> Read each chip&rsquo;s count from the set the <em>other</em>
+              filters allow, not from the unfiltered total. Otherwise a chip promising 12 returns
+              3 and the operator stops believing the numbers.
+            </>,
+            <>
+              <strong className="font-semibold text-ink">State the cost of an expensive query
+              before it runs.</strong> Range times interval times visible series, in the line above
+              the button, with the cheap alternative offered beside it. Cost is read from the range
+              and the interval, never from what the chart drew: a chart that caps its own sample
+              count reports what it rendered, not what the historian was asked for. Cost the
+              PENDING fields, because a warning after Apply is not a warning.
+            </>,
           {[
             <>
               A label binds to its control with a 9px gap; the 18px bar gap separates whole groups.
