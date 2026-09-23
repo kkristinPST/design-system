@@ -172,6 +172,28 @@ export default function ScadaSymbolsPage() {
         heading: 'Rules',
         items: [
           <>
+            <strong className="font-semibold text-ink">A mode chip shares the line under the
+            readout with the setpoint.</strong> Placed beside the glyph it lands on the process
+            pipe or the return run. A setpoint sits under every reading and turns amber only when
+            the value leaves its band.
+          </>,
+          <>
+            <strong className="font-semibold text-ink">The viewBox must never outgrow its
+            container.</strong> Mimic text is authored in viewBox units, so a 1600-unit sheet
+            dropped into a 790px card scales to 0.49 and renders its tags at under 5px. Bound the
+            width and wrap the rows; never fix it by shrinking the font. Measure what actually
+            rendered:{' '}
+            <code className="font-mono text-[11px]">
+              parseFloat(getComputedStyle(tag).fontSize) * (svgRect.width / viewBox.width)
+            </code>
+            .
+          </>,
+          <>
+            When a diagram wraps to a second row, route the connector{' '}
+            <strong>through the gutter between rows</strong>. Along the next row&rsquo;s centreline
+            it runs straight through that row&rsquo;s first glyphs.
+          </>,
+          <>
             <strong className="font-semibold text-ink">An alarm on a machine is drawn AROUND the
             symbol, never into it.</strong> A ring on the symbol&rsquo;s own bounding box plus a
             corner badge. Do not recolour the body: fill already means run/stop, so a filled red

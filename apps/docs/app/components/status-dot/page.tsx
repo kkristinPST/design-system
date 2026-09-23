@@ -131,6 +131,19 @@ export default function StatusDotPage() {
         heading: 'Rules',
         items: [
           <>
+            <strong className="font-semibold text-ink">Equipment runs on three states, not
+            two.</strong> Green running, <strong>amber in service but stopped</strong>, grey out
+            of service. The amber case is the only one worth walking over to: a stopped machine
+            that is still in service is a decision waiting to be made, while one taken out of
+            service is already accounted for. Collapsing the two into a single &ldquo;not
+            running&rdquo; grey hides the only one that needs an operator.
+          </>,
+          <>
+            Where one symbol stands for several identical machines, carry the multiplicity as a{' '}
+            <strong>row of dots beneath it</strong> rather than drawing the machine three times.
+            One drum filter drawn, three dots under it.
+          </>,
+          <>
             The dot never travels alone. It is a redundancy cue beside a word, so the state survives
             colour-blindness and monochrome printing; a bare dot is not a status.
           </>,

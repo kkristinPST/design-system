@@ -128,6 +128,20 @@ export default function ResponsiveAndReflowPage() {
       <div className="mt-10 rounded-xl border border-slate-200 bg-white p-5">
         <p className="text-xs font-bold uppercase tracking-widest text-slate-400">Traps</p>
         <ul className="mt-3 space-y-2">
+            <>
+              <strong className="font-semibold text-ink">A dense diagram is authored once and
+              hosted on the phone, not redrawn for it.</strong> The operator should see what the
+              control room sees. Operating live equipment stays a control-room action: the phone
+              opens its own equipment screen instead of the desktop control dialog.
+            </>,
+            <>
+              <strong className="font-semibold text-ink">Give a touch surface ONE tool.</strong> A
+              Pan/Inspect toggle meant a tap in the wrong mode was silently swallowed, which reads
+              as a dead diagram. Drag pans; a tap that did not drift more than ~8px picks the
+              nearest target within ~26px. Nearest-wins beats padded hit rectangles, which are
+              sized for one zoom level and overlap their neighbours at every other one, routing
+              taps to the wrong machine.
+            </>,
           {[
             <>
               The scroll owner must not also hold the card&rsquo;s controls. Making the card scroll
