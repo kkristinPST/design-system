@@ -172,6 +172,32 @@ export default function ScadaSymbolsPage() {
         heading: 'Rules',
         items: [
           <>
+            <strong className="font-semibold text-ink">An alarm on a machine is drawn AROUND the
+            symbol, never into it.</strong> A ring on the symbol&rsquo;s own bounding box plus a
+            corner badge. Do not recolour the body: fill already means run/stop, so a filled red
+            pump reads as &ldquo;running red&rdquo; rather than &ldquo;in alarm&rdquo;.
+          </>,
+          <>
+            <strong className="font-semibold text-ink">Shape carries priority, not just colour.</strong>{' '}
+            A <strong>triangle</strong> badge is critical; a <strong>circle</strong> is high and
+            below. The triangle is the universal danger shape, so it belongs to the loudest state.
+            Unacknowledged reads louder than acknowledged, because nobody has looked yet.
+          </>,
+          <>
+            Mark only <strong>standing</strong> alarms. A blocked or deactivated alarm is not an
+            abnormal condition the operator is being told about, and drawing it would re-create
+            the noise that blocking was used to remove.
+          </>,
+          <>
+            <strong className="font-semibold text-ink">Manual mode is not an alarm.</strong> It
+            takes <code className="font-mono text-[12px]">sc-manual</code>, an amber family that is
+            deliberately <em>not</em> <code className="font-mono text-[12px]">warning</code>: a
+            manual chip in the exact high-alarm amber, beside a high-alarm badge, reads as a second
+            warning. Outline and letter share the one token, so it only has to clear 4.5:1 against{' '}
+            <code className="font-mono text-[12px]">sc-node</code>, its own fill, and must stay
+            quieter than the alarm badges next to it.
+          </>,
+          <>
             Normal is <strong>gray</strong>. Running and stopped differ by lightness, not hue;
             colour on a mimic is reserved for abnormal states.
           </>,
