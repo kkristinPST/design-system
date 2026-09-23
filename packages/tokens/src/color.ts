@@ -158,6 +158,14 @@ export const scada = {
   run:         '#3C4A5E', // running / open: energized (solid neutral)
   stop:        '#C9D2DC', // stopped / closed: de-energized (light neutral)
   abnormal:    '#F53E39', // equipment in alarm: the ONLY saturated symbol color
+  // Manual mode. An amber FAMILY, deliberately NOT palette.warning (#FBA100):
+  // a manual chip in the exact high-alarm amber, sitting beside a high-alarm
+  // badge, reads as a second warning. This marks a MODE, not a fault.
+  //
+  // Outline and letter share this one token, so there is no fill/ink pair to
+  // keep legible; it only has to clear 4.5:1 against scada.node, the chip's own
+  // fill, and stay quieter than the alarm badges next to it.
+  manual:      '#9A5C00',
 } as const
 
 // ─────────────────────────────────────────────────────────────────────────────

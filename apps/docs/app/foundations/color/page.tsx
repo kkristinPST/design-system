@@ -76,6 +76,7 @@ const scadaRows: [string, string, string][] = [
   ['sc-run', scada.run, 'Running / open · energised'],
   ['sc-stop', scada.stop, 'Stopped / closed · de-energised'],
   ['sc-abnormal', scada.abnormal, 'In alarm · the only saturated one'],
+  ['sc-manual', scada.manual, 'Manual mode · an amber family, not --warning'],
   ['sc-pipe', scada.pipe, 'Connector pipes'],
   ['sc-line', scada.line, 'Thin rules and leaders'],
   ['sc-edge', scada.edge, 'Symbol outlines'],
