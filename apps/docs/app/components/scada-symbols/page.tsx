@@ -1,6 +1,153 @@
 import ComponentDoc, { type Variant } from '../../../components/ComponentDoc'
 import { ignitionSpecs } from '../../../components/ignition-specs'
 
+/*
+ * These are the shipping symbols, not an approximation of them. Each one mirrors
+ * the application's own primitive, so a developer measuring off this page gets
+ * the drawing the control room actually has.
+ */
+
+/** Running / open is a solid dark neutral, stopped / closed a light one. Colour only for abnormal. */
+const stateFill = (running?: boolean, abnormal?: boolean) =>
+  abnormal ? 'var(--color-sc-abnormal)' : running ? 'var(--color-sc-run)' : 'var(--color-sc-stop)'
+
+/** Centrifugal pump: a circle with a discharge wedge. Not a triangle. */
+function Pump({ running, abnormal, r = 17 }: { running?: boolean; abnormal?: boolean; r?: number }) {
+  const f = stateFill(running, abnormal)
+  return (
+    <g>
+      <circle cx="0" cy="0" r={r} fill={f} stroke="var(--color-sc-edge)" strokeWidth="1.5" />
+      <path
+        d={`M0,${-r} L${r + 8},${-r + 4} L${r + 8},${r - 4} L0,${r} Z`}
+        fill={f}
+        stroke="var(--color-sc-edge)"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+    </g>
+  )
+}
+
+/** Blower / fan: a neutral circle whose three blades carry the state. */
+function Fan({ running, abnormal, r = 16 }: { running?: boolean; abnormal?: boolean; r?: number }) {
+  return (
+    <g>
+      <circle cx="0" cy="0" r={r} fill="var(--color-sc-node)" stroke="var(--color-sc-edge)" strokeWidth="1.5" />
+      {[0, 120, 240].map((a) => (
+        <path
+          key={a}
+          d={`M0,0 L${r - 3},-5 A${r - 3},${r - 3} 0 0 1 ${r - 3},5 Z`}
+          transform={`rotate(${a})`}
+          fill={stateFill(running, abnormal)}
+        />
+      ))}
+    </g>
+  )
+}
+
+/** Two triangles meeting at a point. A regulating valve adds the actuator stem. */
+function Valve({
+  open,
+  abnormal,
+  regulating,
+  w = 13,
+}: {
+  open?: boolean
+  abnormal?: boolean
+  regulating?: boolean
+  w?: number
+}) {
+  const f = stateFill(open, abnormal)
+  return (
+    <g>
+      <path d={`M${-w},${-w * 0.8} L0,0 L${-w},${w * 0.8} Z`} fill={f} stroke="var(--color-sc-edge)" strokeWidth="1.4" />
+      <path d={`M${w},${-w * 0.8} L0,0 L${w},${w * 0.8} Z`} fill={f} stroke="var(--color-sc-edge)" strokeWidth="1.4" />
+      {regulating ? (
+        <g>
+          <line x1="0" y1="0" x2="0" y2={-w - 8} stroke="var(--color-sc-edge)" strokeWidth="1.4" />
+          <rect
+            x={-7}
+            y={-w - 15}
+            width="14"
+            height="8"
+            rx="2"
+            fill="var(--color-sc-node)"
+            stroke="var(--color-sc-edge)"
+            strokeWidth="1.4"
+          />
+        </g>
+      ) : null}
+    </g>
+  )
+}
+
+/** Tank or vessel with a fill level. The wall is sc-vessel at 3px, not the symbol edge. */
+function Vessel({
+  w = 90,
+  h = 70,
+  pct = 55,
+  rounded = true,
+}: {
+  w?: number
+  h?: number
+  pct?: number
+  rounded?: boolean
+}) {
+  const fh = (h - 4) * (pct / 100)
+  return (
+    <g transform={`translate(${-w / 2} ${-h / 2})`}>
+      <rect
+        x="0"
+        y="0"
+        width={w}
+        height={h}
+        rx={rounded ? 8 : 2}
+        fill="var(--color-sc-node)"
+        stroke="var(--color-sc-vessel)"
+        strokeWidth="3"
+      />
+      <rect x="3" y={h - 2 - fh} width={w - 6} height={fh} rx={rounded ? 5 : 1} fill="var(--color-fl-proc)" opacity=".28" />
+      <line x1="3" y1={h - 2 - fh} x2={w - 3} y2={h - 2 - fh} stroke="var(--color-fl-proc)" strokeWidth="1.6" />
+    </g>
+  )
+}
+
+/** The classic ISA bubble: measurement code over loop number, both mono. */
+function Instrument({ code, loop, r = 15 }: { code: string; loop: string; r?: number }) {
+  return (
+    <g>
+      <circle cx="0" cy="0" r={r} fill="var(--color-sc-node)" stroke="var(--color-sc-edge)" strokeWidth="1.4" />
+      <text x="0" y="-2" textAnchor="middle" fontSize="9.5" fontFamily="var(--font-mono)" fontWeight="700" fill="var(--color-fg)">
+        {code}
+      </text>
+      <text x="0" y="9" textAnchor="middle" fontSize="8.5" fontFamily="var(--font-mono)" fill="var(--color-fg-muted)">
+        {loop}
+      </text>
+    </g>
+  )
+}
+
+function Cell({
+  label,
+  children,
+  w = 96,
+  h = 82,
+}: {
+  label: string
+  children: React.ReactNode
+  w?: number
+  h?: number
+}) {
+  return (
+    <div className="flex flex-col items-center gap-2.5">
+      <svg width={w} height={h} viewBox={`${-w / 2} ${-h / 2} ${w} ${h}`} aria-hidden>
+        {children}
+      </svg>
+      <span className="text-center text-xs text-slate-600">{label}</span>
+    </div>
+  )
+}
+
 const fluids = [
   ['Process / recirculated', 'var(--color-fl-proc)', false],
   ['Raw · intake · make-up', 'var(--color-fl-raw)', false],
@@ -16,56 +163,92 @@ const fluids = [
 
 const variants: Variant[] = [
   {
+    name: 'The symbol set',
+    platform: 'Desktop',
+    description:
+      'Five shapes carry the whole process vocabulary. A pump is a circle with a discharge wedge; a fan is a circle whose blades carry the state; a valve is two triangles meeting at a point; a vessel draws its wall in sc-vessel rather than the symbol edge; an instrument is the ISA bubble with a two-line mono tag.',
+    preview: (
+      <div className="flex flex-wrap items-start gap-7 rounded-xl border border-slate-200 bg-white p-6">
+        <Cell label="Pump">
+          <Pump running />
+        </Cell>
+        <Cell label="Fan / blower">
+          <Fan running />
+        </Cell>
+        <Cell label="Valve">
+          <Valve open />
+        </Cell>
+        <Cell label="Regulating valve">
+          <Valve open regulating />
+        </Cell>
+        <Cell label="Vessel" w={112} h={92}>
+          <Vessel />
+        </Cell>
+        <Cell label="Instrument">
+          <Instrument code="LT" loop="0220" />
+        </Cell>
+      </div>
+    ),
+    code: `/* Pump — circle plus discharge wedge, both in the state fill */
+<circle r="17" fill={stateFill} stroke="var(--njord-sc-edge)" stroke-width="1.5"/>
+<path d="M0,-17 L25,-13 L25,13 L0,17 Z" fill={stateFill} …/>
+
+/* Valve — two triangles, point to point */
+<path d="M-13,-10.4 L0,0 L-13,10.4 Z" …/>
+<path d="M13,-10.4 L0,0 L13,10.4 Z" …/>
+
+/* Vessel — the WALL is sc-vessel at 3px; the level is fl-proc at .28 */
+<rect width="90" height="70" rx="8" fill="var(--njord-sc-node)"
+      stroke="var(--njord-sc-vessel)" stroke-width="3"/>`,
+  },
+  {
     name: 'Equipment states',
     platform: 'Desktop',
     description:
-      'ISA-101 high-performance HMI: NORMAL is neutral gray and colour is reserved for ABNORMAL. Running / open is a solid dark neutral; stopped / closed is a light neutral.',
+      'NORMAL IS NEUTRAL. Running / open is a solid dark neutral, stopped / closed a light one, and saturated colour appears only when something is abnormal. A mimic where every running pump is green teaches operators to ignore green, which is exactly what high-performance HMI exists to prevent.',
     preview: (
-      <div className="flex flex-wrap items-start gap-8">
-        {[
-          { l: 'Running / open', fill: 'var(--color-sc-run)', stroke: 'var(--color-sc-edge)', text: '#fff' },
-          { l: 'Stopped / closed', fill: 'var(--color-sc-stop)', stroke: 'var(--color-sc-edge)', text: 'var(--color-ink)' },
-          { l: 'In alarm', fill: 'var(--color-sc-abnormal)', stroke: 'var(--color-sc-edge)', text: '#fff' },
-        ].map(({ l, fill, stroke, text }) => (
-          <div key={l} className="flex flex-col items-center gap-2.5">
-            <svg width="96" height="70" viewBox="0 0 96 70" aria-hidden>
-              <circle cx="34" cy="35" r="19" fill={fill} stroke={stroke} strokeWidth="1.6" />
-              <path d="M34 16 L53 35 L34 54 Z" fill={fill} stroke={stroke} strokeWidth="1.6" strokeLinejoin="round" />
-              <rect x="58" y="27" width="30" height="16" rx="2" fill="var(--color-sc-node)" stroke="var(--color-sc-edge)" strokeWidth="1.2" />
-              <text x="73" y="38" textAnchor="middle" className="font-mono text-[9px]" fill="var(--color-ink)">
-                PU-11
-              </text>
-              <text x="34" y="39" textAnchor="middle" className="font-mono text-[9px] font-bold" fill={text}>
-                P
-              </text>
-            </svg>
-            <span className="text-xs text-slate-600">{l}</span>
-          </div>
-        ))}
+      <div className="flex flex-wrap items-start gap-8 rounded-xl border border-slate-200 bg-white p-6">
+        <Cell label="Running / open">
+          <Pump running />
+        </Cell>
+        <Cell label="Stopped / closed">
+          <Pump />
+        </Cell>
+        <Cell label="In alarm">
+          <Pump running abnormal />
+        </Cell>
+        <Cell label="Valve open">
+          <Valve open />
+        </Cell>
+        <Cell label="Valve closed">
+          <Valve />
+        </Cell>
       </div>
     ),
-    code: `--sc-run:      #3C4A5E   /* running / open  — energized, solid neutral */
---sc-stop:     #C9D2DC   /* stopped / closed — de-energized, light neutral */
---sc-abnormal: #F53E39   /* in alarm — the ONLY saturated symbol colour */
---sc-edge:     #222B3A   /* equipment outlines */
---sc-node:     #FFFFFF   /* readout / equipment boxes */`,
+    code: `const fill = (running, abnormal) =>
+  abnormal ? 'var(--njord-sc-abnormal)'
+  : running ? 'var(--njord-sc-run)'
+            : 'var(--njord-sc-stop)'`,
   },
   {
     name: 'Fluid line coding',
     platform: 'Desktop',
     description:
-      'Ten process fluids, each with its own pipe colour. Gases are dashed as well as coloured, so the distinction survives a monochrome print. Deliberately desaturated: status must still read louder.',
+      'Ten process fluids, each with its own pipe colour at 3.5px. Gases are dashed as well as coloured, so the coding survives a monochrome print and a colour-blind operator. Deliberately desaturated: routing must never shout louder than an alarm.',
     preview: (
       <div className="grid w-[560px] grid-cols-2 gap-x-8 gap-y-3">
         {fluids.map(([l, c, dashed]) => (
           <div key={l} className="flex items-center gap-3">
             <svg width="44" height="10" viewBox="0 0 44 10" aria-hidden className="shrink-0">
               <line
-                x1="1" y1="5" x2="43" y2="5"
+                x1="1"
+                y1="5"
+                x2="43"
+                y2="5"
                 stroke={c}
-                strokeWidth="4"
+                strokeWidth="3.5"
                 strokeLinecap="round"
-                strokeDasharray={dashed ? '7 5' : undefined}
+                strokeDasharray={dashed ? '9 5' : undefined}
               />
             </svg>
             <span className="text-[13px] text-slate-600">{l}</span>
@@ -73,49 +256,107 @@ const variants: Variant[] = [
         ))}
       </div>
     ),
-    code: `--fl-proc:   #2C6FA8   /* process / recirculated water */
---fl-raw:    #4093D2   /* raw · intake · make-up        */
---fl-drain:  #6E7B8C   /* effluent · drain · overflow   */
---fl-sludge: #8A7250   --fl-glycol: #B87214
---fl-brine:  #2AA198   --fl-chem:   #B0563F
---fl-feed:   #5F7A2E
---fl-o2:     #1F8FA8   /* gas — DASHED */
---fl-gas:    #6E7B8C   /* gas — DASHED */`,
+    code: `/* One marker per mimic, reused by every arrowed pipe.
+   fill="context-stroke" makes the head inherit its own line's colour. */
+<marker id="njd-arrow" viewBox="0 0 10 10" refX="8" refY="5"
+        markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+  <path d="M0,1 L9,5 L0,9 z" fill="context-stroke"/>
+</marker>
+
+<path class="njd-pipe fl-o2" stroke-width="3.5" marker-end="url(#njd-arrow)"/>`,
   },
   {
     name: 'Mimic fragment',
     platform: 'Desktop',
     description:
-      'A tank, a pump and a readout. Values sit in white node boxes rather than floating on the diagram, and the halo token gives any free-floating label an outline against the schematic.',
+      'A vessel feeding a pump, with an instrument bubble on the line and the reading in a white node box. Values sit in node boxes rather than floating on the diagram, and the halo token gives any free-floating label an outline against the schematic.',
     preview: (
-      <div className="w-[560px] rounded-xl border border-slate-200 bg-white p-5">
-        <svg viewBox="0 0 520 190" className="block h-auto w-full" role="img" aria-label="Tank TK-04 at 6.2 milligrams per litre feeding recirculation pump PU-11A, which is running">
-          <path d="M60 40 h120 v96 a12 12 0 0 1 -12 12 h-96 a12 12 0 0 1 -12 -12 Z" fill="var(--color-sc-vessel)" stroke="var(--color-sc-edge)" strokeWidth="1.6" />
-          <path d="M60 88 h120 v48 a12 12 0 0 1 -12 12 h-96 a12 12 0 0 1 -12 -12 Z" fill="var(--color-sc-water)" opacity="0.55" />
-          <text x="120" y="32" textAnchor="middle" className="font-mono text-[11px] font-bold" fill="var(--color-ink)">TK-04</text>
+      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white p-5">
+        <svg
+          viewBox="0 0 520 190"
+          className="block h-auto w-full"
+          role="img"
+          aria-label="Tank TK-04 at 6.2 milligrams per litre feeding recirculation pump PU-11A, which is running"
+        >
+          <defs>
+            <marker
+              id="njd-arrow-doc"
+              viewBox="0 0 10 10"
+              refX="8"
+              refY="5"
+              markerWidth="5"
+              markerHeight="5"
+              orient="auto-start-reverse"
+            >
+              <path d="M0,1 L9,5 L0,9 z" fill="context-stroke" />
+            </marker>
+          </defs>
 
-          <line x1="180" y1="112" x2="260" y2="112" stroke="var(--color-fl-proc)" strokeWidth="5" strokeLinecap="round" />
-          <line x1="300" y1="112" x2="392" y2="112" stroke="var(--color-fl-proc)" strokeWidth="5" strokeLinecap="round" />
-          <line x1="120" y1="40" x2="120" y2="14" stroke="var(--color-fl-o2)" strokeWidth="4" strokeDasharray="7 5" strokeLinecap="round" />
+          <g transform="translate(110 100)">
+            <Vessel w={110} h={104} pct={62} />
+          </g>
+          <text x="110" y="34" textAnchor="middle" fontSize="11" fontFamily="var(--font-mono)" fill="var(--color-fg-muted)">
+            TK-04
+          </text>
 
-          <circle cx="280" cy="112" r="20" fill="var(--color-sc-run)" stroke="var(--color-sc-edge)" strokeWidth="1.6" />
-          <path d="M280 92 L300 112 L280 132 Z" fill="var(--color-sc-run)" stroke="var(--color-sc-edge)" strokeWidth="1.6" strokeLinejoin="round" />
-          <text x="280" y="152" textAnchor="middle" className="font-mono text-[10px]" fill="var(--color-ink)" stroke="var(--color-sc-halo)" strokeWidth="3" paintOrder="stroke">
+          <path
+            d="M168 100 H250"
+            fill="none"
+            stroke="var(--color-fl-proc)"
+            strokeWidth="3.5"
+            strokeLinecap="round"
+            markerEnd="url(#njd-arrow-doc)"
+          />
+          <g transform="translate(209 62)">
+            <Instrument code="LT" loop="0220" />
+          </g>
+          <line x1="209" y1="79" x2="209" y2="100" stroke="var(--color-sc-line)" strokeWidth="1" strokeDasharray="3 3" />
+
+          <g transform="translate(288 100)">
+            <Pump running />
+          </g>
+          <text
+            x="288"
+            y="146"
+            textAnchor="middle"
+            fontSize="11"
+            fontFamily="var(--font-mono)"
+            fill="var(--color-fg-muted)"
+            stroke="var(--color-sc-halo)"
+            strokeWidth="3"
+            paintOrder="stroke"
+          >
             PU-11A
           </text>
 
-          <rect x="392" y="92" width="86" height="40" rx="3" fill="var(--color-sc-node)" stroke="var(--color-sc-edge)" strokeWidth="1.2" />
-          <text x="435" y="108" textAnchor="middle" className="font-mono text-[9px]" fill="var(--color-slate-500)">DO-0403</text>
-          <text x="435" y="124" textAnchor="middle" className="font-mono text-[13px] font-bold" fill="var(--color-critical-text)">6.2 mg/L</text>
+          <path
+            d="M322 100 H392"
+            fill="none"
+            stroke="var(--color-fl-proc)"
+            strokeWidth="3.5"
+            strokeLinecap="round"
+            markerEnd="url(#njd-arrow-doc)"
+          />
+
+          <rect x="398" y="80" width="86" height="40" rx="10" fill="#fff" stroke="var(--color-slate-200)" strokeWidth="1.5" />
+          <circle cx="471" cy="93" r="4.5" fill="var(--color-sev-ok)" />
+          <text x="411" y="97" fontSize="10" fontFamily="var(--font-sans)" fontWeight="700" fill="var(--color-fg-muted)">
+            DO
+          </text>
+          <text x="411" y="113" fontSize="13" fontFamily="var(--font-mono)" fill="var(--color-fg)">
+            6.2<tspan fontSize="10" fill="var(--color-fg-muted)"> mg/L</tspan>
+          </text>
         </svg>
       </div>
     ),
-    code: `{/* values live in white node boxes, not floating on the schematic */}
-<rect fill="var(--color-sc-node)" stroke="var(--color-sc-edge)" strokeWidth="1.2" />
-<text className="font-mono text-[13px] font-bold" fill="var(--color-critical-text)">6.2 mg/L</text>
+    code: `/* A node box is white with a slate-200 hairline and rx 10. It is chrome sitting
+   ON the diagram, not a piece of equipment, so it takes neither sc-node nor
+   sc-edge. The status dot lives at (w-13, 13), r 4.5. */
+<rect width="86" height="40" rx="10" fill="#fff"
+      stroke="var(--njord-slate-200)" stroke-width="1.5"/>
 
-{/* a free-floating label gets a halo outline */}
-<text stroke="var(--color-sc-halo)" strokeWidth="3" paintOrder="stroke">PU-11A</text>`,
+/* A label that floats free gets a halo so the schematic cannot eat it */
+<text stroke="var(--njord-sc-halo)" stroke-width="3" paint-order="stroke">PU-11A</text>`,
   },
   {
     name: 'Interactive nodes',
@@ -131,14 +372,22 @@ const variants: Variant[] = [
         ].map(({ l, stroke, ring }) => (
           <div key={l} className="flex flex-col items-center gap-2.5">
             <svg
-              width="70"
+              width="82"
               height="60"
-              viewBox="0 0 70 60"
+              viewBox="-41 -30 82 60"
               className={ring ? 'rounded outline outline-2 outline-offset-[1px] outline-primary' : ''}
               aria-hidden
             >
-              <circle cx="26" cy="30" r="17" fill="var(--color-sc-run)" stroke={stroke} strokeWidth="1.8" />
-              <path d="M26 13 L43 30 L26 47 Z" fill="var(--color-sc-run)" stroke={stroke} strokeWidth="1.8" strokeLinejoin="round" />
+              <g>
+                <circle cx="0" cy="0" r="17" fill="var(--color-sc-run)" stroke={stroke} strokeWidth="1.8" />
+                <path
+                  d="M0,-17 L25,-13 L25,13 L0,17 Z"
+                  fill="var(--color-sc-run)"
+                  stroke={stroke}
+                  strokeWidth="1.8"
+                  strokeLinejoin="round"
+                />
+              </g>
             </svg>
             <span className="text-xs text-slate-600">{l}</span>
           </div>
@@ -146,7 +395,7 @@ const variants: Variant[] = [
       </div>
     ),
     code: `<g role="button" tabIndex={0} className="cursor-pointer
-  hover:[&>rect]:stroke-primary hover:[&>circle]:stroke-primary">
+  hover:[&>circle]:stroke-primary hover:[&>path]:stroke-primary">
   …
 </g>
 
