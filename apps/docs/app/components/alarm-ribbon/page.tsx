@@ -168,6 +168,25 @@ export default function AlarmRibbonPage() {
         heading: 'Rules',
         items: [
           <>
+            <strong className="font-semibold text-ink">The ribbon owns unacknowledged.</strong>{' '}
+            It is the one surface that annunciates, which is why no screen carries a second alarm
+            line of its own; a third alarm surface was proposed for the department sheet and
+            rejected for exactly that reason.
+          </>,
+          <>
+            <strong className="font-semibold text-ink">Severity earns height.</strong> Critical
+            keeps the full ribbon card. High and below collapse to a one-line strip of about 48px,
+            so a screen carrying several low alarms is not buried by its own annunciator. An alarm
+            newer than two minutes carries a <strong>New</strong> chip and pulses three times, then
+            stops: a pulse that never ends becomes furniture.
+          </>,
+          <>
+            <strong className="font-semibold text-ink">Never state a consequence the alarm
+            philosophy has not approved.</strong> A generated &ldquo;what this means / respond
+            within&rdquo; line was built and pulled: the product must not invent process
+            explanations. This line needs the customer&rsquo;s own wording or it does not ship.
+          </>,
+          <>
             The ribbon is never removed. An all-clear state collapses it to a quiet line; hiding it
             entirely makes &ldquo;no alarms&rdquo; look identical to &ldquo;the feed is
             broken&rdquo;.

@@ -170,6 +170,12 @@ export default function DialogPage() {
         heading: 'Rules',
         items: [
           <>
+            <strong className="font-semibold text-ink">Acknowledging everything is a danger
+            confirm.</strong> Amber <code className="font-mono text-[12px]">alert-triangle</code>,
+            red primary, on both desktop and mobile. It is bulk, it is not undoable per row, and it
+            silences the annunciator; a neutral confirm understates all three.
+          </>,
+          <>
             Anchor with <code className="font-mono text-[12px]">align-items: flex-start</code> and a{' '}
             <code className="font-mono text-[12px]">padding-top</code> of roughly 9vh. Vertical
             centring makes the panel jump every time its content resizes.

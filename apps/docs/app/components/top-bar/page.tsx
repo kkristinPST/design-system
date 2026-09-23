@@ -218,6 +218,28 @@ export default function TopBarPage() {
         heading: 'Rules',
         items: [
           <>
+            <strong className="font-semibold text-ink">One meaning per surface.</strong> The top
+            bar owns <em>standing</em> alarms: a labelled pair of counts by priority. It does
+            <em> not</em> also report unacknowledged, which belongs to the ribbon and the sidebar
+            badge. Four numbers for two facts is how an operator stops trusting any of them.
+          </>,
+          <>
+            <strong className="font-semibold text-ink">The bell carries a dot, never a count.</strong>{' '}
+            A number on the bell duplicates the sidebar badge and invites the reader to reconcile
+            two figures that are counting different things. Every count on the bar states its
+            meaning in its own tooltip.
+          </>,
+          <>
+            <strong className="font-semibold text-ink">Under squeeze the page title goes first,
+            not the scope.</strong> The title is already shown by the active sidebar item; the
+            scope is shown nowhere else. Below 1180px the title hides <em>with its separator</em>.
+            There is no width floor on the scope: a floor resolves against the bar while the
+            32px-min pickers absorb the shrink anyway, and per-label floors strand the caret away
+            from short names. The ordering is the fix, and{' '}
+            <code className="font-mono text-[12px]">min-width: 32px</code> on each picker is what
+            protects the affordance.
+          </>,
+          <>
             Squeeze order is fixed: the <strong>scope</strong> gives way first, then the trailing
             crumb, and the <strong>page title shrinks last</strong>: it is the identity of the
             screen.
