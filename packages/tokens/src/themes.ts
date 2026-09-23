@@ -234,7 +234,9 @@ const legacy: Skin = {
     'color-slate-200':   '#B4BCC5',
     'color-slate-100':   '#D3D8DD',
     'color-slate-50':    '#E4E7EA',
-    'color-neutral-100': '#E4E7EA',
+    // neutral-* is our alias of slate, so this follows slate-100. The
+    // #E4E7EA the app carried under this name was a one-off it has now dropped.
+    'color-neutral-100': '#D3D8DD',
 
     // A deeper blue, and every status hue desaturated toward the classic HMI.
     'color-primary':  '#2F6CB0',

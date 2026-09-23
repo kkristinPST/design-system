@@ -13,10 +13,15 @@
 
 export const fontFamilies = {
   sans: "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-  // Consolas FIRST; control-room Windows machines then render the original the
-  // design was drawn against. Consolas is not web-distributable, so JetBrains
-  // Mono is the substitute everyone else falls back to.
-  mono: "Consolas, 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace",
+  // JetBrains Mono FIRST, loaded from the CDN, so every machine renders the
+  // metrics the mimics were measured against. Consolas is the FALLBACK for a
+  // control-room machine that cannot reach the CDN; Windows has it installed.
+  //
+  // This order was reversed once, on the reading that Consolas is the original
+  // the design was drawn against. Consistent metrics everywhere beat fidelity
+  // on one platform: a mimic measured against one mono and rendered in another
+  // shifts its own labels.
+  mono: "'JetBrains Mono', Consolas, ui-monospace, 'SF Mono', Menlo, monospace",
 } as const
 
 export type TypeToken = {
