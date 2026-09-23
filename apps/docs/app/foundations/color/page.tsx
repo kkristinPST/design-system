@@ -98,6 +98,7 @@ const ALIAS = new Set([
   'fg',
   'fg-muted',
   'fg-subtle',
+  'border',
 ])
 
 const aliasRows: [string, string, string][] = [
@@ -107,11 +108,12 @@ const aliasRows: [string, string, string][] = [
   ['fg', skins.modern.tokens.fg, 'Primary text'],
   ['fg-muted', skins.modern.tokens['fg-muted'], 'Secondary text'],
   ['fg-subtle', skins.modern.tokens['fg-subtle'], 'Tertiary and meta text'],
+  ['border', skins.modern.tokens.border, 'Every dividing line · card edges, table rules, input outlines'],
 ]
 
 /**
  * The modern value of any token, keyed by web name without the leading `--`.
- * Most live in the base theme; the seven aliases are declared by the modern
+ * Most live in the base theme; the eight aliases are declared by the modern
  * skin itself, so it is layered on top.
  */
 const modernValue = new Map(allTokens().map((t) => [t.web.slice(2), t.value]))

@@ -3,7 +3,7 @@
 //
 // THIS FILE IS THE SOURCE for the runtime alias layer and the three skins.
 //
-// Seven alias names are the re-skin seam: components read them instead of the
+// Eight alias names are the re-skin seam: components read them instead of the
 // raw ramp, so a skin is a list of remapped tokens rather than a second
 // stylesheet. `npm run build` emits each skin under its selector into
 // dist/tokens.css, and the dark skin into dist/njord.css for the HMI.
@@ -23,6 +23,14 @@ export const aliasNames = [
   'fg',         // primary text
   'fg-muted',   // secondary text
   'fg-subtle',  // tertiary / meta text
+  // Every dividing line: card edges, table rules, input outlines, dividers.
+  //
+  // It earns its own alias rather than pointing components at slate-200,
+  // because a border and a background can resolve to the same grey and still
+  // need to move apart in a skin. Once a component writes the raw ramp step,
+  // the two uses are indistinguishable and a re-skin has to guess which is
+  // which. The application uses it in 73 places for exactly this reason.
+  'border',
 ] as const
 
 export type AliasName = (typeof aliasNames)[number]
@@ -72,6 +80,7 @@ const modern: Skin = {
     fg:          palette.slate.ink,
     'fg-muted':  palette.slate[600],
     'fg-subtle': palette.slate[400],
+    border:      palette.slate[200],
   },
 }
 
@@ -98,6 +107,7 @@ const dark: Skin = {
     fg:          '#E8EDF5',
     'fg-muted':  '#B7C2D4',
     'fg-subtle': '#8B99B2',
+    border:      '#28374F',
 
     // The ramp inverts: low steps become surfaces, high steps become text.
     'color-ink':         '#0E1828',
@@ -212,6 +222,7 @@ const legacy: Skin = {
     fg:          '#1F2733',
     'fg-muted':  '#3F4A57',
     'fg-subtle': '#565F6B',
+    border:      '#B4BCC5',
 
     'color-ink':         '#2C3A48',
     'color-slate-800':   '#3A4A5A',
