@@ -181,6 +181,24 @@ export default function TypographyPage() {
       <div className="mt-10 rounded-xl border border-slate-200 bg-white p-5">
         <p className="text-xs font-bold uppercase tracking-widest text-slate-400">Rules</p>
         <ul className="mt-3 space-y-2">
+            <>
+              <strong className="font-semibold text-ink">
+                <code className="font-mono text-[12px]">line-height: 1</code> is correct on a
+                single-line chip whose height comes from its own padding.
+              </strong>{' '}
+              A button label, a badge, a percentage centred in a ring: applying the role&rsquo;s
+              leading there changes the geometry for no legibility gain. Everywhere the text can
+              wrap or sits in a flow, the role&rsquo;s pixel leading is explicit. Keeping that
+              distinction is what stops a type sweep from quietly resizing every control.
+            </>,
+            <>
+              <strong className="font-semibold text-ink">Audit the resolved CSSOM, not a list of
+              files.</strong> Walk <code className="font-mono text-[12px]">document.styleSheets</code>{' '}
+              and check every rule that actually resolved. A hand-maintained file list is a blind
+              spot: one audit omitted the token file itself, which carried ~40 theme-override rules
+              no ladder had ever been checked against, including a legacy-only heading that was
+              invisible in a default-light screenshot.
+            </>,
           {[
             <>
               Every mono role is <code className="font-mono text-[12px]">tabular-nums</code>. A

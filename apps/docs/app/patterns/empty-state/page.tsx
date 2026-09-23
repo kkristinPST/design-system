@@ -407,6 +407,13 @@ export default function StatesPage() {
       <div className="mt-5 rounded-xl border border-slate-200 bg-white p-5">
         <p className="text-xs font-bold uppercase tracking-widest text-slate-400">Rules</p>
         <ul className="mt-3 space-y-2">
+            <>
+              <strong className="font-semibold text-ink">Instructions belong in the empty state,
+              not above the working screen.</strong> A permanent how-to on a screen someone opens
+              daily is a layout cost, not guidance: it is read once and then occupies chart height
+              forever. Put it where there is nothing to look at yet, and it disappears the moment
+              it stops being needed.
+            </>,
           {[
             <>
               One shared implementation. Nothing else may define its own empty-state or loading
