@@ -171,6 +171,20 @@ export default function TrendChartPage() {
         heading: 'Rules',
         items: [
           <>
+            <strong className="font-semibold text-ink">A range picker is a preset segment with{' '}
+            Custom as one of its options</strong>, revealed in place when chosen. Not an
+            always-visible Start / End / Interval bar: that puts the expensive, deliberate control
+            permanently in front of the cheap, common one.
+          </>,
+          <>
+            <strong className="font-semibold text-ink">The shape tells the operator which kind of
+            control they are touching.</strong> A preset applies instantly, because it is cheap and
+            reversible. Custom reveals fields and waits for <strong>Apply</strong>, because it
+            issues a historian query. Keep that distinction visible: a control that looks instant
+            and is not, or one that asks for Apply when it did not need to, teaches the operator to
+            distrust both.
+          </>,
+          <>
             Axis labels are mono at 10px in slate-400. Proportional digits make a y-axis look
             ragged.
           </>,

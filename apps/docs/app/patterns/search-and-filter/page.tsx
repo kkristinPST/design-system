@@ -106,6 +106,13 @@ export default function SearchAndFilterPage() {
         <p className="text-xs font-bold uppercase tracking-widest text-slate-400">Rules</p>
         <ul className="mt-3 space-y-2">
             <>
+              <strong className="font-semibold text-ink">Let the control&rsquo;s shape carry the
+              distinction.</strong> Presets and chips apply on click; anything that issues a query
+              reveals its fields and waits for Apply. Once the two look different, the operator
+              stops having to remember which is which, and no screen needs a second Search button
+              to explain itself.
+            </>,
+            <>
               <strong className="font-semibold text-ink">Separate what QUERIES from what
               SLICES.</strong> A control that changes the data fetched (a date range hitting the
               historian) needs an explicit Search. A control that narrows the set already returned
