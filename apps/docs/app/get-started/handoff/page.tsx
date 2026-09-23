@@ -61,7 +61,7 @@ const scope = [
   { n: 7, label: 'Foundations', href: '/foundations/color', what: 'colour, type, spacing, elevation, severity, writing, brand' },
   { n: 5, label: 'Styles', href: '/styles/icons', what: 'icons, motion, the three skins, density, this Ignition guide' },
   { n: Object.keys(ignitionSpecs).length, label: 'Components', href: '/components', what: 'each with desktop + mobile variants and its Perspective spec' },
-  { n: 7, label: 'Patterns', href: '/patterns/dashboard-overview', what: 'how components compose into real screens' },
+  { n: 8, label: 'Patterns', href: '/patterns/dashboard-overview', what: 'how components compose into real screens' },
   { n: 4, label: 'Templates', href: '/templates/dashboard', what: 'full-screen frames · dashboard, alarms, SCADA, mobile' },
 ]
 

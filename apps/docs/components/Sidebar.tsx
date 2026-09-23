@@ -86,6 +86,7 @@ const nav = [
       { label: 'SCADA loop', href: '/patterns/scada-loop' },
       { label: 'Search & filter', href: '/patterns/search-and-filter' },
       { label: 'Navigation & breadcrumbs', href: '/patterns/navigation-and-breadcrumbs' },
+      { label: 'On-call & paging', href: '/patterns/on-call' },
       { label: 'Responsive & reflow', href: '/patterns/responsive-and-reflow' },
     ],
   },
