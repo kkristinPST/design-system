@@ -1,4 +1,5 @@
 import TemplateSpec from '../../../components/TemplateSpec'
+import { SymPump, SymMotor, AbnormalBadge } from '../../../components/scada'
 
 export default function ScadaTemplatePage() {
   return (
@@ -50,13 +51,19 @@ export default function ScadaTemplatePage() {
               <text x="330" y="188" className="font-mono text-[9px]" fill="var(--color-slate-500)">drain</text>
 
               {/* pump */}
-              <circle cx="202" cy="112" r="18" fill="var(--color-sc-run)" stroke="var(--color-sc-edge)" strokeWidth="1.6" />
-              <path d="M202 94 L220 112 L202 130 Z" fill="var(--color-sc-run)" stroke="var(--color-sc-edge)" strokeWidth="1.6" strokeLinejoin="round" />
+              <g transform="translate(202,112)">
+                <SymPump running />
+              </g>
+              <g transform="translate(170,121)">
+                <AbnormalBadge critical />
+              </g>
               <text x="202" y="150" textAnchor="middle" className="font-mono text-[9px]" fill="var(--color-ink)" stroke="var(--color-sc-halo)" strokeWidth="3" paintOrder="stroke">PU-11A</text>
 
               {/* drum filter */}
               <rect x="286" y="88" width="66" height="48" rx="3" fill="var(--color-sc-cabinet)" stroke="var(--color-sc-cabinet-edge)" strokeWidth="1.4" />
-              <circle cx="319" cy="112" r="15" fill="none" stroke="var(--color-sc-line)" strokeWidth="1.4" />
+              <g transform="translate(319,112)">
+                <SymMotor running s={0.72} />
+              </g>
               <text x="319" y="80" textAnchor="middle" className="font-mono text-[9px]" fill="var(--color-slate-500)">Drum filter</text>
 
               {/* biofilter */}
@@ -64,7 +71,7 @@ export default function ScadaTemplatePage() {
               <text x="439" y="72" textAnchor="middle" className="font-mono text-[9px]" fill="var(--color-slate-500)">MBBR</text>
 
               {/* readout; abnormal */}
-              <rect x="132" y="176" width="86" height="38" rx="3" fill="var(--color-sc-node)" stroke="var(--color-sc-abnormal)" strokeWidth="1.8" />
+              <rect x="132" y="176" width="86" height="38" rx="4" fill="#fff" stroke="var(--color-sc-abnormal)" strokeWidth="2.4" />
               <text x="175" y="191" textAnchor="middle" className="font-mono text-[9px]" fill="var(--color-slate-500)">DO-0403</text>
               <text x="175" y="206" textAnchor="middle" className="font-mono text-[12px] font-bold" fill="var(--color-critical-text)">6.2 mg/L</text>
             </svg>
