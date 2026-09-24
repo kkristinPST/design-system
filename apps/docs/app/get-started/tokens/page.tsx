@@ -214,6 +214,21 @@ export default function DesignTokens() {
         </a>{' '}
         · a flat map for a consumer that speaks neither Tailwind nor Perspective.
       </p>
+      <p className="mt-2 text-[12px] leading-relaxed text-slate-500">
+        <a
+          href={asset('/downloads/njord-process-symbols.zip')}
+          download
+          className="font-semibold text-primary-text hover:underline"
+        >
+          njord-process-symbols.zip
+        </a>{' '}
+        · the 41 SCADA symbols as flat SVG in all three skins, for Figma or anywhere CSS variables
+        do not reach. See{' '}
+        <Link href="/components/scada-symbols" className="font-semibold text-primary-text hover:underline">
+          SCADA symbols
+        </Link>
+        .
+      </p>
 
       <div className="mt-9 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-[12px] leading-relaxed text-slate-600">
         Next:{' '}

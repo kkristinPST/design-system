@@ -1,4 +1,5 @@
 import ComponentDoc, { type Variant } from '../../../components/ComponentDoc'
+import { asset } from '../../../components/asset'
 import { ignitionSpecs } from '../../../components/ignition-specs'
 import type { Alarm, Supp } from '../../../components/scada'
 import {
@@ -421,6 +422,18 @@ export default function ScadaSymbolsPage() {
           The process-mimic vocabulary: equipment shapes, pipes and readout nodes. It follows
           ISA-101 high-performance HMI; the diagram is quiet by default, and saturated colour means
           something is wrong.
+          <span className="mt-3 block">
+            <a
+              href={asset('/downloads/njord-process-symbols.zip')}
+              download
+              className="font-semibold text-primary-text hover:underline"
+            >
+              Download the symbol pack
+            </a>{' '}
+            · 41 symbols as flat SVG in all three skins, plus the stylesheet and the SCADA tokens.
+            For Figma, or anywhere CSS variables do not reach. Built from the same source as the
+            symbols on this page, so the two cannot drift.
+          </span>
         </>
       }
       variants={variants}

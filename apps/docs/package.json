@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "predev": "node scripts/copy-artifacts.mjs",
+    "predev": "node scripts/copy-artifacts.mjs && node scripts/build-symbol-pack.mjs",
     "dev": "next dev",
-    "prebuild": "node scripts/copy-artifacts.mjs",
+    "prebuild": "node scripts/copy-artifacts.mjs && node scripts/build-symbol-pack.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
