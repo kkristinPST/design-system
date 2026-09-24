@@ -15,10 +15,7 @@ import {
   DrumFilterBox,
   BlowerCabinet,
   ModeChip,
-  AbnormalRing,
-  SuppMark,
   EquipmentCluster,
-  CLUSTER,
   RD,
   Flag,
   UnitDots,
@@ -175,7 +172,7 @@ const variants: Variant[] = [
     name: 'Equipment × state',
     platform: 'Desktop',
     description:
-      'Every symbol in every state it can render. Run state is the body fill and nothing else. Priority is the badge, by colour AND shape. Acknowledgement is opacity. Suppression is a neutral dashed square. A PLC lock-out ghosts the symbol and turns the mode chip into a lock. Each row uses its own placement from the mimic, so the badge sits where that symbol actually puts it.',
+      'Every symbol in every state it can render, and the single place to read them. Running is a solid dark neutral, stopped a light one, and that is ALL the body ever says: an alarm neither recolours nor outlines it, because the badge alone carries the alarm. Priority is colour AND shape, so the pair survives colour-blindness. Acknowledgement is opacity only, never hue, because a hue change reads as a different alarm rather than the same one later. Suppression is a neutral dashed square, and a PLC lock-out ghosts the symbol and turns the mode chip into a lock. Each row uses its own placement from the mimic, so the badge sits where that symbol actually puts it.',
     preview: (
       <div className="overflow-x-auto">
         <table className="min-w-full border-collapse">
@@ -264,56 +261,6 @@ const variants: Variant[] = [
   <path d="M33.75 16.43C33.75 7.36 26.39 0 17.32 0…" fill="var(--njord-sc-fill-lite)"/>
   <path d="M17.27 0.10C8.22 0.10 0.89 7.44…"        fill="var(--njord-sc-run)"/>
 </g>`,
-  },
-  {
-    name: 'Equipment states',
-    platform: 'Desktop',
-    description:
-      'Running is a solid dark neutral, stopped a light one, and that is ALL the symbol ever says. An alarm does not recolour it and does not outline it: the badge alone carries the alarm. Colour marks priority and shape repeats it, so the pair survives colour-blindness; opacity marks whether anyone has looked, and acknowledgement never changes hue.',
-    preview: (
-      <div className="flex flex-wrap items-start gap-7 rounded-xl border border-slate-200 bg-white p-6">
-        <Cell label="Running">
-          <SymPump cx={0} cy={0} running />
-        </Cell>
-        <Cell label="Stopped">
-          <SymPump cx={0} cy={0} />
-        </Cell>
-        <Cell label="High, unacknowledged">
-          <g>
-            <SymPump cx={0} cy={0} running />
-            <AbnormalRing at={CLUSTER.badge(0, 0)} alarm={{ level: 'high', state: 'unack' }} />
-          </g>
-        </Cell>
-        <Cell label="Critical, unacknowledged">
-          <g>
-            <SymPump cx={0} cy={0} running />
-            <AbnormalRing at={CLUSTER.badge(0, 0)} alarm={{ level: 'critical', state: 'unack' }} />
-          </g>
-        </Cell>
-        <Cell label="Critical, acknowledged">
-          <g>
-            <SymPump cx={0} cy={0} running />
-            <AbnormalRing at={CLUSTER.badge(0, 0)} alarm={{ level: 'critical', state: 'ack' }} />
-          </g>
-        </Cell>
-        <Cell label="Blocked or out of service">
-          <SymPump cx={0} cy={0} running />
-        </Cell>
-      </div>
-    ),
-    code: `/* The symbol carries run state and nothing else. */
-const body = (running) =>
-  running ? 'var(--njord-sc-run)' : 'var(--njord-sc-stop)'
-
-/* The badge sits in the MODE-CHIP COLUMN, directly under the chip, which
-   moves up to make room: (cx - 32, cy + 9). Not centred, not on a flank —
-   the readout is above, the tag below, the trend affordance right, so that
-   column is the only free side. The anchor is passed in, never measured:
-   a symbol already knows its centre, and getBBox inside an effect never
-   resolves in time. */
-<path d="M0 -8.8 L9 6.6 L-9 6.6 Z" fill="var(--njord-sc-abnormal)"/>  /* critical */
-<circle r="8" fill="var(--njord-warning)"/>                            /* high and below */
-.rasm-abn:not(.unack) { opacity: .45 }                                /* acknowledged */`,
   },
   {
     name: 'Mode chip and readout',
