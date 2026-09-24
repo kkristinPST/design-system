@@ -1,5 +1,5 @@
 import TemplateSpec from '../../../components/TemplateSpec'
-import { SymPump, SymMotor, AbnormalBadge } from '../../../components/scada'
+import { SymPump, DrumFilterBox, AbnormalRing, CLUSTER } from '../../../components/scada'
 
 export default function ScadaTemplatePage() {
   return (
@@ -30,7 +30,7 @@ export default function ScadaTemplatePage() {
         <div className="grid grid-cols-[minmax(0,1fr)_220px] gap-3">
           {/* mimic */}
           <div className="rounded-xl border border-slate-200 bg-white p-3.5">
-            <svg viewBox="0 0 520 230" className="block h-auto w-full" role="img" aria-label="RAS 2 loop: tank TK-04 at 6.2 milligrams per litre, below band; pump PU-11A running; drum filter and biofilter normal">
+            <svg viewBox="0 0 520 230" className="rasm block h-auto w-full" role="img" aria-label="RAS 2 loop: tank TK-04 at 6.2 milligrams per litre, below band; pump PU-11A running; drum filter and biofilter normal">
               {/* tank */}
               <path d="M28 46 h96 v96 a12 12 0 0 1 -12 12 h-72 a12 12 0 0 1 -12 -12 Z" fill="var(--color-sc-vessel)" stroke="var(--color-sc-edge)" strokeWidth="1.5" />
               <path d="M28 90 h96 v52 a12 12 0 0 1 -12 12 h-72 a12 12 0 0 1 -12 -12 Z" fill="var(--color-sc-water)" opacity="0.5" />
@@ -51,19 +51,12 @@ export default function ScadaTemplatePage() {
               <text x="330" y="188" className="font-mono text-[9px]" fill="var(--color-slate-500)">drain</text>
 
               {/* pump */}
-              <g transform="translate(202,112)">
-                <SymPump running />
-              </g>
-              <g transform="translate(170,121)">
-                <AbnormalBadge critical />
-              </g>
+              <SymPump cx={202} cy={112} running />
+              <AbnormalRing at={CLUSTER.badge(202, 112)} alarm={{ level: 'critical', state: 'unack' }} />
               <text x="202" y="150" textAnchor="middle" className="font-mono text-[9px]" fill="var(--color-ink)" stroke="var(--color-sc-halo)" strokeWidth="3" paintOrder="stroke">PU-11A</text>
 
               {/* drum filter */}
-              <rect x="286" y="88" width="66" height="48" rx="3" fill="var(--color-sc-cabinet)" stroke="var(--color-sc-cabinet-edge)" strokeWidth="1.4" />
-              <g transform="translate(319,112)">
-                <SymMotor running s={0.72} />
-              </g>
+              <DrumFilterBox x={288} y={83} running />
               <text x="319" y="80" textAnchor="middle" className="font-mono text-[9px]" fill="var(--color-slate-500)">Drum filter</text>
 
               {/* biofilter */}

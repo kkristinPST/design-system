@@ -13,6 +13,9 @@
 
 @import "@njord/tokens/css";
 
+/* Process-mimic symbol styles, under the application's own .rasm-* class names. */
+@import "./scada.css";
+
 body {
   background: var(--background);
   color: var(--foreground);

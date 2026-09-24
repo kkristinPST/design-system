@@ -1,0 +1,106 @@
+/* NJORD process-symbol styles.
+ *
+ * Transcribed from design_handoff_njord/process-symbols/process-symbols.css,
+ * which is itself verbatim from the application's lib/screens.css. Class names
+ * are unchanged from the app so a diff between the two stays readable.
+ *
+ * The only edits are token names: the app writes --sc-node and --slate-300,
+ * this build emits --color-sc-node and --color-slate-300. The alias layer
+ * (--fg, --surface) and the font stacks are the same on both sides.
+ */
+
+.rasm text { -webkit-user-select: none; user-select: none; }
+
+/* ── labels ── */
+.rasm-tag {
+  font-family: var(--font-mono); font-size: 10px; font-weight: 700; fill: var(--fg); letter-spacing: 0;
+  paint-order: stroke; stroke: var(--color-sc-halo); stroke-width: 4.5px; stroke-linejoin: round; transition: fill .12s;
+}
+.rasm-desc {
+  font-family: var(--font-sans); font-size: 12px; font-weight: 500; fill: var(--color-slate-600);
+  paint-order: stroke; stroke: var(--color-sc-halo); stroke-width: 4.5px; stroke-linejoin: round; transition: fill .12s;
+}
+.rasm-mode { font-family: var(--font-sans); font-size: 12px; font-weight: 800; }
+.rasm-flag { font-family: var(--font-sans); font-size: 12px; font-weight: 700; fill: var(--fg); }
+g.abn > .rasm-tag { fill: var(--color-critical-text); }
+g.abn.warn > .rasm-tag { fill: var(--color-warning-text); }
+
+/* ── containers ── */
+.rasm-cab { fill: var(--color-sc-cabinet); stroke: var(--color-sc-cabinet-edge); stroke-width: 1.3; }
+.rasm-box { fill: var(--color-sc-node); stroke: var(--color-slate-300); stroke-width: 1.3; }
+
+/* ── pipes: tinted by fluid, gases dashed ── */
+.rasm-pipe { fill: none; stroke: var(--color-sc-pipe); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.rasm-pipe.fl-proc { stroke: var(--color-fl-proc); }
+.rasm-pipe.fl-raw { stroke: var(--color-fl-raw); }
+.rasm-pipe.fl-drain { stroke: var(--color-fl-drain); }
+.rasm-pipe.fl-sludge { stroke: var(--color-fl-sludge); }
+.rasm-pipe.fl-glycol { stroke: var(--color-fl-glycol); }
+.rasm-pipe.fl-brine { stroke: var(--color-fl-brine); }
+.rasm-pipe.fl-chem { stroke: var(--color-fl-chem); }
+.rasm-pipe.fl-feed { stroke: var(--color-fl-feed); }
+.rasm-pipe.fl-o2 { stroke: var(--color-fl-o2); stroke-dasharray: 7 6; }
+.rasm-pipe.fl-gas { stroke: var(--color-fl-gas); stroke-dasharray: 7 6; }
+.rasm-pipe.fl-idle { opacity: .4; }
+
+/* ── equipment hit area: hover and focus are cyan. Interaction colour, never state. ── */
+.rasm-eq { cursor: pointer; }
+.rasm-eq > rect, .rasm-eq path, .rasm-eq circle { transition: filter .12s; }
+/* NOTE: the app writes drop-shadow(0 0 0 2px var(--primary)) here, which is
+   invalid — drop-shadow() takes no spread — so the declaration is dropped and a
+   bare pump shows no hover at all. Documented as an open gap; this build uses
+   the two-argument form so the state is at least visible in the reference. */
+.rasm-eq:hover { filter: drop-shadow(0 0 2px var(--color-primary)); }
+.rasm-eq:hover .rasm-box, .rasm-eq:hover .rasm-cab { stroke: var(--color-primary); }
+svg g[role='button']:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 1px; }
+
+/* ── value readout ── */
+.rasm-rd-box { fill: var(--color-sc-node); stroke: var(--color-slate-300); stroke-width: 1.3; transition: stroke .12s, fill .12s; }
+.rasm-rd-v { font-family: var(--font-mono); font-size: 14px; font-weight: 700; fill: var(--fg); }
+.rasm-rd-v.s { font-size: 12px; }
+.rasm-rd-u { font-family: var(--font-mono); font-size: 10px; font-weight: 400; fill: var(--color-slate-400); }
+.rasm-rd.t { cursor: default; }
+.rasm-rd.t:hover .rasm-rd-box { stroke: var(--color-slate-400); }
+/* a readout whose own tag is in alarm marks itself on the edge and value only, never a second badge */
+.rasm-rd.abn .rasm-rd-box { stroke: var(--color-sc-abnormal); stroke-width: 2.4; }
+.rasm-rd.abn.warn .rasm-rd-box { stroke: var(--color-warning); }
+.rasm-rd.abn .rasm-rd-v { fill: var(--color-critical-text); }
+.rasm-rd.abn.warn .rasm-rd-v { fill: var(--color-warning-text); }
+
+/* value trend affordance — line-chart glyph */
+.rasm-rd-tr { pointer-events: auto; cursor: pointer; }
+.rasm-rd-trhit { fill: transparent; }
+.rasm-rd-trbg { fill: var(--color-sc-node); stroke: var(--color-slate-300); stroke-width: 1.2; transition: fill .12s, stroke .12s; }
+.rasm-rd-trln { fill: none; stroke: var(--color-primary); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; transition: stroke .12s; }
+.rasm-rd-tr:hover .rasm-rd-trbg, .rasm-rd-tr.on .rasm-rd-trbg { fill: var(--color-primary); stroke: var(--color-primary); }
+.rasm-rd-tr:hover .rasm-rd-trln, .rasm-rd-tr.on .rasm-rd-trln { stroke: #fff; }
+
+/* run/stop trend affordance — step-wave glyph, so binary reads apart from analog */
+.rasm-symtrend { cursor: pointer; opacity: .62; transition: opacity .12s; }
+.rasm-symtrend:hover, .rasm-symtrend.on { opacity: 1; }
+.rasm-symtrend-bg { fill: var(--surface); stroke: var(--color-slate-300); stroke-width: 1.2; transition: fill .12s, stroke .12s; }
+.rasm-symtrend:hover .rasm-symtrend-bg, .rasm-symtrend.on .rasm-symtrend-bg { fill: var(--color-primary); stroke: var(--color-primary); }
+.rasm-symtrend-ln path { fill: none; stroke: var(--color-slate-600); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: stroke .12s; }
+.rasm-symtrend:hover .rasm-symtrend-ln path, .rasm-symtrend.on .rasm-symtrend-ln path { stroke: #fff; }
+
+/* ── alarm badge ──
+   COLOUR and SHAPE both carry priority: red triangle critical, amber circle for
+   high and below. OPACITY carries acknowledgement: solid unacked, .45 otherwise.
+   The symbol body is never recoloured. */
+.rasm-abn-dot { fill: var(--color-warning); stroke: #fff; stroke-width: 1.4; }
+.rasm-abn.crit .rasm-abn-dot { fill: var(--color-sc-abnormal); }
+.rasm-abn-g { font-family: var(--font-sans); font-size: 10px; font-weight: 700; fill: #3d2c00; }
+.rasm-abn.crit .rasm-abn-g { fill: #fff; }
+.rasm-abn:not(.unack) { opacity: .45; }
+
+/* legend chips (HTML, for a mimic legend strip) */
+.rasm-leg-chip {
+  display: inline-flex; align-items: center; justify-content: center; width: 17px; height: 17px;
+  border-radius: 3px; background: var(--color-sc-node); border: 1.2px solid var(--color-slate-300);
+  color: var(--color-slate-600); font-size: 12px; font-weight: 800;
+}
+.rasm-leg-chip.man { border-color: var(--color-sc-manual); color: var(--color-sc-manual); }
+
+@media (prefers-reduced-motion: reduce) {
+  .rasm * { transition-duration: .001ms !important; }
+}

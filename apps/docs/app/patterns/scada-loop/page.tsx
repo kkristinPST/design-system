@@ -1,4 +1,4 @@
-import { SymPump } from '../../../components/scada'
+import { SymPump, Eq, CLUSTER } from '../../../components/scada'
 
 export default function ScadaLoopPage() {
   return (
@@ -22,7 +22,7 @@ export default function ScadaLoopPage() {
               Live
             </span>
           </div>
-          <svg viewBox="0 0 460 200" className="block h-auto w-full" role="img" aria-label="Tank TK-04 at 6.2 milligrams per litre, below band, feeding recirculation pump PU-11A which is running">
+          <svg viewBox="0 0 460 200" className="rasm block h-auto w-full" role="img" aria-label="Tank TK-04 at 6.2 milligrams per litre, below band, feeding recirculation pump PU-11A which is running">
             {/* tank */}
             <path d="M40 42 h104 v92 a12 12 0 0 1 -12 12 h-80 a12 12 0 0 1 -12 -12 Z" fill="var(--color-sc-vessel)" stroke="var(--color-sc-edge)" strokeWidth="1.5" />
             <path d="M40 86 h104 v48 a12 12 0 0 1 -12 12 h-80 a12 12 0 0 1 -12 -12 Z" fill="var(--color-sc-water)" opacity="0.5" />
@@ -36,9 +36,9 @@ export default function ScadaLoopPage() {
             <line x1="252" y1="106" x2="336" y2="106" stroke="var(--color-fl-proc)" strokeWidth="5" strokeLinecap="round" />
 
             {/* pump; selected */}
-            <g transform="translate(232,106)">
-              <circle r="24" fill="none" stroke="var(--color-primary)" strokeWidth="2.4" />
-              <SymPump running />
+            <g className="rasm">
+              <circle cx="232" cy="106" r="24" fill="none" stroke="var(--color-primary)" strokeWidth="2.4" />
+              <SymPump cx={232} cy={106} running />
             </g>
             <text x="232" y="146" textAnchor="middle" className="font-mono text-[10px]" fill="var(--color-ink)" stroke="var(--color-sc-halo)" strokeWidth="3" paintOrder="stroke">PU-11A</text>
 

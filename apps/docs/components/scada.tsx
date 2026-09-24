@@ -1,94 +1,110 @@
 /**
- * The shipping mimic symbols, transcribed path-for-path from the process
- * screens. They are the CUSTOMER's own symbol set, recreated from the legacy
- * SCADA capture so the picture reads the way operators already know it. They
- * are NOT a textbook ISA set, and substituting one builds the wrong drawing.
+ * NJORD process (P&ID mimic) symbols.
  *
- * Every page that draws a mimic imports from here. Three pages had their own
- * hand-drawn copies and all three had drifted, which is what this module exists
- * to stop.
+ * Mirrors design_handoff_njord/process-symbols/process-symbols.jsx, which the
+ * project packaged specifically for this design system. Geometry and path data
+ * are VERBATIM; like that file, every piece of state is a prop rather than a
+ * read from the app's alarm and trend stores.
  *
- * Each symbol is centred on (0,0), the way the mimics place them:
- *   translate(cx,cy) scale(s) translate(-halfW,-halfH)
+ * The handoff README is explicit about provenance: njord-ds-v2's SCADA
+ * components are behind the app — they draw their own pump and fill the body
+ * with sc-abnormal in alarm. The app replaced both. Treat this as the source.
+ *
+ * Styling lives in app/scada.css under the app's own .rasm-* class names.
  */
 
-/**
- * Run state, and ONLY run state.
- *
- * An alarm never recolours a symbol. The fill already carries run/stop, so a
- * red pump reads as "running red"; and an added outline is a second treatment
- * competing with the badge. The badge alone marks the alarm, which also keeps
- * one consistent mark facility-wide.
- */
-const body = (running?: boolean) => (running ? 'var(--color-sc-run)' : 'var(--color-sc-stop)')
+export type Alarm = {
+  level: 'critical' | 'high' | 'medium' | 'low'
+  /** Blocked and out-of-service alarms draw NOTHING: pass null, not a state. */
+  state: 'unack' | 'ack' | 'returned'
+}
 
-/** Centrifugal pump: a windowed disc. The cut-outs are the symbol, not decoration. */
-export function SymPump({ running, s = 1.25 }: { running?: boolean; s?: number }) {
+/** High, medium and low all render as "warn": the mimic carries two tones, the register five. */
+export const tone = (a?: Alarm | null) => (a && a.level === 'critical' ? 'crit' : 'warn')
+
+export function alarmTitle(a?: Alarm | null) {
+  if (!a) return ''
+  const st =
+    a.state === 'unack' ? 'unacknowledged' : a.state === 'returned' ? 'returned to normal, not acknowledged' : 'acknowledged'
+  return `${a.level[0].toUpperCase()}${a.level.slice(1)} alarm, ${st}`
+}
+
+/** The fill says run/stop and nothing else. An alarm never touches it. */
+const psBody = (running?: boolean) => (running ? 'var(--color-sc-run)' : 'var(--color-sc-stop)')
+
+type Sym = { cx: number; cy: number; s?: number; running?: boolean }
+
+/** Centrifugal pump — the customer's windowed disc. */
+export function SymPump({ cx, cy, s = 1.25, running }: Sym) {
   return (
-    <g transform={`scale(${s}) translate(-17.32,-16.43)`}>
+    <g transform={`translate(${cx},${cy}) scale(${s}) translate(-17.32,-16.43)`}>
       <path
         d="M33.75 16.4297C33.75 7.3558 26.3942 0 17.3203 0C8.24645 0 0.890625 7.3558 0.890625 16.4297C0.890625 25.5035 8.24645 32.8594 17.3203 32.8594C26.3942 32.8594 33.75 25.5035 33.75 16.4297Z"
         fill="var(--color-sc-fill-lite)"
       />
       <path
+        className="sc-body"
         d="M17.2688 0.102936C8.22342 0.102936 0.890625 7.43573 0.890625 16.4812C0.890625 25.5267 8.22353 32.8594 17.2688 32.8594C26.3142 32.8594 33.6471 25.5266 33.6471 16.4812C33.6471 7.43562 26.3142 0.102936 17.2688 0.102936ZM17.013 2.66203L3.48148 17.2165C3.46834 16.9704 3.44972 16.73 3.44972 16.4807C3.44972 8.93509 9.50045 2.80004 17.013 2.66203ZM17.5247 2.66203C25.0374 2.80013 31.088 8.93565 31.088 16.4816C31.088 16.7309 31.0694 16.9713 31.0562 17.2174L17.5247 2.66203ZM4.44119 21.6318L30.0967 21.6318C28.0529 26.7094 23.0782 30.3007 17.2695 30.3007C11.4608 30.3007 6.48472 26.7094 4.44119 21.6318Z"
-        fill={body(running)}
+        fill={psBody(running)}
       />
     </g>
   )
 }
 
-/** CO2 stripping fan / blower: a two-leaf rotor in the same disc. */
-export function SymFan({ running, s = 1.25 }: { running?: boolean; s?: number }) {
+/** CO2 stripping fan / blower — a two-leaf rotor in the same disc. */
+export function SymFan({ cx, cy, s = 1.25, running }: Sym) {
   return (
-    <g transform={`scale(${s}) translate(-17.32,-16.43)`}>
+    <g transform={`translate(${cx},${cy}) scale(${s}) translate(-17.32,-16.43)`}>
       <path
         d="M33.75 16.4297C33.75 7.3558 26.3942 0 17.3203 0C8.24645 0 0.890625 7.3558 0.890625 16.4297C0.890625 25.5035 8.24645 32.8594 17.3203 32.8594C26.3942 32.8594 33.75 25.5035 33.75 16.4297Z"
         fill="var(--color-sc-fill-lite)"
       />
       <path
+        className="sc-body"
         d="M0.890625 16.4324C0.890625 7.38686 8.21067 0.0664062 17.2567 0.0664062C26.3026 0.0664062 33.6227 7.38635 33.6227 16.4324C33.6227 25.4785 26.3026 32.7985 17.2567 32.7985C8.21067 32.7985 0.890625 25.4785 0.890625 16.4324ZM3.26523 16.4324C3.26523 22.1259 6.6631 27.0193 11.5443 29.2045L7.91822 6.06838C5.07763 8.62916 3.26523 12.3066 3.26523 16.4324ZM22.9685 29.2045C27.8497 27.0203 31.2476 22.1265 31.2476 16.4324C31.2476 12.3068 29.4353 8.62833 26.5947 6.06735L22.9685 29.2045Z"
-        fill={body(running)}
+        fill={psBody(running)}
       />
     </g>
   )
 }
 
-/** Motor / impeller in a ring. Sits inside the drum filter and the MBBR blower cabinet. */
-export function SymMotor({ running, s = 1 }: { running?: boolean; s?: number }) {
+/** Motor / impeller in a ring — inside the drum filter and the blower cabinet. */
+export function SymMotor({ cx, cy, s = 1, running }: Sym) {
   return (
-    <g transform={`scale(${s}) translate(-21.08,-18.55)`}>
+    <g transform={`translate(${cx},${cy}) scale(${s}) translate(-21.08,-18.55)`}>
       <path
         d="M39.637 18.5555C39.637 8.30849 31.3302 0.00164795 21.0832 0.00164795C10.8361 0.00164795 2.5293 8.30849 2.5293 18.5555C2.5293 28.8025 10.8361 37.1094 21.0832 37.1094C31.3302 37.1094 39.637 28.8025 39.637 18.5555Z"
         fill="var(--color-sc-edge)"
       />
       <path
+        className="sc-body"
         d="M36.7374 18.5561C36.7374 9.91019 29.7285 2.90129 21.0826 2.90129C12.4366 2.90129 5.42773 9.91019 5.42773 18.5561C5.42773 27.202 12.4366 34.2109 21.0826 34.2109C29.7285 34.2109 36.7374 27.202 36.7374 18.5561Z"
-        fill={body(running)}
+        fill={psBody(running)}
       />
       <path d="M15.2852 5.79898L15.2852 31.3105H26.8813V5.79898H15.2852Z" fill="var(--color-sc-edge)" />
     </g>
   )
 }
 
-/** Dose / control valve: a bowtie. */
-export function SymValve({ running, s = 1.1 }: { running?: boolean; s?: number }) {
-  const f = body(running)
+/** Dose / control valve — a bowtie. */
+export function SymValve({ cx, cy, s = 1.1, running }: Sym) {
   return (
-    <g transform={`scale(${s}) translate(-10.32,-16.15)`}>
+    <g transform={`translate(${cx},${cy}) scale(${s}) translate(-10.32,-16.15)`}>
       <path
+        className="sc-body"
         fillRule="evenodd"
         clipRule="evenodd"
         d="M19.6426 1.79492L10.3217 15.7762L1.00081 1.79492L19.6426 1.79492Z"
-        fill={f}
+        fill={psBody(running)}
         stroke="var(--color-sc-edge)"
         strokeWidth="0.926"
       />
       <path
+        className="sc-body"
         fillRule="evenodd"
         clipRule="evenodd"
         d="M19.6426 30.5008H1.00081L10.3217 16.5195L19.6426 30.5008Z"
-        fill={f}
+        fill={psBody(running)}
         stroke="var(--color-sc-edge)"
         strokeWidth="0.926"
       />
@@ -96,10 +112,10 @@ export function SymValve({ running, s = 1.1 }: { running?: boolean; s?: number }
   )
 }
 
-/** Oxygenation cone (DOX). Static: it has no run state to show. */
-export function SymCone({ s = 1.05 }: { s?: number }) {
+/** Oxygenation cone — static, because a cone has no run state. */
+export function SymCone({ cx, cy, s = 1.05 }: { cx: number; cy: number; s?: number }) {
   return (
-    <g transform={`scale(${s}) translate(-14.18,-22.6)`}>
+    <g transform={`translate(${cx},${cy}) scale(${s}) translate(-14.18,-22.6)`}>
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -124,14 +140,126 @@ export function SymCone({ s = 1.05 }: { s?: number }) {
   )
 }
 
-/** Auto / manual chip. Manual is drawn like Auto: outline and letter, never a fill. */
-export function ModeChip({ mode }: { mode: 'A' | 'M' }) {
+/** Drum filter: node box 62x58, motor centred at 0.7. */
+export function DrumFilterBox({ x, y, running }: { x: number; y: number; running?: boolean }) {
+  return (
+    <g>
+      <rect className="rasm-box" x={x} y={y} width={62} height={58} rx="6" />
+      <SymMotor cx={x + 31} cy={y + 29} s={0.7} running={running} />
+    </g>
+  )
+}
+
+/** Blower cabinet 66x86, fan at 0.82 in the lower half. The speed readout sits inside the top. */
+export function BlowerCabinet({ x, y, running }: { x: number; y: number; running?: boolean }) {
+  return (
+    <g>
+      <rect className="rasm-cab" x={x} y={y} width={66} height={86} rx="5" />
+      <SymFan cx={x + 33} cy={y + 60} s={0.82} running={running} />
+    </g>
+  )
+}
+
+type Box = { x: number; y: number; w: number; h: number }
+
+export function Bioreactor({ x, y, w, h }: Box) {
+  return (
+    <g aria-hidden="true">
+      <rect x={x} y={y} width={w} height={h} rx="4" fill="var(--color-sc-vessel)" stroke="var(--color-sc-edge)" strokeWidth="1.4" />
+      <rect x={x + 6} y={y + h * 0.42} width={w - 12} height={h * 0.58 - 6} fill="var(--color-sc-water)" opacity="0.55" />
+      {[0, 1].map((b) => (
+        <g key={b}>
+          {Array.from({ length: 7 }).map((_, i) => (
+            <line
+              key={i}
+              x1={x + 18 + b * (w / 2 - 8) + i * 7}
+              y1={y + h - 10}
+              x2={x + 18 + b * (w / 2 - 8) + i * 7}
+              y2={y + h - 26}
+              stroke="var(--color-sc-line)"
+              strokeWidth="1.3"
+            />
+          ))}
+          <line
+            x1={x + 16 + b * (w / 2 - 8)}
+            y1={y + h - 10}
+            x2={x + 16 + b * (w / 2 - 8) + 50}
+            y2={y + h - 10}
+            stroke="var(--color-sc-line)"
+            strokeWidth="1.6"
+          />
+        </g>
+      ))}
+    </g>
+  )
+}
+
+export function StripperColumn({ x, y, w, h }: Box) {
+  return (
+    <g aria-hidden="true">
+      <rect x={x} y={y} width={w} height={h} rx="3" fill="var(--color-sc-vessel)" stroke="var(--color-sc-edge)" strokeWidth="1.4" />
+      <rect x={x + 7} y={y + 8} width={w - 14} height={h - 40} fill="var(--color-sc-node)" stroke="var(--color-sc-line)" strokeWidth="1" />
+      {Array.from({ length: 9 }).map((_, i) => (
+        <line
+          key={i}
+          x1={x + 7}
+          y1={y + 16 + i * ((h - 56) / 9)}
+          x2={x + w - 7}
+          y2={y + 16 + i * ((h - 56) / 9)}
+          stroke="var(--color-sc-line)"
+          strokeWidth="1.2"
+        />
+      ))}
+      <rect x={x + 7} y={y + h - 30} width={w - 14} height={22} fill="var(--color-sc-water)" opacity="0.5" />
+    </g>
+  )
+}
+
+/** Inlet / outlet flag. The width grows with the label; it never truncates. */
+export function Flag({ x, y, label, dir = 'r' }: { x: number; y: number; label: string; dir?: 'r' | 'l' }) {
+  const tip = 14
+  const w = Math.max(96, Math.ceil(label.length * 7.1) + tip + 22)
+  const h = 34
+  const d =
+    dir === 'r'
+      ? `M${x},${y} H${x + w - tip} L${x + w},${y + h / 2} L${x + w - tip},${y + h} H${x} Z`
+      : `M${x + w},${y} H${x + tip} L${x},${y + h / 2} L${x + tip},${y + h} H${x + w} Z`
+  return (
+    <g aria-hidden="true">
+      <path d={d} fill="var(--color-sc-node)" stroke="var(--color-slate-400)" strokeWidth="1.4" />
+      <text className="rasm-flag" x={x + w / 2 + (dir === 'r' ? -4 : 4)} y={y + h / 2 + 4} textAnchor="middle">
+        {label}
+      </text>
+    </g>
+  )
+}
+
+export function Pipe({ d, fluid = 'proc', idle }: { d: string; fluid?: string; idle?: boolean }) {
+  return <path d={d} className={`rasm-pipe fl-${fluid}${idle ? ' fl-idle' : ''}`} />
+}
+
+export const FLUIDS: Record<string, { label: string; gas: boolean }> = {
+  proc: { label: 'Process water', gas: false },
+  raw: { label: 'Raw water', gas: false },
+  drain: { label: 'Effluent / drain', gas: false },
+  sludge: { label: 'Sludge', gas: false },
+  glycol: { label: 'Glycol loop', gas: false },
+  brine: { label: 'Brine / seawater', gas: false },
+  chem: { label: 'Chemical dosing', gas: false },
+  feed: { label: 'Feed transport', gas: false },
+  o2: { label: 'Oxygen', gas: true },
+  gas: { label: 'Air / CO₂ off-gas', gas: true },
+}
+
+/** Auto / Manual. Outline and letter share ONE token; Manual is a mode, never --warning. */
+export function ModeChip({ x, y, mode }: { x: number; y: number; mode: 'A' | 'M' }) {
   const man = mode === 'M'
   return (
-    <g transform="translate(-8.5,-8.5)">
+    <g>
+      <title>{man ? 'Manual mode' : 'Automatic mode'}</title>
       <rect
-        x="0"
-        y="0"
+        x={x}
+        y={y}
         width="17"
         height="17"
         rx="3"
@@ -139,56 +267,24 @@ export function ModeChip({ mode }: { mode: 'A' | 'M' }) {
         stroke={man ? 'var(--color-sc-manual)' : 'var(--color-slate-300)'}
         strokeWidth="1.2"
       />
-      <text
-        x="8.5"
-        y="12.5"
-        textAnchor="middle"
-        fontSize="10.5"
-        fontFamily="var(--font-sans)"
-        fontWeight="700"
-        fill={man ? 'var(--color-sc-manual)' : 'var(--color-slate-600)'}
-      >
+      <text className="rasm-mode" x={x + 8.5} y={y + 12.5} textAnchor="middle" fill={man ? 'var(--color-sc-manual)' : 'var(--color-slate-600)'}>
         {mode}
       </text>
     </g>
   )
 }
 
-/**
- * The abnormal badge. One rule, two independent axes:
- *
- *   COLOUR = priority. Red for critical, amber for high and below.
- *   SHAPE  = the same thing again. Triangle critical, circle otherwise, because
- *            red-versus-amber cannot answer "critical or high" for a
- *            colour-blind operator.
- *   OPACITY = whether anyone has looked. Solid unacknowledged, faded once
- *            acknowledged. Acknowledgement must never change hue: that reads as
- *            a different kind of alarm rather than the same one, later.
- *
- * It is placed in the MODE-CHIP COLUMN, directly under the chip — never centred
- * on the glyph and never on a flank. The readout sits above, the tag below and
- * the trend affordance right, so that column is the only free side. Relative to
- * a symbol centred at (cx,cy) the anchor is (cx - 32, cy + 9).
- */
-export const ABN_OFFSET = { dx: -32, dy: 9 } as const
-
-export function AbnormalBadge({ critical, acknowledged }: { critical?: boolean; acknowledged?: boolean }) {
+/** Priority badge: triangle critical, circle otherwise; faded unless unacknowledged. */
+export function AbnormalRing({ at, alarm }: { at: [number, number]; alarm: Alarm }) {
+  const crit = alarm.level === 'critical'
   return (
-    <g opacity={acknowledged ? 0.45 : 1} pointerEvents="none">
-      {critical ? (
-        <path d="M0 -8.8 L9 6.6 L-9 6.6 Z" fill="var(--color-sc-abnormal)" stroke="#fff" strokeWidth="1.4" strokeLinejoin="round" />
-      ) : (
-        <circle r="8" fill="var(--color-warning)" stroke="#fff" strokeWidth="1.4" />
-      )}
-      <text
-        x="0"
-        y={critical ? 5.6 : 3.8}
-        textAnchor="middle"
-        fontSize="10"
-        fontFamily="var(--font-sans)"
-        fontWeight="700"
-        fill={critical ? '#fff' : '#3d2c00'}
-      >
+    <g
+      className={`rasm-abn ${tone(alarm)}${alarm.state === 'unack' ? ' unack' : ''}`}
+      pointerEvents="none"
+      transform={`translate(${at[0]},${at[1]})`}
+    >
+      {crit ? <path className="rasm-abn-dot" d="M0 -8.8 L9 6.6 L-9 6.6 Z" strokeLinejoin="round" /> : <circle className="rasm-abn-dot" r="8" />}
+      <text className="rasm-abn-g" y={crit ? 5.6 : 3.8} textAnchor="middle">
         !
       </text>
     </g>
@@ -196,53 +292,112 @@ export function AbnormalBadge({ critical, acknowledged }: { critical?: boolean; 
 }
 
 /**
- * Value readout.
+ * Hit wrapper. `mark` is the badge anchor, PASSED IN — a symbol knows its own
+ * centre, and getBBox inside an effect never resolves in time.
  *
- * A sensor readout IS its alarm, so it marks itself — but only on the box edge
- * and the value. It must not also carry a badge: a lye pump once drew an amber
- * ring round the symbol, a second round its readout and an amber Manual chip,
- * three amber shapes for one condition. The badge belongs to the SYMBOL, the
- * edge to the readout.
+ * `interactive` stands in for the app's onClick: these pages are static, so the
+ * reference carries the role, tab stop and classes that drive :hover and
+ * :focus-visible, but no handler.
  */
+export function Eq({
+  interactive,
+  title,
+  children,
+  alarm,
+  mark,
+  className = '',
+}: {
+  interactive?: boolean
+  title?: string
+  children: React.ReactNode
+  alarm?: Alarm | null
+  mark?: [number, number]
+  className?: string
+}) {
+  const cls = [
+    interactive ? 'rasm-eq' : '',
+    alarm ? `rasm-eq-abn ${tone(alarm)}${alarm.state === 'unack' ? ' unack' : ''}` : '',
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ')
+  const label = [title, alarm ? alarmTitle(alarm) : null].filter(Boolean).join(' — ')
+  return (
+    <g className={cls || undefined} role={interactive ? 'button' : undefined} tabIndex={interactive ? 0 : undefined}>
+      {label ? <title>{label}</title> : null}
+      {children}
+      {alarm && mark ? <AbnormalRing at={mark} alarm={alarm} /> : null}
+    </g>
+  )
+}
+
+export function Tag2({
+  x,
+  y,
+  tag,
+  desc,
+  anchor = 'middle',
+  alarm,
+}: {
+  x: number
+  y: number
+  tag?: string
+  desc?: string[]
+  anchor?: 'middle' | 'start' | 'end'
+  alarm?: Alarm | null
+}) {
+  return (
+    <g aria-hidden="true" className={alarm ? `abn ${tone(alarm)}` : undefined}>
+      {tag ? (
+        <text className="rasm-tag" x={x} y={y} textAnchor={anchor}>
+          {tag}
+        </text>
+      ) : null}
+      {desc?.map((d, i) => (
+        <text key={i} className="rasm-desc" x={x} y={y + 13 + i * 12} textAnchor={anchor}>
+          {d}
+        </text>
+      ))}
+    </g>
+  )
+}
+
+/** Value readout. The box is not clickable; only the trend icon (right, +13) is. */
 export function RD({
+  x,
+  y,
+  w = 60,
+  h = 25,
   value,
   unit,
   alarm,
-  trend,
-  w = 60,
+  trendable,
+  trendOn,
+  mono = true,
 }: {
-  value: string
-  unit: string
-  alarm?: 'crit' | 'warn'
-  trend?: boolean
+  x: number
+  y: number
   w?: number
+  h?: number
+  value: string
+  unit?: string
+  alarm?: Alarm | null
+  trendable?: boolean
+  trendOn?: boolean
+  mono?: boolean
 }) {
-  const stroke = alarm === 'crit' ? 'var(--color-sc-abnormal)' : alarm === 'warn' ? 'var(--color-warning)' : 'var(--color-slate-200)'
   return (
-    <g>
-      <rect x={-w / 2} y="-12.5" width={w} height="25" rx="4" fill="#fff" stroke={stroke} strokeWidth={alarm ? 2.4 : 1.4} />
-      <text
-        x="0"
-        y="4.5"
-        textAnchor="middle"
-        fontSize="13"
-        fontFamily="var(--font-mono)"
-        fill={alarm ? 'var(--color-critical-text)' : 'var(--color-fg)'}
-      >
+    <g className={`rasm-rd${trendable ? ' t' : ''}${alarm ? ` abn ${tone(alarm)}` : ''}`}>
+      <rect className="rasm-rd-box" x={x} y={y} width={w} height={h} rx="4" />
+      <text className={`rasm-rd-v${mono ? '' : ' s'}`} x={x + w / 2} y={y + h / 2 + 5} textAnchor="middle">
         {value}
-        <tspan fontSize="9.5" fill="var(--color-fg-muted)"> {unit}</tspan>
+        {unit ? <tspan className="rasm-rd-u"> {unit}</tspan> : null}
       </text>
-      {trend ? (
-        <g transform={`translate(${w / 2 + 13},0)`}>
-          <rect x="-9" y="-9" width="18" height="18" rx="4.5" fill="var(--color-primary-bg)" />
-          <g
-            transform="translate(-6.3,-5.6) scale(0.7)"
-            fill="none"
-            stroke="var(--color-primary-text)"
-            strokeWidth="1.8"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
+      {trendable ? (
+        <g className={`rasm-rd-tr${trendOn ? ' on' : ''}`} transform={`translate(${x + w + 13},${y + h / 2})`} role="button">
+          <rect className="rasm-rd-trhit" x={-11} y={-11} width={22} height={22} />
+          <rect className="rasm-rd-trbg" x={-9} y={-9} width={18} height={18} rx={4.5} />
+          <g className="rasm-rd-trln" transform="translate(-6.3,-5.6) scale(0.7)">
             <path d="M3 3 L3 13 L15 13" />
             <path d="M6 10 L9 7 L11 9 L15 4" />
           </g>
@@ -252,29 +407,101 @@ export function RD({
   )
 }
 
-/** Inlet / outlet flow flag. The tip points the way the fluid travels. */
-export function Flag({ label, dir = 'r' }: { label: string; dir?: 'r' | 'l' }) {
-  const tip = 14
-  const w = Math.max(96, Math.ceil(label.length * 7.1) + tip + 22)
-  const h = 34
-  const d =
-    dir === 'r'
-      ? `M0,0 H${w - tip} L${w},${h / 2} L${w - tip},${h} H0 Z`
-      : `M${w},0 H${tip} L0,${h / 2} L${tip},${h} H${w} Z`
+/** Run/stop trend affordance. A step wave, so binary reads apart from the analog line chart. */
+export function SymTrend({ cx, cy, on }: { cx: number; cy: number; on?: boolean }) {
   return (
-    <g transform={`translate(${-w / 2},${-h / 2})`}>
-      <path d={d} fill="var(--color-sc-node)" stroke="var(--color-slate-400)" strokeWidth="1.4" />
-      <text
-        x={w / 2 + (dir === 'r' ? -4 : 4)}
-        y={h / 2 + 4}
-        textAnchor="middle"
-        fontSize="12"
-        fontFamily="var(--font-sans)"
-        fontWeight="600"
-        fill="var(--color-fg)"
-      >
-        {label}
-      </text>
+    <g className={`rasm-symtrend${on ? ' on' : ''}`} transform={`translate(${cx},${cy})`} role="button">
+      <rect x={-11} y={-11} width={22} height={22} fill="transparent" />
+      <rect className="rasm-symtrend-bg" x={-9} y={-9} width={18} height={18} rx={4.5} />
+      <g className="rasm-symtrend-ln" transform="translate(-6.5,-5) scale(0.72)">
+        <path d="M1 12 H4 V3 H8 V12 H11 V3 H15" />
+      </g>
+    </g>
+  )
+}
+
+/** Multiplicity: green running, amber in service but stopped, grey out of service. */
+export function UnitDots({ cx, y, units }: { cx: number; y: number; units: { run?: boolean; duty?: boolean }[] }) {
+  const gap = 16
+  const x0 = cx - ((units.length - 1) * gap) / 2
+  return (
+    <g aria-hidden="true">
+      {units.map((u, i) => (
+        <circle
+          key={i}
+          cx={x0 + i * gap}
+          cy={y}
+          r="5.5"
+          fill={u.run ? 'var(--color-success-solid)' : u.duty ? 'var(--color-warning-mid)' : 'var(--color-sc-stop)'}
+          stroke="var(--color-sc-edge)"
+          strokeWidth="1"
+        />
+      ))}
+    </g>
+  )
+}
+
+/**
+ * The canonical cluster. Every mimic is authored to this geometry, taken from
+ * the RAS lift pump:
+ *
+ *   readout    x cx-33, y cy-48, 66x25
+ *   mode chip  x cx-40, y cy-20
+ *   badge      [cx-32, cy+9] — the mode-chip column, under the chip
+ *   run trend  cx+30
+ *   tag        baseline cy+40, description lines +13 / +25
+ *
+ * Fans sit their chip lower: chip cy-8, badge cy+26.
+ */
+export const CLUSTER = {
+  rd: (cx: number, cy: number) => ({ x: cx - 33, y: cy - 48, w: 66 }),
+  chip: (cx: number, cy: number, fan = false) => ({ x: cx - 40, y: fan ? cy - 8 : cy - 20 }),
+  badge: (cx: number, cy: number, fan = false): [number, number] => [cx - 32, fan ? cy + 26 : cy + 9],
+  trend: (cx: number, cy: number) => ({ cx: cx + 30, cy }),
+  tag: (cx: number, cy: number) => ({ x: cx, y: cy + 40 }),
+} as const
+
+export function EquipmentCluster({
+  kind = 'pump',
+  cx,
+  cy,
+  running,
+  mode = 'A',
+  alarm,
+  value,
+  unit = 'Hz',
+  tag,
+  name,
+  trendValueOn,
+  trendRunOn,
+}: {
+  kind?: 'pump' | 'fan' | 'valve'
+  cx: number
+  cy: number
+  running?: boolean
+  mode?: 'A' | 'M'
+  alarm?: Alarm | null
+  value?: string
+  unit?: string
+  tag?: string
+  name: string
+  trendValueOn?: boolean
+  trendRunOn?: boolean
+}) {
+  const S = kind === 'fan' ? SymFan : kind === 'valve' ? SymValve : SymPump
+  const fan = kind === 'fan'
+  const rd = CLUSTER.rd(cx, cy)
+  const chip = CLUSTER.chip(cx, cy, fan)
+  const t = CLUSTER.tag(cx, cy)
+  return (
+    <g>
+      {value != null ? <RD {...rd} value={value} unit={unit} trendable={!!tag} trendOn={trendValueOn} /> : null}
+      <Eq title={name} alarm={alarm} mark={CLUSTER.badge(cx, cy, fan)} interactive>
+        <S cx={cx} cy={cy} running={running} />
+      </Eq>
+      <ModeChip {...chip} mode={mode} />
+      {kind !== 'valve' ? <SymTrend {...CLUSTER.trend(cx, cy)} on={trendRunOn} /> : null}
+      <Tag2 {...t} tag={tag} desc={[name]} alarm={alarm} />
     </g>
   )
 }

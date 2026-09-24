@@ -1,16 +1,23 @@
 import ComponentDoc, { type Variant } from '../../../components/ComponentDoc'
 import { ignitionSpecs } from '../../../components/ignition-specs'
 import {
+  Pipe,
+  Tag2,
+  Bioreactor,
   SymPump,
   SymFan,
   SymMotor,
   SymValve,
   SymCone,
+  DrumFilterBox,
+  BlowerCabinet,
   ModeChip,
-  AbnormalBadge,
-  ABN_OFFSET,
+  AbnormalRing,
+  EquipmentCluster,
+  CLUSTER,
   RD,
   Flag,
+  UnitDots,
 } from '../../../components/scada'
 
 function Cell({
@@ -26,7 +33,7 @@ function Cell({
 }) {
   return (
     <div className="flex flex-col items-center gap-2.5">
-      <svg width={w} height={h} viewBox={`${-w / 2} ${-h / 2} ${w} ${h}`} aria-hidden>
+      <svg className="rasm" width={w} height={h} viewBox={`${-w / 2} ${-h / 2} ${w} ${h}`} aria-hidden>
         {children}
       </svg>
       <span className="max-w-[120px] text-center text-xs leading-snug text-slate-600">{label}</span>
@@ -56,19 +63,19 @@ const variants: Variant[] = [
     preview: (
       <div className="flex flex-wrap items-start gap-6 rounded-xl border border-slate-200 bg-white p-6">
         <Cell label="Pump">
-          <SymPump running />
+          <SymPump cx={0} cy={0} running />
         </Cell>
         <Cell label="Fan / blower">
-          <SymFan running />
+          <SymFan cx={0} cy={0} running />
         </Cell>
         <Cell label="Motor / impeller">
-          <SymMotor running />
+          <SymMotor cx={0} cy={0} running />
         </Cell>
         <Cell label="Dose / control valve">
-          <SymValve running />
+          <SymValve cx={0} cy={0} running />
         </Cell>
         <Cell label="O₂ cone">
-          <SymCone />
+          <SymCone cx={0} cy={0} />
         </Cell>
       </div>
     ),
@@ -89,34 +96,31 @@ const variants: Variant[] = [
     preview: (
       <div className="flex flex-wrap items-start gap-7 rounded-xl border border-slate-200 bg-white p-6">
         <Cell label="Running">
-          <SymPump running />
+          <SymPump cx={0} cy={0} running />
         </Cell>
         <Cell label="Stopped">
-          <SymPump />
+          <SymPump cx={0} cy={0} />
         </Cell>
         <Cell label="High, unacknowledged">
           <g>
-            <SymPump running />
-            <g transform={`translate(${ABN_OFFSET.dx},${ABN_OFFSET.dy})`}>
-              <AbnormalBadge />
-            </g>
+            <SymPump cx={0} cy={0} running />
+            <AbnormalRing at={CLUSTER.badge(0, 0)} alarm={{ level: 'high', state: 'unack' }} />
           </g>
         </Cell>
         <Cell label="Critical, unacknowledged">
           <g>
-            <SymPump running />
-            <g transform={`translate(${ABN_OFFSET.dx},${ABN_OFFSET.dy})`}>
-              <AbnormalBadge critical />
-            </g>
+            <SymPump cx={0} cy={0} running />
+            <AbnormalRing at={CLUSTER.badge(0, 0)} alarm={{ level: 'critical', state: 'unack' }} />
           </g>
         </Cell>
         <Cell label="Critical, acknowledged">
           <g>
-            <SymPump running />
-            <g transform={`translate(${ABN_OFFSET.dx},${ABN_OFFSET.dy})`}>
-              <AbnormalBadge critical acknowledged />
-            </g>
+            <SymPump cx={0} cy={0} running />
+            <AbnormalRing at={CLUSTER.badge(0, 0)} alarm={{ level: 'critical', state: 'ack' }} />
           </g>
+        </Cell>
+        <Cell label="Blocked or out of service">
+          <SymPump cx={0} cy={0} running />
         </Cell>
       </div>
     ),
@@ -142,23 +146,19 @@ const body = (running) =>
     preview: (
       <div className="flex flex-wrap items-center gap-9 rounded-xl border border-slate-200 bg-white p-6">
         <Cell label="Auto" w={56} h={56}>
-          <ModeChip mode="A" />
+          <ModeChip x={-8.5} y={-8.5} mode="A" />
         </Cell>
         <Cell label="Manual" w={56} h={56}>
-          <ModeChip mode="M" />
+          <ModeChip x={-8.5} y={-8.5} mode="M" />
         </Cell>
         <Cell label="Readout, trendable" w={130} h={56}>
-          <g transform="translate(-14,0)">
-            <RD value="42" unit="Hz" trend />
-          </g>
+          <RD x={-33} y={-12.5} w={66} value="42" unit="Hz" trendable />
         </Cell>
         <Cell label="Readout, manual setpoint" w={130} h={56}>
-          <g transform="translate(-14,0)">
-            <RD value="0.0" unit="L/h" alarm="warn" trend />
-          </g>
+          <RD x={-33} y={-12.5} w={66} value="0.0" unit="L/h" trendable alarm={{ level: 'high', state: 'unack' }} />
         </Cell>
         <Cell label="Flow flag" w={140} h={56}>
-          <Flag label="Fish tanks" />
+          <Flag x={-60} y={-17} label="Fish tanks" />
         </Cell>
       </div>
     ),
@@ -209,98 +209,49 @@ const body = (running) =>
     name: 'Mimic fragment',
     platform: 'Desktop',
     description:
-      'A drum filter feeding the bioreactor, with the tag block under each symbol and the reading above it. This is the arrangement every mimic uses: readout above, mode chip and alarm badge in the left column, tag and description below, trend affordance to the right.',
+      'The canonical cluster, twice. Every mimic is authored to this geometry, taken from the RAS lift pump: readout above at cy-48, mode chip left at cx-40, alarm badge under the chip at [cx-32, cy+9], run/stop trend right at cx+30, tag and description below from cy+40. Fans sit their chip lower.',
     preview: (
       <div className="overflow-hidden rounded-xl border border-slate-200 bg-white p-5">
         <svg
-          viewBox="0 0 560 220"
-          className="block h-auto w-full"
+          viewBox="0 0 560 230"
+          className="rasm block h-auto w-full"
           role="img"
-          aria-label="Backwash pump filter 1 stopped, feeding drum filter 1, which discharges to the bioreactor at 248 centimetres"
+          aria-label="Backwash pump filter 1 stopped and in alarm, feeding drum filter 1, which discharges to the bioreactor at 248 centimetres"
         >
-          {/* pipes */}
-          <path d="M104 96 H150" fill="none" stroke="var(--color-fl-proc)" strokeWidth="3.5" strokeLinecap="round" />
-          <path d="M214 96 H300" fill="none" stroke="var(--color-fl-proc)" strokeWidth="3.5" strokeLinecap="round" />
+          <Pipe d="M118 120 H176" />
+          <Pipe d="M242 120 H300" />
 
-          {/* backwash pump */}
-          <g transform="translate(76,96)">
-            <SymPump />
-          </g>
-          <g transform="translate(46,78)">
-            <ModeChip mode="A" />
-          </g>
-          <g transform="translate(76,50)">
-            <RD value="0" unit="Hz" />
-          </g>
-          <text x="76" y="136" textAnchor="middle" fontSize="11" fontFamily="var(--font-mono)" fill="var(--color-fg-muted)">
-            DPT1-FIL0-PU1
-          </text>
-          <text x="76" y="150" textAnchor="middle" fontSize="11" fontFamily="var(--font-sans)" fill="var(--color-fg-muted)">
-            Backwash pump filter 1
-          </text>
+          <EquipmentCluster
+            cx={86}
+            cy={120}
+            running={false}
+            mode="A"
+            value="0"
+            unit="Hz"
+            tag="DPT1-FIL0-PU1"
+            name="Backwash pump filter 1"
+            alarm={{ level: 'high', state: 'unack' }}
+          />
 
-          {/* drum filter: motor in a cabinet */}
-          <rect x="150" y="62" width="64" height="68" rx="6" fill="var(--color-sc-node)" stroke="var(--color-slate-300)" strokeWidth="1.4" />
-          <g transform="translate(182,96)">
-            <SymMotor running />
-          </g>
-          <g transform="translate(160,74)">
-            <ModeChip mode="A" />
-          </g>
-          <text x="182" y="150" textAnchor="middle" fontSize="11" fontFamily="var(--font-mono)" fill="var(--color-fg-muted)">
-            DPT1-FIL1-FE1
-          </text>
-          <text x="182" y="164" textAnchor="middle" fontSize="11" fontFamily="var(--font-sans)" fill="var(--color-fg-muted)">
-            Drum filter 1
-          </text>
+          <DrumFilterBox x={178} y={91} running />
+          <ModeChip x={186} y={99} mode="A" />
+          <Tag2 x={209} y={172} tag="DPT1-FIL1-FE1" desc={['Drum filter 1']} />
 
-          {/* bioreactor */}
-          <g>
-            <rect x="300" y="40" width="200" height="130" rx="4" fill="var(--color-sc-vessel)" stroke="var(--color-sc-edge)" strokeWidth="1.4" />
-            <rect x="306" y={40 + 130 * 0.42} width="188" height={130 * 0.58 - 6} fill="var(--color-sc-water)" opacity="0.55" />
-            {[0, 1].map((b) => (
-              <g key={b}>
-                {Array.from({ length: 7 }).map((_, i) => (
-                  <line
-                    key={i}
-                    x1={318 + b * (200 / 2 - 8) + i * 7}
-                    y1={40 + 130 - 10}
-                    x2={318 + b * (200 / 2 - 8) + i * 7}
-                    y2={40 + 130 - 26}
-                    stroke="var(--color-sc-line)"
-                    strokeWidth="1.3"
-                  />
-                ))}
-                <line
-                  x1={316 + b * (200 / 2 - 8)}
-                  y1={40 + 130 - 10}
-                  x2={316 + b * (200 / 2 - 8) + 50}
-                  y2={40 + 130 - 10}
-                  stroke="var(--color-sc-line)"
-                  strokeWidth="1.6"
-                />
-              </g>
-            ))}
-          </g>
-          <g transform="translate(374,96)">
-            <RD value="248" unit="cm" trend />
-          </g>
-          <text x="400" y="186" textAnchor="middle" fontSize="11" fontFamily="var(--font-mono)" fill="var(--color-fg-muted)">
-            DPT1-AEB0-LT1
-          </text>
-          <text x="400" y="200" textAnchor="middle" fontSize="11" fontFamily="var(--font-sans)" fill="var(--color-fg-muted)">
-            Level in bioreactor
-          </text>
+          <Bioreactor x={300} y={52} w={200} h={130} />
+          <RD x={367} y={107} w={66} value="248" unit="cm" trendable />
+          <Tag2 x={400} y={200} tag="DPT1-AEB0-LT1" desc={['Level in bioreactor']} />
         </svg>
       </div>
     ),
-    code: `/* Bioreactor — vessel fill, water at 55%, diffuser grid along the floor */
-<rect rx="4" fill="var(--njord-sc-vessel)" stroke="var(--njord-sc-edge)" stroke-width="1.4"/>
-<rect y={h*0.42} height={h*0.58-6} fill="var(--njord-sc-water)" opacity="0.55"/>
+    code: `/* The cluster every mimic is authored to, from symbol centre (cx, cy): */
+readout    x cx-33, y cy-48, 66x25
+mode chip  x cx-40, y cy-20        /* fan: cy-8  */
+badge      [cx-32, cy+9]           /* fan: cy+26 */
+run trend  cx+30
+tag        baseline cy+40, description lines +13 / +25
 
-/* Stripper column — the same vessel with stacked packing hatch instead */
-<rect x={x+7} y={y+8} width={w-14} height={h-40}
-      fill="var(--njord-sc-node)" stroke="var(--njord-sc-line)" stroke-width="1"/>`,
+/* The badge anchor is PASSED IN, never measured: getBBox inside an effect
+   never resolves in time, and re-measuring every render would loop. */`,
   },
   {
     name: 'Interactive nodes',
@@ -323,7 +274,7 @@ const body = (running) =>
               aria-hidden
             >
               {hover ? <circle r="23" fill="none" stroke="var(--color-primary)" strokeWidth="1.6" /> : null}
-              <SymPump running />
+              <SymPump cx={0} cy={0} running />
             </svg>
             <span className="text-xs text-slate-600">{l}</span>
           </div>
@@ -353,6 +304,40 @@ export default function ScadaSymbolsPage() {
       notes={{
         heading: 'Rules',
         items: [
+          <>
+            <strong className="font-semibold text-ink">Suppression draws nothing.</strong> A
+            blocked or out-of-service alarm is not an abnormal condition the operator is being
+            told about, so the symbol renders exactly as if there were no alarm: pass no alarm at
+            all rather than a suppressed state. Drawing it would re-create the noise that
+            blocking was used to remove.
+          </>,
+          <>
+            <strong className="font-semibold text-ink">Cyan is interaction, never state.</strong>{' '}
+            Hover, focus and &ldquo;on Trends&rdquo; are the only things that may use it. A symbol
+            never turns cyan because of something the process is doing.
+          </>,
+          <>
+            <strong className="font-semibold text-ink">Known gap: medium and low are drawn as
+            high.</strong> The mimic carries two tones where the register carries five, so a
+            medium and a low alarm are indistinguishable on the diagram. Deliberate in the
+            application; it needs a decision from the alarm-philosophy owner before this system
+            states it as a rule.
+          </>,
+          <>
+            <strong className="font-semibold text-ink">Known gap: not every symbol can show an
+            alarm.</strong> Dose valves carry no tag, drum filters carry a tag but no badge
+            anchor, and the blower cabinet&rsquo;s alarm lives on its speed readout instead. Each
+            of those needs a decision rather than a default.
+          </>,
+          <>
+            <strong className="font-semibold text-ink">Known gap: hover is invisible on a bare
+            symbol.</strong> The application writes{' '}
+            <code className="font-mono text-[11px]">drop-shadow(0 0 0 2px …)</code>, and{' '}
+            <code className="font-mono text-[11px]">drop-shadow()</code> has no spread argument, so
+            the declaration is invalid and dropped: a pump, fan or valve changes only the cursor.
+            Boxed symbols get a cyan stroke from a separate rule and are fine. This reference uses
+            the two-argument form so the state is at least visible.
+          </>,
           <>
             <strong className="font-semibold text-ink">A mode chip shares the line under the
             readout with the setpoint.</strong> Placed beside the glyph it lands on the process
