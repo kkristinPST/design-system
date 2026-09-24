@@ -197,6 +197,9 @@ const dark: Skin = {
     'color-sc-stop':         '#3A4A63',
     'color-sc-abnormal':     '#FF6F66',
     'color-sc-manual':       '#D08A28',
+    'color-sc-alarm-lo':      '#E8C94A',
+    'color-sc-alarm-lo-edge': '#E8C94A',
+    'color-sc-alarm-lo-text': '#EDD677',
   },
 }
 
@@ -311,7 +314,10 @@ const legacy: Skin = {
     'color-sc-run':      '#2C3A48',
     'color-sc-stop':     '#C4CCD4',
     'color-sc-abnormal': '#C8443D',
-    'color-sc-manual':   '#A25E08',
+    'color-sc-manual':        '#A25E08',
+    'color-sc-alarm-lo':      '#E3BE2C',
+    'color-sc-alarm-lo-edge': '#B39200',
+    'color-sc-alarm-lo-text': '#5E4D00',
   },
 }
 

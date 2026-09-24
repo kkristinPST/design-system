@@ -49,11 +49,10 @@ g.abn.warn > .rasm-tag { fill: var(--color-warning-text); }
 /* ── equipment hit area: hover and focus are cyan. Interaction colour, never state. ── */
 .rasm-eq { cursor: pointer; }
 .rasm-eq > rect, .rasm-eq path, .rasm-eq circle { transition: filter .12s; }
-/* NOTE: the app writes drop-shadow(0 0 0 2px var(--primary)) here, which is
-   invalid — drop-shadow() takes no spread — so the declaration is dropped and a
-   bare pump shows no hover at all. Documented as an open gap; this build uses
-   the two-argument form so the state is at least visible in the reference. */
-.rasm-eq:hover { filter: drop-shadow(0 0 2px var(--color-primary)); }
+/* Two stacked shadows rather than one: the original wrote
+   drop-shadow(0 0 0 2px …), which is invalid because drop-shadow takes no
+   spread, so the declaration was dropped and a bare pump had no hover at all. */
+.rasm-eq:hover { filter: drop-shadow(0 0 2px var(--color-primary)) drop-shadow(0 0 1px var(--color-primary)); }
 .rasm-eq:hover .rasm-box, .rasm-eq:hover .rasm-cab { stroke: var(--color-primary); }
 svg g[role='button']:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 1px; }
 
@@ -95,6 +94,30 @@ svg g[role='button']:focus-visible { outline: 2px solid var(--color-primary); ou
 .rasm-abn-g { font-family: var(--font-sans); font-size: 10px; font-weight: 700; fill: #3d2c00; }
 .rasm-abn.crit .rasm-abn-g { fill: #fff; }
 .rasm-abn:not(.unack) { opacity: .45; }
+/* medium / low: a yellow DIAMOND. Colour and shape both separate it from high
+   (amber circle), so the mimic no longer collapses five register priorities
+   into two tones. */
+.rasm-abn.lo .rasm-abn-dot { fill: var(--color-sc-alarm-lo); }
+.rasm-rd.abn.lo .rasm-rd-box { stroke: var(--color-sc-alarm-lo-edge); }
+.rasm-rd.abn.lo .rasm-rd-v { fill: var(--color-sc-alarm-lo-text); }
+g.abn.lo > .rasm-tag { fill: var(--color-sc-alarm-lo-text); }
+
+/* ── equipment out of service: the MACHINE, not the alarm ──
+   A PLC lock-out. The symbol ghosts to 40% and a lock replaces the A/M chip,
+   because Auto versus Manual is meaningless on a machine nobody can start. Any
+   alarm or suppression mark keeps its full opacity on top. */
+.rasm-eq.eq-oos > :not(title):not(.rasm-abn):not(.rasm-sup) { opacity: .4; }
+.rasm-eqoos-chip > rect { fill: var(--color-sc-node); stroke: var(--color-slate-600); stroke-width: 1.2; }
+.rasm-eqoos-chip g > * { fill: none; stroke: var(--color-slate-600); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ── suppressed: not healthy, and not an alarm either ──
+   Neutral ink, dashed to say "not listening", and a SQUARE so it cannot be read
+   as the alarm circle or triangle. Icons rather than the register's B / M
+   letters, because an out-of-service "M" would sit directly under a Manual "M"
+   mode chip in the same column. Drawn only when no alarm is standing. */
+.rasm-sup-box { fill: var(--color-sc-node); stroke: var(--color-slate-600); stroke-width: 1.2; stroke-dasharray: 2.5 1.8; }
+.rasm-sup-ic > * { fill: none; stroke: var(--color-slate-600); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.rasm-rd.sup .rasm-rd-box { stroke: var(--color-slate-600); stroke-dasharray: 3 2; }
 
 /* legend chips (HTML, for a mimic legend strip) */
 .rasm-leg-chip {
@@ -102,7 +125,7 @@ svg g[role='button']:focus-visible { outline: 2px solid var(--color-primary); ou
   border-radius: 3px; background: var(--color-sc-node); border: 1.2px solid var(--color-slate-300);
   color: var(--color-slate-600); font-size: 12px; font-weight: 800;
 }
-.rasm-leg-chip.man { background: var(--color-sc-node); border-color: var(--color-sc-manual); color: var(--color-sc-manual); }
+.rasm-leg-chip.man { border-color: var(--color-sc-manual); color: var(--color-sc-manual); }
 
 @media (prefers-reduced-motion: reduce) {
   .rasm * { transition-duration: .001ms !important; }

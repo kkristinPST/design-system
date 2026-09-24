@@ -19,8 +19,14 @@ export type Alarm = {
   state: 'unack' | 'ack' | 'returned'
 }
 
-/** High, medium and low all render as "warn": the mimic carries two tones, the register five. */
-export const tone = (a?: Alarm | null) => (a && a.level === 'critical' ? 'crit' : 'warn')
+/** crit (red triangle) · lo (yellow diamond, medium and low) · warn (amber circle, high). */
+export const tone = (a?: Alarm | null) =>
+  !a ? 'warn' : a.level === 'critical' ? 'crit' : a.level === 'medium' || a.level === 'low' ? 'lo' : 'warn'
+
+export type Supp = 'blocked' | 'oos'
+
+export const suppTitle = (s?: Supp | null) =>
+  s === 'oos' ? 'Alarm out of service' : s === 'blocked' ? 'Alarm blocked' : ''
 
 export function alarmTitle(a?: Alarm | null) {
   if (!a) return ''
@@ -252,8 +258,20 @@ export const FLUIDS: Record<string, { label: string; gas: boolean }> = {
 }
 
 /** Auto / Manual. Outline and letter share ONE token; Manual is a mode, never --warning. */
-export function ModeChip({ x, y, mode }: { x: number; y: number; mode: 'A' | 'M' }) {
+export function ModeChip({ x, y, mode, eqOos }: { x: number; y: number; mode: 'A' | 'M'; eqOos?: boolean }) {
   const man = mode === 'M'
+  // A locked-out machine has no meaningful Auto/Manual, so the chip becomes a lock.
+  if (eqOos)
+    return (
+      <g className="rasm-eqoos-chip">
+        <title>Equipment out of service</title>
+        <rect x={x} y={y} width="17" height="17" rx="3" />
+        <g transform={`translate(${x + 3},${y + 3}) scale(0.46)`}>
+          <rect x="3" y="11" width="18" height="11" rx="2" />
+          <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+        </g>
+      </g>
+    )
   return (
     <g>
       <title>{man ? 'Manual mode' : 'Automatic mode'}</title>
@@ -277,16 +295,50 @@ export function ModeChip({ x, y, mode }: { x: number; y: number; mode: 'A' | 'M'
 /** Priority badge: triangle critical, circle otherwise; faded unless unacknowledged. */
 export function AbnormalRing({ at, alarm }: { at: [number, number]; alarm: Alarm }) {
   const crit = alarm.level === 'critical'
+  const lo = alarm.level === 'medium' || alarm.level === 'low'
   return (
     <g
       className={`rasm-abn ${tone(alarm)}${alarm.state === 'unack' ? ' unack' : ''}`}
       pointerEvents="none"
       transform={`translate(${at[0]},${at[1]})`}
     >
-      {crit ? <path className="rasm-abn-dot" d="M0 -8.8 L9 6.6 L-9 6.6 Z" strokeLinejoin="round" /> : <circle className="rasm-abn-dot" r="8" />}
+      {crit ? (
+        <path className="rasm-abn-dot" d="M0 -8.8 L9 6.6 L-9 6.6 Z" strokeLinejoin="round" />
+      ) : lo ? (
+        <path className="rasm-abn-dot" d="M0 -9 L9 0 L0 9 L-9 0 Z" strokeLinejoin="round" />
+      ) : (
+        <circle className="rasm-abn-dot" r="8" />
+      )}
       <text className="rasm-abn-g" y={crit ? 5.6 : 3.8} textAnchor="middle">
         !
       </text>
+    </g>
+  )
+}
+
+/**
+ * Suppression mark: the alarm is deactivated, the condition is not.
+ *
+ * Neutral ink and a dashed SQUARE — never an alarm colour, and never the
+ * alarm's circle or triangle. "We stopped listening" must not look like
+ * "nothing is wrong", and must not look like an alarm either. Icons rather than
+ * the register's B / M letters, because an out-of-service "M" would sit
+ * directly under a Manual "M" mode chip in the same column.
+ */
+export function SuppMark({ at, supp }: { at: [number, number]; supp: Supp }) {
+  return (
+    <g className={`rasm-sup ${supp}`} pointerEvents="none" transform={`translate(${at[0]},${at[1]})`}>
+      <rect className="rasm-sup-box" x="-8" y="-8" width="16" height="16" rx="3" />
+      <g className="rasm-sup-ic" transform="translate(-5.5,-5.5) scale(0.46)">
+        {supp === 'oos' ? (
+          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+        ) : (
+          <>
+            <circle cx="12" cy="12" r="10" />
+            <path d="M4.93 4.93l14.14 14.14" />
+          </>
+        )}
+      </g>
     </g>
   )
 }
@@ -304,6 +356,8 @@ export function Eq({
   title,
   children,
   alarm,
+  supp,
+  eqOos,
   mark,
   className = '',
 }: {
@@ -311,22 +365,36 @@ export function Eq({
   title?: string
   children: React.ReactNode
   alarm?: Alarm | null
+  /** The ALARM is deactivated. Independent of eqOos, and an active alarm wins. */
+  supp?: Supp | null
+  /** The MACHINE is locked out by the PLC. Independent of supp. */
+  eqOos?: boolean
   mark?: [number, number]
   className?: string
 }) {
+  // Precedence: active alarm > suppression > none.
+  const sp = alarm ? null : supp
   const cls = [
     interactive ? 'rasm-eq' : '',
+    eqOos ? 'eq-oos' : '',
     alarm ? `rasm-eq-abn ${tone(alarm)}${alarm.state === 'unack' ? ' unack' : ''}` : '',
     className,
   ]
     .filter(Boolean)
     .join(' ')
-  const label = [title, alarm ? alarmTitle(alarm) : null].filter(Boolean).join(' — ')
+  const label = [
+    title,
+    eqOos ? 'Equipment out of service' : null,
+    alarm ? alarmTitle(alarm) : sp ? suppTitle(sp) : null,
+  ]
+    .filter(Boolean)
+    .join(' — ')
   return (
     <g className={cls || undefined} role={interactive ? 'button' : undefined} tabIndex={interactive ? 0 : undefined}>
       {label ? <title>{label}</title> : null}
       {children}
       {alarm && mark ? <AbnormalRing at={mark} alarm={alarm} /> : null}
+      {sp && mark ? <SuppMark at={mark} supp={sp} /> : null}
     </g>
   )
 }
@@ -371,6 +439,7 @@ export function RD({
   value,
   unit,
   alarm,
+  supp,
   trendable,
   trendOn,
   mono = true,
@@ -382,12 +451,14 @@ export function RD({
   value: string
   unit?: string
   alarm?: Alarm | null
+  supp?: Supp | null
   trendable?: boolean
   trendOn?: boolean
   mono?: boolean
 }) {
+  const sp = alarm ? null : supp
   return (
-    <g className={`rasm-rd${trendable ? ' t' : ''}${alarm ? ` abn ${tone(alarm)}` : ''}`}>
+    <g className={`rasm-rd${trendable ? ' t' : ''}${alarm ? ` abn ${tone(alarm)}` : ''}${sp ? ' sup' : ''}`}>
       <rect className="rasm-rd-box" x={x} y={y} width={w} height={h} rx="4" />
       <text className={`rasm-rd-v${mono ? '' : ' s'}`} x={x + w / 2} y={y + h / 2 + 5} textAnchor="middle">
         {value}

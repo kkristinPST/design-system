@@ -166,6 +166,13 @@ export const scada = {
   // keep legible; it only has to clear 4.5:1 against scada.node, the chip's own
   // fill, and stay quieter than the alarm badges next to it.
   manual:      '#9A5C00',
+  // Medium and low alarms. They earn their own yellow and their own SHAPE (a
+  // diamond) rather than sharing the high amber circle: the mimic used to carry
+  // two tones where the register carries five, so a medium and a low were
+  // indistinguishable from a high. `edge` and `text` are the readout pair.
+  alarmLo:     '#F2CC2E',
+  alarmLoEdge: '#C9A300',
+  alarmLoText: '#6B5700',
 } as const
 
 // ─────────────────────────────────────────────────────────────────────────────

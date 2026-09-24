@@ -111,6 +111,9 @@ const SCADA_CSS: Record<keyof typeof scada, string> = {
   stop: 'stop',
   abnormal: 'abnormal',
   manual: 'manual',
+  alarmLo: 'alarm-lo',
+  alarmLoEdge: 'alarm-lo-edge',
+  alarmLoText: 'alarm-lo-text',
 }
 
 /** Elevation steps carry no suffix in the HMI at the base step. */

@@ -1,6 +1,9 @@
 import ComponentDoc, { type Variant } from '../../../components/ComponentDoc'
 import { ignitionSpecs } from '../../../components/ignition-specs'
+import type { Alarm, Supp } from '../../../components/scada'
 import {
+  Eq,
+  SymTrend,
   Pipe,
   Tag2,
   Bioreactor,
@@ -13,6 +16,7 @@ import {
   BlowerCabinet,
   ModeChip,
   AbnormalRing,
+  SuppMark,
   EquipmentCluster,
   CLUSTER,
   RD,
@@ -54,7 +58,180 @@ const fluids = [
   ['Feed transport', 'var(--color-fl-feed)', false],
 ] as const
 
+type Col = {
+  k: string
+  l: string
+  sub: string
+  running: boolean
+  mode?: 'A' | 'M'
+  alarm?: Alarm
+  supp?: Supp
+  eqOos?: boolean
+}
+
+/** Every state a symbol can be in, laid out as the application spec sheet does. */
+const COLS: Col[] = [
+  { k: 'run', l: 'Running', sub: 'Auto', running: true },
+  { k: 'stop', l: 'Stopped', sub: 'Auto', running: false },
+  { k: 'man', l: 'Manual', sub: 'Running', running: true, mode: 'M' },
+  { k: 'hu', l: 'High', sub: 'Unacked', running: true, alarm: { level: 'high', state: 'unack' } },
+  { k: 'ha', l: 'High', sub: 'Acked', running: true, alarm: { level: 'high', state: 'ack' } },
+  { k: 'cu', l: 'Critical', sub: 'Unacked', running: false, alarm: { level: 'critical', state: 'unack' } },
+  { k: 'ca', l: 'Critical', sub: 'Acked', running: false, alarm: { level: 'critical', state: 'ack' } },
+  { k: 'mu', l: 'Medium / Low', sub: 'Unacked', running: true, alarm: { level: 'medium', state: 'unack' } },
+  { k: 'ma', l: 'Medium / Low', sub: 'Acked', running: true, alarm: { level: 'low', state: 'ack' } },
+  { k: 'hr', l: 'Returned', sub: 'Not acked', running: true, alarm: { level: 'high', state: 'returned' } },
+  { k: 'blk', l: 'Blocked', sub: 'Alarm deactivated', running: true, supp: 'blocked' },
+  { k: 'oos', l: 'Out of service', sub: 'Alarm deactivated', running: true, supp: 'oos' },
+  { k: 'eqoos', l: 'Equipment OOS', sub: 'PLC lock-out', running: false, eqOos: true },
+]
+
+/** Each row reproduces its own placement from the mimic, never a generic one. */
+const ROWS = [
+  {
+    k: 'pump',
+    name: 'Centrifugal pump',
+    code: 'SymPump / s 1.25',
+    marks: true,
+    rdAlarm: false,
+    draw: (c: Col) => (
+      <g>
+        <Eq title="Pump" alarm={c.alarm} supp={c.supp} eqOos={c.eqOos} mark={[32, 67]} interactive>
+          <SymPump cx={64} cy={58} running={c.running} />
+        </Eq>
+        <ModeChip x={24} y={38} mode={c.mode ?? 'A'} eqOos={c.eqOos} />
+        <SymTrend cx={94} cy={58} />
+      </g>
+    ),
+  },
+  {
+    k: 'fan',
+    name: 'Fan / blower',
+    code: 'SymFan / s 1.25',
+    marks: true,
+    rdAlarm: false,
+    draw: (c: Col) => (
+      <g>
+        <Eq title="CO2 fan" alarm={c.alarm} supp={c.supp} eqOos={c.eqOos} mark={[32, 84]} interactive>
+          <SymFan cx={64} cy={58} running={c.running} />
+        </Eq>
+        <ModeChip x={24} y={50} mode={c.mode ?? 'A'} eqOos={c.eqOos} />
+        <SymTrend cx={94} cy={58} />
+      </g>
+    ),
+  },
+  {
+    k: 'valve',
+    name: 'Dose / control valve',
+    code: 'SymValve / s 1.1',
+    marks: true,
+    rdAlarm: false,
+    draw: (c: Col) => (
+      <g>
+        <Eq title="Dose valve" alarm={c.alarm} supp={c.supp} eqOos={c.eqOos} mark={[80.5, 80]} interactive>
+          <SymValve cx={56} cy={58} running={c.running} />
+        </Eq>
+        <ModeChip x={72} y={50} mode={c.mode ?? 'A'} eqOos={c.eqOos} />
+      </g>
+    ),
+  },
+  {
+    k: 'drum',
+    name: 'Drum filter',
+    code: 'rasm-box + SymMotor / s 0.7',
+    marks: true,
+    rdAlarm: false,
+    draw: (c: Col) => (
+      <g>
+        <Eq title="Drum filter" alarm={c.alarm} supp={c.supp} eqOos={c.eqOos} mark={[78.5, 65]} interactive>
+          <DrumFilterBox x={26} y={29} running={c.running} />
+        </Eq>
+        <ModeChip x={70} y={31} mode={c.mode ?? 'A'} eqOos={c.eqOos} />
+        <SymTrend cx={102} cy={58} />
+      </g>
+    ),
+  },
+  {
+    k: 'blower',
+    name: 'MBBR blower cabinet',
+    code: 'rasm-cab + SymFan / s 0.82',
+    marks: false,
+    rdAlarm: true,
+    draw: (c: Col) => (
+      <g>
+        <Eq title="Blower" eqOos={c.eqOos} interactive>
+          <BlowerCabinet x={30} y={12} running={c.running} />
+        </Eq>
+        <RD x={37} y={16} w={52} h={24} value={c.running ? '42' : '0'} unit="Hz" alarm={c.alarm} supp={c.supp} />
+        <ModeChip x={6} y={52} mode={c.mode ?? 'A'} eqOos={c.eqOos} />
+        <SymTrend cx={108} cy={72} />
+      </g>
+    ),
+  },
+]
+
 const variants: Variant[] = [
+  {
+    name: 'Equipment × state',
+    platform: 'Desktop',
+    description:
+      'Every symbol in every state it can render. Run state is the body fill and nothing else. Priority is the badge, by colour AND shape. Acknowledgement is opacity. Suppression is a neutral dashed square. A PLC lock-out ghosts the symbol and turns the mode chip into a lock. Each row uses its own placement from the mimic, so the badge sits where that symbol actually puts it.',
+    preview: (
+      <div className="overflow-x-auto">
+        <table className="min-w-full border-collapse">
+          <thead>
+            <tr>
+              <th className="border-b border-slate-200 px-1 py-2 text-left text-[10px] font-bold uppercase tracking-[0.8px] text-slate-500">
+                Symbol
+              </th>
+              {COLS.map((c) => (
+                <th
+                  key={c.k}
+                  className="border-b border-slate-200 px-1 py-2 text-center text-[10px] font-bold whitespace-nowrap uppercase tracking-[0.8px] text-slate-500"
+                >
+                  {c.l}
+                  <br />
+                  <span className="font-medium normal-case tracking-normal text-slate-400">{c.sub}</span>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {ROWS.map((r) => (
+              <tr key={r.k}>
+                <td className="border-b border-slate-100 py-1.5 pr-3 align-middle whitespace-nowrap">
+                  <span className="text-[13px] font-semibold text-ink">{r.name}</span>
+                  <span className="block font-mono text-[11px] text-slate-500">{r.code}</span>
+                </td>
+                {COLS.map((c) => (
+                  <td key={c.k} className="border-b border-slate-100 px-1 py-1.5 text-center align-middle">
+                    <svg
+                      className="mx-auto block h-[110px] w-[120px]"
+                      viewBox="0 0 120 110"
+                      aria-label={r.name + ' - ' + c.l + ' ' + c.sub}
+                    >
+                      {r.draw(c)}
+                    </svg>
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    ),
+    code: `/* Two axes that look similar and are not:
+     supp   = the ALARM is deactivated (blocked / out of service)
+     eqOos  = the MACHINE is locked out by the PLC
+
+   They are independent: a locked-out pump can still carry an alarm badge.
+   Precedence when both could draw: active alarm > suppression > none. */
+
+<Eq alarm={alarm} supp={supp} eqOos={eqOos} mark={[cx - 32, cy + 9]}>
+  <SymPump cx={cx} cy={cy} running={running} />
+</Eq>
+<ModeChip x={cx - 40} y={cy - 20} mode={mode} eqOos={eqOos} />`,
+  },
   {
     name: 'The symbol set',
     platform: 'Desktop',
@@ -305,11 +482,21 @@ export default function ScadaSymbolsPage() {
         heading: 'Rules',
         items: [
           <>
-            <strong className="font-semibold text-ink">Suppression draws nothing.</strong> A
-            blocked or out-of-service alarm is not an abnormal condition the operator is being
-            told about, so the symbol renders exactly as if there were no alarm: pass no alarm at
-            all rather than a suppressed state. Drawing it would re-create the noise that
-            blocking was used to remove.
+            <strong className="font-semibold text-ink">Suppressed is neither healthy nor an
+            alarm.</strong> A blocked or out-of-service alarm draws a neutral, dashed{' '}
+            <strong>square</strong> in the badge slot: dashed because we have stopped listening,
+            square so it cannot be read as the alarm circle or triangle, neutral because it is not
+            a priority. &ldquo;We stopped listening&rdquo; is not &ldquo;nothing is wrong&rdquo;.
+            It carries an icon rather than the register&rsquo;s B / M letters, because an
+            out-of-service <em>M</em> would sit directly under a Manual <em>M</em> mode chip in
+            the same column.
+          </>,
+          <>
+            <strong className="font-semibold text-ink">A locked-out machine is not a suppressed
+            alarm.</strong> They are independent axes and both can be true at once. Equipment out
+            of service comes per machine from the PLC: the symbol ghosts to 40% and the mode chip
+            becomes a <strong>lock</strong>, because Auto versus Manual is meaningless on a
+            machine nobody can start. Its alarm badge, if it has one, keeps full opacity on top.
           </>,
           <>
             <strong className="font-semibold text-ink">Cyan is interaction, never state.</strong>{' '}
@@ -317,26 +504,27 @@ export default function ScadaSymbolsPage() {
             never turns cyan because of something the process is doing.
           </>,
           <>
-            <strong className="font-semibold text-ink">Known gap: medium and low are drawn as
-            high.</strong> The mimic carries two tones where the register carries five, so a
-            medium and a low alarm are indistinguishable on the diagram. Deliberate in the
-            application; it needs a decision from the alarm-philosophy owner before this system
-            states it as a rule.
+            <strong className="font-semibold text-ink">Priority is colour AND shape, three
+            ways.</strong> Red triangle critical, amber circle high, yellow diamond medium and
+            low. The mimic used to carry two tones where the register carries five, which made a
+            medium indistinguishable from a high; the third tone and the third shape were added
+            together, so the distinction survives colour-blindness and a monochrome print.
           </>,
           <>
-            <strong className="font-semibold text-ink">Known gap: not every symbol can show an
-            alarm.</strong> Dose valves carry no tag, drum filters carry a tag but no badge
-            anchor, and the blower cabinet&rsquo;s alarm lives on its speed readout instead. Each
-            of those needs a decision rather than a default.
+            <strong className="font-semibold text-ink">A symbol that can hold an alarm needs both
+            a tag and a badge anchor.</strong> Missing either and the alarm is simply never drawn:
+            dose valves had no tag, drum filters had a tag but no anchor. Both now carry an anchor
+            under their mode chip. The MBBR blower cabinet is the deliberate exception — its alarm
+            stays on the speed readout, because a badge in the chip column would sit on the
+            process-air riser.
           </>,
           <>
-            <strong className="font-semibold text-ink">Known gap: hover is invisible on a bare
-            symbol.</strong> The application writes{' '}
-            <code className="font-mono text-[11px]">drop-shadow(0 0 0 2px …)</code>, and{' '}
-            <code className="font-mono text-[11px]">drop-shadow()</code> has no spread argument, so
-            the declaration is invalid and dropped: a pump, fan or valve changes only the cursor.
-            Boxed symbols get a cyan stroke from a separate rule and are fine. This reference uses
-            the two-argument form so the state is at least visible.
+            <strong className="font-semibold text-ink">Hover is two stacked shadows, not one
+            with a spread.</strong>{' '}
+            <code className="font-mono text-[11px]">drop-shadow()</code> takes no spread argument,
+            so <code className="font-mono text-[11px]">drop-shadow(0 0 0 2px …)</code> is invalid
+            and silently dropped — which left every bare pump, fan and valve with no hover state
+            at all while the boxed symbols looked fine. Stack two shadows instead.
           </>,
           <>
             <strong className="font-semibold text-ink">A mode chip shares the line under the
