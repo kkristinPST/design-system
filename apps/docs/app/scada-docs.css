@@ -1,0 +1,25 @@
+/* Forced interaction states — FOR THIS SITE ONLY. Do not ship these.
+ *
+ * The state matrix has to show what hover and focus look like, and a static
+ * documentation page can trigger neither. These classes mirror the real
+ * :hover and :focus-visible rules in scada.css one for one; they add no
+ * appearance of their own, so the matrix cannot drift from the live rules
+ * without the mirror going with it.
+ *
+ * Transcribed from the spec sheet's own <style> block in
+ * design_handoff_njord/process-symbols/Process Symbols.html, which keeps them
+ * out of process-symbols.css for exactly this reason. Kept in a separate file
+ * here so scada.css stays a verbatim transcription of the app's stylesheet.
+ *
+ * Token names differ only by the prefix this build emits: the app writes
+ * --primary and --slate-400, here --color-primary and --color-slate-400.
+ */
+.rasm-eq.is-hover .rasm-box, .rasm-eq.is-hover .rasm-cab { stroke: var(--color-primary); }
+.rasm-eq.is-hover { filter: drop-shadow(0 0 2px var(--color-primary)) drop-shadow(0 0 1px var(--color-primary)); }
+.rasm-eq.is-focus { outline: 2px solid var(--color-primary); outline-offset: 1px; }
+.rasm-rd.is-hover .rasm-rd-box { stroke: var(--color-slate-400); }
+.rasm-rd.is-hover .rasm-rd-trbg { fill: var(--color-primary); stroke: var(--color-primary); }
+.rasm-rd.is-hover .rasm-rd-trln { stroke: #fff; }
+.rasm-symtrend.is-hover { opacity: 1; }
+.rasm-symtrend.is-hover .rasm-symtrend-bg { fill: var(--color-primary); stroke: var(--color-primary); }
+.rasm-symtrend.is-hover .rasm-symtrend-ln path { stroke: #fff; }
