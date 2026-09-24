@@ -9,6 +9,9 @@
  * (--fg, --surface) and the font stacks are the same on both sides.
  */
 
+/* The mimic SVG fills its container; text is authored in viewBox units, so the
+   width is bounded and the font is never shrunk to fit. */
+.rasm { width: 100%; height: auto; display: block; }
 .rasm text { -webkit-user-select: none; user-select: none; }
 
 /* ── labels ── */
@@ -99,7 +102,7 @@ svg g[role='button']:focus-visible { outline: 2px solid var(--color-primary); ou
   border-radius: 3px; background: var(--color-sc-node); border: 1.2px solid var(--color-slate-300);
   color: var(--color-slate-600); font-size: 12px; font-weight: 800;
 }
-.rasm-leg-chip.man { border-color: var(--color-sc-manual); color: var(--color-sc-manual); }
+.rasm-leg-chip.man { background: var(--color-sc-node); border-color: var(--color-sc-manual); color: var(--color-sc-manual); }
 
 @media (prefers-reduced-motion: reduce) {
   .rasm * { transition-duration: .001ms !important; }

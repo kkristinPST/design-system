@@ -33,7 +33,7 @@ function Cell({
 }) {
   return (
     <div className="flex flex-col items-center gap-2.5">
-      <svg className="rasm" width={w} height={h} viewBox={`${-w / 2} ${-h / 2} ${w} ${h}`} aria-hidden>
+      <svg width={w} height={h} viewBox={`${-w / 2} ${-h / 2} ${w} ${h}`} aria-hidden>
         {children}
       </svg>
       <span className="max-w-[120px] text-center text-xs leading-snug text-slate-600">{label}</span>
