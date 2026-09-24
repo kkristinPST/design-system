@@ -15,6 +15,14 @@ import {
   SymCone,
   DrumFilterBox,
   BlowerCabinet,
+  SumpBasin,
+  StageTank,
+  StageHopper,
+  StageDrum,
+  StageHx,
+  StageCone,
+  StageDose,
+  StagePanel,
   ModeChip,
   EquipmentCluster,
   RD,
@@ -65,6 +73,8 @@ type Col = {
   alarm?: Alarm
   supp?: Supp
   eqOos?: boolean
+  /** Docs-only: a static page cannot hover or focus itself. */
+  cls?: string
 }
 
 /** Every state a symbol can be in, laid out as the application spec sheet does. */
@@ -82,6 +92,8 @@ const COLS: Col[] = [
   { k: 'blk', l: 'Blocked', sub: 'Alarm deactivated', running: true, supp: 'blocked' },
   { k: 'oos', l: 'Out of service', sub: 'Alarm deactivated', running: true, supp: 'oos' },
   { k: 'eqoos', l: 'Equipment OOS', sub: 'PLC lock-out', running: false, eqOos: true },
+  { k: 'hover', l: 'Hover', sub: 'Pointer', running: true, cls: 'is-hover' },
+  { k: 'focus', l: 'Focus', sub: 'Keyboard', running: true, cls: 'is-focus' },
 ]
 
 /** Each row reproduces its own placement from the mimic, never a generic one. */
@@ -94,7 +106,7 @@ const ROWS = [
     rdAlarm: false,
     draw: (c: Col) => (
       <g>
-        <Eq title="Pump" alarm={c.alarm} supp={c.supp} eqOos={c.eqOos} mark={[32, 67]} interactive>
+        <Eq title="Pump" alarm={c.alarm} supp={c.supp} eqOos={c.eqOos} className={c.cls} mark={[32, 67]} interactive>
           <SymPump cx={64} cy={58} running={c.running} />
         </Eq>
         <ModeChip x={24} y={38} mode={c.mode ?? 'A'} eqOos={c.eqOos} />
@@ -110,7 +122,7 @@ const ROWS = [
     rdAlarm: false,
     draw: (c: Col) => (
       <g>
-        <Eq title="CO2 fan" alarm={c.alarm} supp={c.supp} eqOos={c.eqOos} mark={[32, 84]} interactive>
+        <Eq title="CO2 fan" alarm={c.alarm} supp={c.supp} eqOos={c.eqOos} className={c.cls} mark={[32, 84]} interactive>
           <SymFan cx={64} cy={58} running={c.running} />
         </Eq>
         <ModeChip x={24} y={50} mode={c.mode ?? 'A'} eqOos={c.eqOos} />
@@ -126,7 +138,7 @@ const ROWS = [
     rdAlarm: false,
     draw: (c: Col) => (
       <g>
-        <Eq title="Dose valve" alarm={c.alarm} supp={c.supp} eqOos={c.eqOos} mark={[80.5, 80]} interactive>
+        <Eq title="Dose valve" alarm={c.alarm} supp={c.supp} eqOos={c.eqOos} className={c.cls} mark={[80.5, 80]} interactive>
           <SymValve cx={56} cy={58} running={c.running} />
         </Eq>
         <ModeChip x={72} y={50} mode={c.mode ?? 'A'} eqOos={c.eqOos} />
@@ -141,7 +153,7 @@ const ROWS = [
     rdAlarm: false,
     draw: (c: Col) => (
       <g>
-        <Eq title="Drum filter" alarm={c.alarm} supp={c.supp} eqOos={c.eqOos} mark={[78.5, 65]} interactive>
+        <Eq title="Drum filter" alarm={c.alarm} supp={c.supp} eqOos={c.eqOos} className={c.cls} mark={[79, 77]} interactive>
           <DrumFilterBox x={26} y={29} running={c.running} />
         </Eq>
         <ModeChip x={70} y={31} mode={c.mode ?? 'A'} eqOos={c.eqOos} />
@@ -157,7 +169,7 @@ const ROWS = [
     rdAlarm: true,
     draw: (c: Col) => (
       <g>
-        <Eq title="Blower" eqOos={c.eqOos} interactive>
+        <Eq title="Blower" eqOos={c.eqOos} className={c.cls} interactive>
           <BlowerCabinet x={30} y={12} running={c.running} />
         </Eq>
         <RD x={37} y={16} w={52} h={24} value={c.running ? '42' : '0'} unit="Hz" alarm={c.alarm} supp={c.supp} />
@@ -173,7 +185,7 @@ const variants: Variant[] = [
     name: 'Equipment × state',
     platform: 'Desktop',
     description:
-      'Every symbol in every state it can render, and the single place to read them. Running is a solid dark neutral, stopped a light one, and that is ALL the body ever says: an alarm neither recolours nor outlines it, because the badge alone carries the alarm. Priority is colour AND shape, so the pair survives colour-blindness. Acknowledgement is opacity only, never hue, because a hue change reads as a different alarm rather than the same one later. Suppression is a neutral dashed square, and a PLC lock-out ghosts the symbol and turns the mode chip into a lock. Each row uses its own placement from the mimic, so the badge sits where that symbol actually puts it.',
+      'Every symbol in every state it can render, and the single place to read them. Running is a solid dark neutral, stopped a light one, and that is ALL the body ever says: an alarm neither recolours nor outlines it, because the badge alone carries the alarm. Priority is colour AND shape, so the pair survives colour-blindness. Acknowledgement is opacity only, never hue, because a hue change reads as a different alarm rather than the same one later. Suppression is a neutral dashed square, and a PLC lock-out ghosts the symbol and turns the mode chip into a lock. Hover and focus are cyan and nothing else is, so interaction can never be mistaken for a state. Each row uses its own placement from the mimic, so the badge sits where that symbol actually puts it.',
     preview: (
       <div className="overflow-x-auto">
         <table className="min-w-full border-collapse">
@@ -262,6 +274,56 @@ const variants: Variant[] = [
   <path d="M33.75 16.43C33.75 7.36 26.39 0 17.32 0…" fill="var(--njord-sc-fill-lite)"/>
   <path d="M17.27 0.10C8.22 0.10 0.89 7.44…"        fill="var(--njord-sc-run)"/>
 </g>`,
+  },
+  {
+    name: 'Department overview stages',
+    platform: 'Desktop',
+    description:
+      'A second, plainer set for the combined department sheet, where one symbol stands for a whole process stage. It follows the legacy Oversikt sheet: draw ONE drum filter and carry multiplicity in a row of unit dots under it, rather than stacking three full P&IDs into a card. These glyphs never show a run state and are never in alarm, because the stage is the subject and the equipment inside it is not drawn. Green is running, amber is in service but stopped, and grey is out of service; the amber case is the only one worth walking over to.',
+    preview: (
+      <div className="flex flex-wrap items-start gap-6 rounded-xl border border-slate-200 bg-white p-6">
+        <Cell label="Tank">
+          <StageTank cx={0} cy={0} />
+        </Cell>
+        <Cell label="Hopper">
+          <StageHopper cx={0} cy={0} />
+        </Cell>
+        <Cell label="Drum filter">
+          <StageDrum cx={0} cy={0} />
+        </Cell>
+        <Cell label="Heat exchanger">
+          <StageHx cx={0} cy={0} />
+        </Cell>
+        <Cell label="O₂ cone">
+          <StageCone cx={0} cy={0} />
+        </Cell>
+        <Cell label="Dosing">
+          <StageDose cx={0} cy={0} />
+        </Cell>
+        <Cell label="Panel / control">
+          <StagePanel cx={0} cy={0} />
+        </Cell>
+        <Cell label="Sump basin">
+          <SumpBasin x={-46} y={-30} w={92} h={60} />
+        </Cell>
+        <Cell label="Unit dots · 3 drum filters">
+          <UnitDots cx={0} y={0} units={[{ run: true }, { duty: true }, {}]} />
+        </Cell>
+      </div>
+    ),
+    code: `/* A pipe must land ON the glyph, so it is routed to the glyph's own
+   half-width. A single shared value was wrong the moment the shapes
+   stopped being the same size: the 30-wide cone left a visible gap
+   at a fixed 52. */
+STAGE_HALF = { tank:46, hopper:38, drum:46, hx:36, cone:30,
+               dose:26, bio:48, sump:48, panel:34 }
+
+<StageDrum cx={cx} cy={cy} />
+<UnitDots cx={cx} y={cy + 52} units={[{ run: true }, { duty: true }, {}]} />
+
+/* The sheet is authored in viewBox units, so BOUND its width rather than
+   letting it scale down — a 1600-wide sheet in a 790px card rendered its
+   tags at 4.85px. Rows wrap to the measured container instead. */`,
   },
   {
     name: 'Mode chip and readout',

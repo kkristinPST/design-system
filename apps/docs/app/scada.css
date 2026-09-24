@@ -23,6 +23,10 @@
   font-family: var(--font-sans); font-size: 12px; font-weight: 500; fill: var(--color-slate-600);
   paint-order: stroke; stroke: var(--color-sc-halo); stroke-width: 4.5px; stroke-linejoin: round; transition: fill .12s;
 }
+.rasm-sensl {
+  font-family: var(--font-sans); font-size: 12px; font-weight: 500; fill: var(--color-slate-600);
+  paint-order: stroke; stroke: var(--color-sc-halo); stroke-width: 4.5px; stroke-linejoin: round;
+}
 .rasm-mode { font-family: var(--font-sans); font-size: 12px; font-weight: 800; }
 .rasm-flag { font-family: var(--font-sans); font-size: 12px; font-weight: 700; fill: var(--fg); }
 g.abn > .rasm-tag { fill: var(--color-critical-text); }
@@ -52,9 +56,13 @@ g.abn.warn > .rasm-tag { fill: var(--color-warning-text); }
 /* Two stacked shadows rather than one: the original wrote
    drop-shadow(0 0 0 2px …), which is invalid because drop-shadow takes no
    spread, so the declaration was dropped and a bare pump had no hover at all. */
-.rasm-eq:hover { filter: drop-shadow(0 0 2px var(--color-primary)) drop-shadow(0 0 1px var(--color-primary)); }
-.rasm-eq:hover .rasm-box, .rasm-eq:hover .rasm-cab { stroke: var(--color-primary); }
-svg g[role='button']:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 1px; }
+.rasm-eq:hover, .rasm-eq.is-hover { filter: drop-shadow(0 0 2px var(--color-primary)) drop-shadow(0 0 1px var(--color-primary)); }
+.rasm-eq:hover .rasm-box, .rasm-eq:hover .rasm-cab,
+.rasm-eq.is-hover .rasm-box, .rasm-eq.is-hover .rasm-cab { stroke: var(--color-primary); }
+svg g[role='button']:focus-visible, .rasm-eq.is-focus { outline: 2px solid var(--color-primary); outline-offset: 1px; }
+/* is-hover / is-focus exist for the docs only: a printed state matrix has to
+   show what hover and focus look like, and no static page can trigger either.
+   They are not in the app's stylesheet — do not use them in a screen. */
 
 /* ── value readout ── */
 .rasm-rd-box { fill: var(--color-sc-node); stroke: var(--color-slate-300); stroke-width: 1.3; transition: stroke .12s, fill .12s; }

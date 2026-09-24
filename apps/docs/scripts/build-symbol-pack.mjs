@@ -152,14 +152,15 @@ function pumpOrFan(kind, running) {
   }
 }
 
+/** Ring and shaft are the run/stop body; the ground between them is the light tone. */
 function motor(running) {
-  const [ring, disc, bar] = P.motor
+  const [ring, ground, shaft] = P.motor
   return {
     box: '0 0 41 38',
     b:
-      path(ring, { fill: 'var(--color-sc-edge)' }) +
-      path(disc, { fill: body(running) }) +
-      path(bar, { fill: 'var(--color-sc-edge)' }),
+      path(ring, { fill: body(running) }) +
+      path(ground, { fill: 'var(--color-sc-fill-lite)' }) +
+      path(shaft, { fill: body(running) }),
   }
 }
 

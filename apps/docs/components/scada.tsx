@@ -19,9 +19,16 @@ export type Alarm = {
   state: 'unack' | 'ack' | 'returned'
 }
 
-/** crit (red triangle) · lo (yellow diamond, medium and low) · warn (amber circle, high). */
+/**
+ * crit (red triangle) · warn (amber circle, high) · "warn lo" (yellow diamond,
+ * medium and low).
+ *
+ * Medium and low emit BOTH classes, not "lo" alone: "lo" is additive, so every
+ * .warn rule still applies and only the three it overrides — dot fill, readout
+ * edge, tag ink — change. A rule added to .warn later then reaches them too.
+ */
 export const tone = (a?: Alarm | null) =>
-  !a ? 'warn' : a.level === 'critical' ? 'crit' : a.level === 'medium' || a.level === 'low' ? 'lo' : 'warn'
+  !a ? 'warn' : a.level === 'critical' ? 'crit' : a.level === 'high' ? 'warn' : 'warn lo'
 
 export type Supp = 'blocked' | 'oos'
 
@@ -74,20 +81,27 @@ export function SymFan({ cx, cy, s = 1.25, running }: Sym) {
   )
 }
 
-/** Motor / impeller in a ring — inside the drum filter and the blower cabinet. */
+/**
+ * Motor / impeller in a ring — inside the drum filter and the blower cabinet.
+ *
+ * Ring and shaft are the run/stop body, the ground between them is
+ * sc-fill-lite: the same two-tone rule as the pump and the fan. It used to
+ * paint ring and shaft sc-edge in BOTH states, which left a stopped drum
+ * filter reading dark — the one thing the fill is supposed to tell you.
+ */
 export function SymMotor({ cx, cy, s = 1, running }: Sym) {
   return (
     <g transform={`translate(${cx},${cy}) scale(${s}) translate(-21.08,-18.55)`}>
       <path
-        d="M39.637 18.5555C39.637 8.30849 31.3302 0.00164795 21.0832 0.00164795C10.8361 0.00164795 2.5293 8.30849 2.5293 18.5555C2.5293 28.8025 10.8361 37.1094 21.0832 37.1094C31.3302 37.1094 39.637 28.8025 39.637 18.5555Z"
-        fill="var(--color-sc-edge)"
-      />
-      <path
         className="sc-body"
-        d="M36.7374 18.5561C36.7374 9.91019 29.7285 2.90129 21.0826 2.90129C12.4366 2.90129 5.42773 9.91019 5.42773 18.5561C5.42773 27.202 12.4366 34.2109 21.0826 34.2109C29.7285 34.2109 36.7374 27.202 36.7374 18.5561Z"
+        d="M39.637 18.5555C39.637 8.30849 31.3302 0.00164795 21.0832 0.00164795C10.8361 0.00164795 2.5293 8.30849 2.5293 18.5555C2.5293 28.8025 10.8361 37.1094 21.0832 37.1094C31.3302 37.1094 39.637 28.8025 39.637 18.5555Z"
         fill={psBody(running)}
       />
-      <path d="M15.2852 5.79898L15.2852 31.3105H26.8813V5.79898H15.2852Z" fill="var(--color-sc-edge)" />
+      <path
+        d="M36.7374 18.5561C36.7374 9.91019 29.7285 2.90129 21.0826 2.90129C12.4366 2.90129 5.42773 9.91019 5.42773 18.5561C5.42773 27.202 12.4366 34.2109 21.0826 34.2109C29.7285 34.2109 36.7374 27.202 36.7374 18.5561Z"
+        fill="var(--color-sc-fill-lite)"
+      />
+      <path className="sc-body" d="M15.2852 5.79898L15.2852 31.3105H26.8813V5.79898H15.2852Z" fill={psBody(running)} />
     </g>
   )
 }
@@ -217,6 +231,21 @@ export function StripperColumn({ x, y, w, h }: Box) {
         />
       ))}
       <rect x={x + 7} y={y + h - 30} width={w - 14} height={22} fill="var(--color-sc-water)" opacity="0.5" />
+    </g>
+  )
+}
+
+/** Sump / collection basin — square-cornered, so it reads as civil works rather than a vessel. */
+export function SumpBasin({ x, y, w, h }: Box) {
+  return (
+    <g aria-hidden="true">
+      <path
+        d={`M${x},${y} H${x + w} V${y + h} H${x} Z`}
+        fill="var(--color-sc-vessel)"
+        stroke="var(--color-sc-edge)"
+        strokeWidth="1.4"
+      />
+      <rect x={x + 5} y={y + h * 0.34} width={w - 10} height={h * 0.66 - 5} fill="var(--color-sc-water)" opacity="0.5" />
     </g>
   )
 }
@@ -510,6 +539,126 @@ export function UnitDots({ cx, y, units }: { cx: number; y: number; units: { run
       ))}
     </g>
   )
+}
+
+/* ── department-overview stage glyphs ──────────────────────────────────────
+ *
+ * One symbol stands for a whole process stage, the way the legacy Oversikt
+ * sheet does: the combined department sheet draws ONE drum filter and carries
+ * multiplicity in a row of UnitDots under it, rather than stacking three full
+ * P&IDs. These are deliberately plainer than the equipment symbols above —
+ * they are never in alarm and never carry a run state, because the stage is
+ * the subject and the equipment inside it is not drawn.
+ */
+const vessel = {
+  fill: 'var(--color-sc-vessel)',
+  stroke: 'var(--color-sc-edge)',
+  strokeWidth: 1.4,
+} as const
+
+type Stage = { cx: number; cy: number }
+
+export function StageTank({ cx, cy }: Stage) {
+  return (
+    <g aria-hidden="true">
+      <rect x={cx - 46} y={cy - 34} width="92" height="68" rx="6" {...vessel} />
+      <rect x={cx - 41} y={cy - 6} width="82" height="35" rx="4" fill="var(--color-sc-water)" opacity=".5" />
+    </g>
+  )
+}
+
+export function StageHopper({ cx, cy }: Stage) {
+  return (
+    <g aria-hidden="true">
+      <path d={`M${cx - 38},${cy - 34} H${cx + 38} L${cx + 12},${cy + 18} H${cx - 12} Z`} {...vessel} />
+      <rect
+        x={cx - 14}
+        y={cy + 18}
+        width="28"
+        height="16"
+        rx="3"
+        fill="var(--color-sc-stop)"
+        stroke="var(--color-sc-edge)"
+        strokeWidth="1.2"
+      />
+    </g>
+  )
+}
+
+export function StageDrum({ cx, cy }: Stage) {
+  return (
+    <g aria-hidden="true">
+      <rect x={cx - 46} y={cy - 32} width="92" height="64" rx="6" {...vessel} />
+      <circle cx={cx} cy={cy} r="21" fill="none" stroke="var(--color-sc-edge)" strokeWidth="1.6" />
+      <path d={`M${cx - 21},${cy} H${cx + 21} M${cx},${cy - 21} V${cy + 21}`} stroke="var(--color-sc-edge)" strokeWidth="1.2" />
+    </g>
+  )
+}
+
+export function StageHx({ cx, cy }: Stage) {
+  return (
+    <g aria-hidden="true">
+      <rect x={cx - 36} y={cy - 34} width="72" height="68" rx="5" {...vessel} />
+      <path
+        d={`M${cx - 36},${cy - 34} L${cx + 36},${cy + 34} M${cx + 36},${cy - 34} L${cx - 36},${cy + 34}`}
+        stroke="var(--color-sc-edge)"
+        strokeWidth="1.4"
+      />
+    </g>
+  )
+}
+
+export function StageCone({ cx, cy }: Stage) {
+  return (
+    <g aria-hidden="true">
+      <path d={`M${cx - 30},${cy - 32} H${cx + 30} L${cx},${cy + 32} Z`} {...vessel} />
+    </g>
+  )
+}
+
+export function StageDose({ cx, cy }: Stage) {
+  return (
+    <g aria-hidden="true">
+      <rect x={cx - 26} y={cy - 34} width="52" height="50" rx="5" {...vessel} />
+      <rect x={cx - 22} y={cy - 8} width="44" height="20" rx="3" fill="var(--color-sc-water)" opacity=".5" />
+      <path d={`M${cx},${cy + 16} V${cy + 30}`} stroke="var(--color-sc-edge)" strokeWidth="1.4" />
+    </g>
+  )
+}
+
+export function StagePanel({ cx, cy }: Stage) {
+  return (
+    <g aria-hidden="true">
+      <rect x={cx - 34} y={cy - 28} width="68" height="56" rx="5" {...vessel} />
+      <rect
+        x={cx - 24}
+        y={cy - 18}
+        width="48"
+        height="26"
+        rx="3"
+        fill="var(--color-sc-stop)"
+        stroke="var(--color-sc-edge)"
+        strokeWidth="1"
+      />
+    </g>
+  )
+}
+
+/**
+ * Each glyph's half-width, so a pipe lands ON the symbol rather than short of
+ * it. A fixed value was wrong the moment the shapes stopped being the same
+ * size: the 30-wide cone left a visible gap at a shared 52.
+ */
+export const STAGE_HALF: Record<string, number> = {
+  tank: 46,
+  hopper: 38,
+  drum: 46,
+  hx: 36,
+  cone: 30,
+  dose: 26,
+  bio: 48,
+  sump: 48,
+  panel: 34,
 }
 
 /**
